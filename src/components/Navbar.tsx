@@ -22,7 +22,6 @@ import {
   LOGIN_PAGE_PATH,
   PRICING_PAGE_PATH,
   SERVERS_PAGE_PATH,
-  WHAT_IS_A_VPN_PAGE_PATH,
 } from "@/lib/pathnames";
 import { usePathname } from "next/navigation";
 import AuthButton from "./AuthButton";
@@ -32,13 +31,10 @@ const Navbar: FC = () => {
   const pathname = usePathname();
 
   const navItems = [
+    { label: "Home", href: HOME_PAGE_PATH },
     {
       label: "Features",
       href: FEATURES_PAGE_PATH,
-    },
-    {
-      label: "What is a VPN?",
-      href: WHAT_IS_A_VPN_PAGE_PATH,
     },
     {
       label: "Servers",
@@ -52,19 +48,24 @@ const Navbar: FC = () => {
 
   return (
     <HeroUINavbar id="navbar" maxWidth="xl" className="bg-transparent">
-      <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
+      <NavbarContent>
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <Link href={HOME_PAGE_PATH}>
             <AppLogo />
           </Link>
         </NavbarBrand>
+      </NavbarContent>
+      <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <ul className="hidden lg:flex gap-4 justify-start ml-2">
           {navItems.map((item) => (
             <NavbarItem key={item.href}>
               <Link
                 className={cn(
                   linkStyles({ color: "foreground" }),
-                  "data-[active=true]:text-primary data-[active=true]:font-medium"
+                  "data-[active=true]:text-primary data-[active=true]:font-medium border-b-2 border-transparent pb-2 duration-300",
+                  pathname === item.href
+                    ? "text-primary border-primary"
+                    : "text-foreground"
                 )}
                 color="foreground"
                 href={item.href}
@@ -104,10 +105,6 @@ const Navbar: FC = () => {
       <NavbarMenu>
         <div className="mx-4 mt-2 flex flex-col gap-2">
           {[
-            {
-              label: "Home",
-              href: HOME_PAGE_PATH,
-            },
             ...navItems,
             {
               label: "Login",

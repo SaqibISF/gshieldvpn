@@ -13,7 +13,13 @@ const NotFountPage: FC = () => (
     heading="Page Not Found"
     title="404"
   >
-    <Button as={Link} href={HOME_PAGE_PATH} variant="shadow" color="primary">
+    <Button
+      as={Link}
+      href={HOME_PAGE_PATH}
+      size="lg"
+      variant="shadow"
+      color="primary"
+    >
       Back to Home
     </Button>
   </Section>

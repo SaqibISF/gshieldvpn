@@ -28,7 +28,7 @@ const Invoice: FC = () => {
   }
 
   return (
-    <div className="w-[49.625rem] h-[70.1875rem] text-background bg-foreground p-6 space-y-8 relative">
+    <div className="w-[49.625rem] h-[70.1875rem] p-6 space-y-8 relative">
       {isBillingAddressLoading && (
         <div className="space-y-4">
           <Skeleton className="h-6 w-1/3" />
@@ -164,7 +164,7 @@ const Invoice: FC = () => {
             <div className="space-y-2">
               <div className="flex items-center gap-2">
                 <h6 className="text-primary text-sm font-semibold">Sale by:</h6>
-                <span>RockyVPN</span>
+                <span>GShieldVPN</span>
               </div>
               <span>Thanks for your business</span>
             </div>

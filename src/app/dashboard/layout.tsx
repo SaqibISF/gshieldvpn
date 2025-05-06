@@ -24,8 +24,10 @@ import {
 } from "@/lib/pathnames";
 import Link from "next/link";
 import { useLogout } from "@/hooks/useLogout";
+import { usePathname } from "next/navigation";
 
 const SideBar: FC<{ className?: string }> = ({ className }) => {
+  const pathname = usePathname();
   const { handleLogout } = useLogout();
   return (
     <aside className={cn("w-52 py-8", className)}>
@@ -34,7 +36,8 @@ const SideBar: FC<{ className?: string }> = ({ className }) => {
           <Button
             as={Link}
             href={DASHBOARD_PAGE_PATH}
-            variant="light"
+            variant={pathname === DASHBOARD_PAGE_PATH ? "solid" : "light"}
+            color={pathname === DASHBOARD_PAGE_PATH ? "primary" : "default"}
             radius="none"
             className="py-9 px-6 w-full justify-stretch"
           >
@@ -60,7 +63,8 @@ const SideBar: FC<{ className?: string }> = ({ className }) => {
             <Button
               as={Link}
               href={href}
-              variant="light"
+              variant={pathname === href ? "solid" : "light"}
+              color={pathname === href ? "primary" : "default"}
               radius="none"
               className="py-9 px-6 w-full justify-stretch"
             >
@@ -102,11 +106,6 @@ const DashboardLayout: FC<{
     <div
       id="main-section"
       className="w-full flex flex-col items-center justify-center pt-4 relative"
-      style={{
-        backgroundImage: 'url("/stars.png")',
-        backgroundSize: "25rem",
-        backgroundRepeat: "revert",
-      }}
     >
       <Navbar />
 

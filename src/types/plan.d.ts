@@ -6,6 +6,7 @@ export type Plan = {
   price: number | string;
   duration: number;
   duration_unit: string;
+  is_best_deal: boolean;
   created_at: string;
   updated_at: string;
 };

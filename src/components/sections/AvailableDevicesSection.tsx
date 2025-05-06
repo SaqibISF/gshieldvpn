@@ -21,7 +21,7 @@ const AvailableDevices: FC<{ className?: string }> = ({ className }) => (
     ].map(({ deviceName, Icon }) => (
       <Button
         key={deviceName}
-        className="w-28 h-24 rounded-3xl hover:bg-gradient-to-b hover:to-[#0F1657] hover:from-[#1A1A78] hover:text-white"
+        className="w-28 h-24 rounded-3xl hover:bg-gradient-to-b hover:from-[#008234] hover:to-[#0c8103] hover:text-white"
         data-aos="fade-up"
         data-aos-duration="1500"
       >

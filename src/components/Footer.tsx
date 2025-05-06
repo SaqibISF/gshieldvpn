@@ -54,14 +54,7 @@ const Footer: FC = () => {
         }}
       ></div>
 
-      <div
-        className="w-full max-w-7xl mx-auto px-4"
-        style={{
-          backgroundImage: 'url("/stars.png")',
-          backgroundSize: "25rem",
-          backgroundRepeat: "revert",
-        }}
-      >
+      <div className="w-full max-w-7xl mx-auto px-4">
         <AppLogo className="py-12 lg:py-14" />
 
         <Divider />
@@ -212,14 +205,14 @@ const Footer: FC = () => {
 
         <div className="w-full flex justify-between items-center py-4 lg:py-6">
           <div className="text-sm text-default-500">
-            © 2025 RockyVPN. All rights reserved.
+            © 2025 GShieldVPN. All rights reserved.
           </div>
           <div className="text-base text-default-500">
             <span>Powered by </span>
             <Link
               href="https://www.tecclubx.com/"
               target="_blank"
-              className="text-accent font-bold"
+              className="text-primary font-bold"
             >
               Tecclub
             </Link>

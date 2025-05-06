@@ -1,8 +1,81 @@
 "use client";
-import React, { FC, ReactNode } from "react";
+import React, { FC, HTMLAttributes, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import Navbar from "../Navbar";
 import { Property } from "csstype";
+
+const SectionTitle: FC<HTMLAttributes<HTMLSpanElement>> = ({
+  children,
+  className,
+  ...props
+}) => (
+  <span
+    className={cn(
+      "text-primary bg-[#E2FFE0] w-fit px-6 py-2 rounded-full text-base font-medium text-center mb-10 inline-block",
+      className
+    )}
+    data-aos="fade-up"
+    data-aos-duration="1500"
+    {...props}
+  >
+    {children}
+  </span>
+);
+
+const SectionHeading: FC<HTMLAttributes<HTMLHeadingElement>> = ({
+  children,
+  className,
+  ...props
+}) => (
+  <h2
+    className={cn(
+      "sm:text-5xl text-4xl font-bold !leading-[3.5rem] text-center mb-6",
+      className
+    )}
+    data-aos="zoom-in-up"
+    data-aos-easing="ease-in-out"
+    data-aos-duration="1500"
+    {...props}
+  >
+    {children}
+  </h2>
+);
+
+const SectionSubTitle: FC<HTMLAttributes<HTMLSpanElement>> = ({
+  children,
+  className,
+  ...props
+}) => (
+  <span
+    className={cn(
+      "px-4 sm:text-xl text-base sm:leading-10 leading-9 font-medium md:w-2/3 text-center mt-4 mb-6 inline-block",
+      className
+    )}
+    data-aos="fade-up"
+    data-aos-duration="1500"
+    {...props}
+  >
+    {children}
+  </span>
+);
+
+const SectionDescription: FC<HTMLAttributes<HTMLParagraphElement>> = ({
+  children,
+  className,
+  ...props
+}) => (
+  <p
+    className={cn(
+      "text-default-500 px-8 text-xl leading-8 capitalize lg:w-2/3 text-center mb-14",
+      className
+    )}
+    data-aos="zoom-in-up"
+    data-aos-duration="1500"
+    {...props}
+  >
+    {children}
+  </p>
+);
 
 const Section: FC<{
   isHeroSection?: boolean;
@@ -13,7 +86,6 @@ const Section: FC<{
   isLeftCornerGradient?: boolean;
   isRightCornerGradient?: boolean;
   isCenterGradient?: boolean;
-  startsRepeat?: Property.BackgroundRepeat;
   parentClassName?: string;
   className?: string;
   children?: ReactNode;
@@ -26,7 +98,6 @@ const Section: FC<{
   isLeftCornerGradient,
   isRightCornerGradient,
   isCenterGradient,
-  startsRepeat = "revert",
   parentClassName,
   className,
   children,
@@ -73,11 +144,6 @@ const Section: FC<{
     )}
 
     <div
-      style={{
-        backgroundImage: 'url("/stars.png")',
-        backgroundSize: "25rem",
-        backgroundRepeat: startsRepeat,
-      }}
       className={cn(
         "container w-full max-w-7xl flex flex-col flex-wrap items-center justify-center",
         isHeroSection
@@ -86,50 +152,19 @@ const Section: FC<{
         className
       )}
     >
-      {title && (
-        <span
-          className="text-accent text-2xl font-bold text-center mb-10 inline-block"
-          data-aos="fade-up"
-          data-aos-duration="1500"
-        >
-          {title}
-        </span>
-      )}
+      {title && <SectionTitle>{title}</SectionTitle>}
 
-      {heading && (
-        <h2
-          className="sm:text-5xl text-4xl font-bold leading-[3.5rem] text-center mb-6"
-          data-aos="zoom-in-up"
-          data-aos-easing="ease-in-out"
-          data-aos-duration="1500"
-        >
-          {heading}
-        </h2>
-      )}
+      {heading && <SectionHeading>{heading}</SectionHeading>}
 
-      {subtitle && (
-        <span
-          className="px-4 sm:text-xl text-base sm:leading-10 leading-9 font-medium md:w-2/3 text-center mt-4 mb-6 inline-block"
-          data-aos="fade-down"
-          data-aos-duration="1500"
-        >
-          {subtitle}
-        </span>
-      )}
+      {subtitle && <SectionSubTitle>{subtitle}</SectionSubTitle>}
 
-      {description && (
-        <p
-          className="text-default-500 px-8 text-xl leading-8 capitalize lg:w-2/3 text-center mb-14"
-          data-aos="zoom-in-up"
-          data-aos-duration="1500"
-        >
-          {description}
-        </p>
-      )}
+      {description && <SectionDescription>{description}</SectionDescription>}
 
       {children}
     </div>
   </section>
 );
+
+export { SectionTitle, SectionHeading, SectionSubTitle, SectionDescription };
 
 export default Section;

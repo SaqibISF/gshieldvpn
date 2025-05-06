@@ -1,4 +1,4 @@
-export const USER_COOKIE_KEY = "rocky_user";
+export const USER_COOKIE_KEY = "gshield_user";
 
 export const STRIPE_PUBLISHABLE_KEY =
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!;

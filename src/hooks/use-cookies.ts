@@ -5,7 +5,7 @@ import { useCookies } from "react-cookie";
 export const useUserCookie = () => {
   const [userCookie, setCookie, removeCookie] = useCookies([USER_COOKIE_KEY]);
 
-  const user: User = userCookie.rocky_user ?? null;
+  const user: User = userCookie.gshield_user ?? null;
 
   const setUserCookie = (user: User) => {
     setCookie(USER_COOKIE_KEY, JSON.stringify(user), {

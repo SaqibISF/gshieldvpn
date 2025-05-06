@@ -6,6 +6,7 @@ import PaymentHistoryTable from "./PaymentHistoryTable";
 import ChangeBillingAddressDialog from "./ChangeBillingAddressDialog";
 import DashboardSection from "./DashboardSection";
 import Invoice from "./Invoice";
+import AllServersTable from "./AllServersTable";
 
 export {
   ChangeNameDialog,
@@ -16,4 +17,5 @@ export {
   ChangeBillingAddressDialog,
   DashboardSection,
   Invoice,
+  AllServersTable,
 };

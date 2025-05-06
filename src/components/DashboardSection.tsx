@@ -8,7 +8,7 @@ const DashboardSection: FC<{
   <section className="space-y-6 lg:px-8 px-6 pb-20 lg:pb-14">
     {title && (
       <span
-        className="text-accent sm:text-xl text-lg font-bold inline-block"
+        className="text-primary sm:text-xl text-lg font-bold inline-block"
         data-aos="fade-up"
         data-aos-duration="1500"
       >

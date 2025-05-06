@@ -7,18 +7,19 @@ import {
   CardBody,
   CardFooter,
   CardHeader,
+  Chip,
   Skeleton,
 } from "@heroui/react";
-import {
-  CheckedIcon,
-  PriceCardBackground1,
-  PriceCardBackground2,
-  PriceCardBackground3,
-} from "@/icons";
+import { BoltIcon, CheckedIcon, StarIcon, TickIcon } from "@/icons";
 import { usePlans } from "@/hooks/usePlans";
 import Link from "next/link";
-import { CHECKOUT_PAGE_PATH, LOGIN_PAGE_PATH } from "@/lib/pathnames";
+import {
+  CHECKOUT_PAGE_PATH,
+  LOGIN_PAGE_PATH,
+  PRICING_PAGE_PATH,
+} from "@/lib/pathnames";
 import { useUserCookie } from "@/hooks/use-cookies";
+import { cn } from "@/lib/utils";
 
 const PricingSection: FC<{
   isHeroSection?: boolean;
@@ -82,9 +83,12 @@ const PricingSection: FC<{
           ))}
 
         {plans.map((plan, index) => (
-          <Card
-            className="p-8 w-full max-w-96 mx-auto relative bg-opacity-60"
+          <div
             key={plan.id}
+            className={cn(
+              "w-full max-w-96 mx-auto p-1 rounded-2xl",
+              plan.is_best_deal ? "bg-primary" : ""
+            )}
             data-aos={
               (index + 1) % 3 === 1
                 ? "fade-right"
@@ -97,42 +101,74 @@ const PricingSection: FC<{
             data-aos-offset="300"
             data-aos-easing="ease-in-sine"
           >
-            {(index + 1) % 3 === 1 && <PriceCardBackground1 />}
-            {(index + 1) % 3 === 2 && <PriceCardBackground2 />}
-            {(index + 1) % 3 === 0 && <PriceCardBackground3 />}
-            <CardHeader className="p-0 flex-col items-start gap-2">
-              <p className="text-2xl font-semibold">{plan.name}</p>
-              <div className="flex items-center mt-2">
-                <h4 className="font-semibold text-4xl">${plan.price}</h4>
-                <small className="text-default-500 text-sm font-medium ml-2">
-                  / {plan.duration > 1 && plan.duration} {plan.duration_unit}
-                </small>
-              </div>
-            </CardHeader>
-            <CardBody className="px-0 py-10 flex flex-col items-start gap-6">
-              {plan.description.split(",").map((desc, index) => (
-                <div key={desc + index} className="flex gap-2">
-                  <CheckedIcon />
-                  <span className="text-default-500 text-sm font-medium">
-                    {desc.trim()}
-                  </span>
+            {plan.is_best_deal && (
+              <span className="text-white flex items-center justify-center gap-2 py-2">
+                <StarIcon /> Best Deals
+              </span>
+            )}
+            <Card className="p-6">
+              <CardHeader className="p-0 flex-col items-start gap-4">
+                <div className="w-full flex gap-4 items-center">
+                  <Button
+                    isIconOnly
+                    variant="shadow"
+                    disabled
+                    className="bg-white"
+                  >
+                    <BoltIcon className="text-primary" />
+                  </Button>
+                  <p className="flex-1 text-2xl font-semibold">{plan.name}</p>
+                  {plan.is_best_deal && (
+                    <Chip className="text-primary bg-[#E2FFE0] rounded-lg">
+                      20% Off
+                    </Chip>
+                  )}
                 </div>
-              ))}
-            </CardBody>
-            <CardFooter className="p-0">
-              <Button
-                as={Link}
-                href={user ? CHECKOUT_PAGE_PATH(plan.id) : LOGIN_PAGE_PATH}
-                variant="bordered"
-                radius="full"
-                className="w-full"
-              >
-                Get Started
-              </Button>
-            </CardFooter>
-          </Card>
+                <div className="flex items-center gap-2">
+                  <span className="text-lg font-bold">$</span>
+                  <h4 className="font-semibold text-5xl">{plan.price}</h4>
+                  <small className="text-default-500 text-lg font-normal self-end">
+                    / {plan.duration > 1 && plan.duration} {plan.duration_unit}
+                  </small>
+                </div>
+                <Button
+                  as={Link}
+                  href={user ? CHECKOUT_PAGE_PATH(plan.id) : LOGIN_PAGE_PATH}
+                  variant={plan.is_best_deal ? "shadow" : "solid"}
+                  color={plan.is_best_deal ? "primary" : "default"}
+                  radius="full"
+                  size="lg"
+                  fullWidth
+                >
+                  Upgrade Plan
+                </Button>
+              </CardHeader>
+              <CardBody className="flex flex-col items-start gap-6">
+                {plan.description.split(",").map((desc, index) => (
+                  <div key={desc + index} className="flex gap-2">
+                    <TickIcon className="text-primary" />
+                    <span className="text-default-500 text-sm font-medium">
+                      {desc.trim()}
+                    </span>
+                  </div>
+                ))}
+              </CardBody>
+            </Card>
+          </div>
         ))}
       </div>
+      <Button
+        as={Link}
+        href={PRICING_PAGE_PATH}
+        radius="full"
+        size="lg"
+        variant="bordered"
+        className="mt-8"
+        data-aos="fade-up"
+        data-aos-duration="1500"
+      >
+        See Plan Details
+      </Button>
     </Section>
   );
 };

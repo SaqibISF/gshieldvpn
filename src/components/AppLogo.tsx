@@ -1,14 +1,18 @@
 import React, { FC } from "react";
-import { AppLogoIcon } from "@/icons";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 const AppLogo: FC<{ className?: string }> = ({ className }) => (
-  <div className={cn("flex justify-start items-center gap-1", className)}>
-    <AppLogoIcon className="w-10 h-auto" />
-    <h2 className="text-xl font-bold">
-      RockyVPN
-    </h2>
-  </div>
+  <Image
+    className={cn("w-44 h-auto", className)}
+    src="/logo.svg"
+    alt="image not founded"
+    width={0}
+    height={0}
+    sizes="100vw"
+    placeholder="blur"
+    blurDataURL="/logo.svg"
+  />
 );
 
 export default AppLogo;

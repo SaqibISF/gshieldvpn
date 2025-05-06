@@ -14,8 +14,6 @@ export const HOME_PAGE_PATH = "/";
 
 export const FEATURES_PAGE_PATH = "/features";
 
-export const WHAT_IS_A_VPN_PAGE_PATH = "/what-is-a-vpn";
-
 export const SERVERS_PAGE_PATH = "/servers";
 
 export const PRICING_PAGE_PATH = "/pricing";

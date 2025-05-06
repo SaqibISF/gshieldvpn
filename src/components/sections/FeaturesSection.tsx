@@ -3,66 +3,83 @@ import React, { FC } from "react";
 import Section from "./Section";
 import { Card, CardBody, CardHeader } from "@heroui/react";
 import Image from "next/image";
+import {
+  GlobeIcon,
+  LockIcon,
+  PlayIcon,
+  ShieldIcon,
+  SplitIcon,
+  WiFiOffIcon,
+} from "@/icons";
 
 const FeaturesSection: FC = () => (
   <Section
     title="Features"
-    heading="Why Use Rocky"
-    description="we offering a range of cutting-edge features that set us apart in the world of online security and privacy."
+    heading="Features for Our App"
+    description="Discover the powerful features of GShieldVPN designed to provide you with secure, private, and seamless internet access."
     isCenterGradient
   >
-    <div className="w-full grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="w-full grid md:grid-cols-2 gap-6">
       {[
         {
-          imageSrc: "/features-card-1-image.png",
-          title: "6 Layers of Security",
+          Icon: ShieldIcon,
+          title: "Secure encryption",
           description:
-            "Effortlessly run smart scans on software, files, and apps to find vulnerabilities.",
+            "Keep your online traffic safe behind a wall of next-generation encryption",
         },
         {
-          imageSrc: "/features-card-2-image.png",
-          title: "Easy to Install and Use",
+          Icon: WiFiOffIcon,
+          title: "Safe when disconnected",
           description:
-            "It only takes a moment to install Pivien and once it’s done, it’ll run quietly in the background.",
+            "Keep your online traffic safe behind a wall of next-generation encryption",
         },
         {
-          imageSrc: "/features-card-3-image.png",
-          title: "Wi-Fi Network Security",
+          Icon: SplitIcon,
+          title: "Split tunneling",
           description:
-            "Connect safely to any Wi-Fi network, even unsecured public networks.",
+            "Everyday digital security, your way. Choose which apps need VPN protection.",
         },
-      ].map((item, index) => (
+        {
+          Icon: LockIcon,
+          title: "Double VPN",
+          description:
+            "Add another layer of encryption with our Double VPN servers for extra peace of mind.",
+        },
+        {
+          Icon: PlayIcon,
+          title: "SmartPlay",
+          description:
+            "Watch shows and movies safely without extra steps — whether at home or abroad.",
+        },
+        {
+          Icon: GlobeIcon,
+          title: "Private DNS",
+          description:
+            "Enjoy more online privacy without worrying about third parties spying on your every move.",
+        },
+      ].map(({ title, description, Icon }, index) => (
         <Card
-          key={item.imageSrc}
-          className="space-y-4 p-4 mx-auto bg-opacity-60"
+          key={title.trim() + index}
+          className="p-4 mx-auto bg-[#00823417]"
           data-aos={
-            (index + 1) % 3 === 1
+            (index + 1) % 2 === 1
               ? "zoom-out-right"
-              : (index + 1) % 3 === 2
-              ? "zoom-out-down"
-              : (index + 1) % 3 === 0
+              : (index + 1) % 2 === 0
               ? "zoom-out-left"
               : ""
           }
           data-aos-duration="1500"
         >
-          <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-            <Image
-              className="rounded-2xl w-full h-auto"
-              src={item.imageSrc}
-              alt="imag not founded"
-              width={0}
-              height={0}
-              sizes="100vw"
-              placeholder="blur"
-              blurDataURL={item.imageSrc}
-            />
-          </CardHeader>
-          <CardBody className="space-y-4">
-            <h4 className="text-3xl font-bold leading-[48px]">{item.title}</h4>
-            <small className="text-default-500 text-xl font-medium">
-              {item.description}
-            </small>
+          <CardBody className="flex sm:flex-row gap-4 items-center">
+            <span className="size-[4.375rem] flex items-center justify-center bg-primary text-white rounded-full">
+              <Icon />
+            </span>
+            <div className="flex-1 flex flex-col justify-center text-center sm:text-start">
+              <h5 className="text-2xl font-normal mb-2">{title}</h5>
+              <small className="text-default-500 text-base font-normal">
+                {description}
+              </small>
+            </div>
           </CardBody>
         </Card>
       ))}

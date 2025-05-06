@@ -10,8 +10,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: "#1A1A78",
-        accent: "#82CFFF",
+        primary: "#008234",
       },
       fontFamily: {
         sans: ["var(--font-sans)"],

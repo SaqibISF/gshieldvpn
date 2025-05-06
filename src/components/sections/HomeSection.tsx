@@ -3,25 +3,16 @@ import React, { FC } from "react";
 import Section from "./Section";
 import Image from "next/image";
 import { mockupBase64Src } from "@/lib/mockup-base64";
-import { Avatar, Button } from "@heroui/react";
-import { DownloadIcon } from "@/icons";
+import { Button } from "@heroui/react";
 
 const HomeSection: FC = () => (
   <Section
     isHeroSection
     isLeftCornerGradient
     isRightCornerGradient
-    startsRepeat="no-repeat"
     className="flex-col lg:flex-row gap-y-12"
   >
     <div className="lg:w-3/5 flex flex-col gap-y-6 px-4 items-center md:items-start text-center md:text-left">
-      <span
-        className="text-accent text-xl font-bold"
-        data-aos="fade-up"
-        data-aos-duration="1500"
-      >
-        Rocky VPN
-      </span>
       <h1
         className="text-5xl md:text-7xl font-bold leading-[3.5rem] md:leading-[5rem]"
         data-aos="fade-right"
@@ -30,7 +21,7 @@ const HomeSection: FC = () => (
       >
         Stay{" "}
         <span
-          className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-[#1A1A78] to-[#0F1657]"
+          className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-[#008234] to-[#0c8103]"
           data-aos="flip-left"
           data-aos-easing="ease-out-cubic"
           data-aos-duration="2000"
@@ -51,64 +42,22 @@ const HomeSection: FC = () => (
         color="primary"
         variant="shadow"
         radius="full"
+        size="lg"
         className="self-center sm:self-start"
         data-aos="fade-up"
         data-aos-anchor-placement="top-bottom"
       >
         Get Started
       </Button>
-      <div className="w-full px-8 md:px-0 flex flex-wrap items-center justify-between md:justify-start sm:gap-20">
-        <div
-          className="flex flex-col items-start justify-center gap-y-2"
-          data-aos="fade-up-right"
-        >
-          <div className="flex">
-            {Array.from({ length: 3 }).map((_, index) => (
-              <span key={index} className={index !== 0 ? "-ml-2" : ""}>
-                <Avatar
-                  className="w-6 h-6 text-tiny"
-                  src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
-                />
-              </span>
-            ))}
-          </div>
-          <h3 className="text-2xl sm:text-3xl md:text-5xl font-bold">172+ K</h3>
-          <p className="text-default-500 text-sm sm:text-base font-medium leading-8">
-            Satisfied user
-          </p>
-        </div>
-
-        <div
-          className="flex flex-col items-start justify-center gap-y-2"
-          data-aos="flip-down"
-        >
-          <div className="text-yellow-500 text-lg md:text-3xl">★★★★☆</div>
-          <h3 className="text-2xl sm:text-3xl md:text-5xl font-bold">4.8</h3>
-          <p className="text-default-500 text-sm sm:text-base font-medium leading-8">
-            Rating
-          </p>
-        </div>
-
-        <div
-          className="flex flex-col items-start justify-center gap-y-2"
-          data-aos="fade-up-left"
-        >
-          <DownloadIcon />
-          <h3 className="text-2xl sm:text-3xl md:text-5xl font-bold">20+ M</h3>
-          <p className="text-default-500 text-sm sm:text-base font-medium leading-8">
-            Downloads
-          </p>
-        </div>
-      </div>
     </div>
     <div
       className="lg:w-2/5 w-full flex items-center justify-center"
       data-aos="fade-left"
     >
       <Image
-        className="max-w-lg w-full h-auto"
+        className="max-w-64 w-full h-auto"
         src="/mockup.png"
-        alt="imag not founded"
+        alt="image not founded"
         width={0}
         height={0}
         sizes="100vw"

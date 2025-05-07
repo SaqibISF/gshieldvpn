@@ -1,16 +1,17 @@
 "use client";
 import React, { FC } from "react";
-import Section from "./Section";
+import Section, { SectionProps } from "./Section";
 import Image from "next/image";
 import { mockupBase64Src } from "@/lib/mockup-base64";
 import { Button } from "@heroui/react";
 
-const HomeSection: FC = () => (
+const HomeSection: FC<SectionProps> = ({ ...props }) => (
   <Section
     isHeroSection
     isLeftCornerGradient
     isRightCornerGradient
     className="flex-col lg:flex-row gap-y-12"
+    {...props}
   >
     <div className="lg:w-3/5 flex flex-col gap-y-6 px-4 items-center md:items-start text-center md:text-left">
       <h1

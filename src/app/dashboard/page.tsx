@@ -1,8 +1,7 @@
 "use client";
 import React, { FC } from "react";
-import { DashboardSection } from "@/components";
+import { AvailableDevices, DashboardSection } from "@/components";
 import { Button } from "@heroui/react";
-import { AvailableDevicesSection } from "@/components/sections";
 import { HeadphoneIcon } from "@/icons";
 import Link from "next/link";
 import { DOWNLOADS_PAGE_PATH } from "@/lib/pathnames";
@@ -25,6 +24,7 @@ const DashboardPage: FC = () => {
           className="flex flex-col items-center justify-center gap-4 p-6 border-2 border-default-500 rounded-xl"
           data-aos="fade-right"
           data-aos-duration="1500"
+          data-aos-once="true"
         >
           <Button
             as={Link}
@@ -44,8 +44,21 @@ const DashboardPage: FC = () => {
 
         <div
           className="flex flex-col justify-center gap-4 p-6 border-2 border-default-500 rounded-xl"
+          data-aos="fade-right"
+          data-aos-duration="1500"
+          data-aos-once="true"
+        >
+          <h3 className="text-3xl font-semibold text-center">
+            Download GShield VPN{" "}
+          </h3>
+          <AvailableDevices />
+        </div>
+
+        <div
+          className="flex flex-col justify-center gap-4 p-6 border-2 border-default-500 rounded-xl"
           data-aos="fade-left"
           data-aos-duration="1500"
+          data-aos-once="true"
         >
           <h3 className="text-2xl font-medium">Subscription</h3>
           {isAppMounted &&
@@ -79,6 +92,7 @@ const DashboardPage: FC = () => {
           className="flex flex-col justify-center gap-4 p-6 border-2 border-default-500 rounded-xl"
           data-aos="fade-right"
           data-aos-duration="1500"
+          data-aos-once="true"
         >
           <h3 className="text-2xl font-medium">Recent Activity</h3>
           <p className="text-default-500 text-xl font-normal">
@@ -90,6 +104,7 @@ const DashboardPage: FC = () => {
           className="flex flex-col justify-center gap-4 p-6 border-2 border-default-500 rounded-xl"
           data-aos="fade-left"
           data-aos-duration="1500"
+          data-aos-once="true"
         >
           <h3 className="flex items-center gap-2 text-2xl font-medium">
             <HeadphoneIcon size={44} /> Customer Contact Support
@@ -99,8 +114,6 @@ const DashboardPage: FC = () => {
           </p>
         </div>
       </div>
-
-      <AvailableDevicesSection />
     </DashboardSection>
   );
 };

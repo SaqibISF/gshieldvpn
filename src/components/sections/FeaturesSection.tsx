@@ -1,8 +1,7 @@
 "use client";
 import React, { FC } from "react";
-import Section from "./Section";
-import { Card, CardBody, CardHeader } from "@heroui/react";
-import Image from "next/image";
+import Section, { SectionProps } from "./Section";
+import { Card, CardBody } from "@heroui/react";
 import {
   GlobeIcon,
   LockIcon,
@@ -12,12 +11,12 @@ import {
   WiFiOffIcon,
 } from "@/icons";
 
-const FeaturesSection: FC = () => (
+const FeaturesSection: FC<SectionProps> = ({ ...props }) => (
   <Section
     title="Features"
     heading="Features for Our App"
     description="Discover the powerful features of GShieldVPN designed to provide you with secure, private, and seamless internet access."
-    isCenterGradient
+    {...props}
   >
     <div className="w-full grid md:grid-cols-2 gap-6">
       {[

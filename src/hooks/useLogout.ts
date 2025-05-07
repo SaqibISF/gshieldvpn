@@ -37,8 +37,8 @@ export const useLogout = () => {
           : "Failed to logout";
       addToast({ color: "danger", description: errorMessage });
     } finally {
-      removeUserCookie();
       router.push(LOGIN_PAGE_PATH);
+      removeUserCookie();
     }
   };
 

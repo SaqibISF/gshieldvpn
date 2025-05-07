@@ -91,8 +91,10 @@ const SideBar: FC<{ className?: string }> = ({ className }) => {
         className="w-[21.875rem] h-[27.125rem] rounded-xl absolute blur-[5.375rem] -left-[10.625rem] -bottom-[12.5rem] pointer-events-none"
         style={{
           background:
-            "linear-gradient(180deg, rgba(130, 144, 255, 0.70) 12.38%, rgba(130, 144, 255, 0.00) 100%)",
+            "linear-gradient(180deg, rgba(96, 211, 148, 0.70) 12.38%, rgba(96, 211, 148, 0.00) 100%)",
         }}
+        data-aos="fade-left"
+        data-aos-duration="1500"
       ></div>
     </aside>
   );
@@ -113,16 +115,20 @@ const DashboardLayout: FC<{
         className="w-[21.875rem] h-[27.125rem] rounded-[27.125rem] absolute blur-[12.5rem] top-16 -right-10 pointer-events-none"
         style={{
           background:
-            "linear-gradient(180deg, rgba(130, 144, 255, 0.70) 12.38%, rgba(130, 144, 255, 0.00) 100%)",
+            "linear-gradient(180deg, rgba(96, 211, 148, 0.70) 12.38%, rgba(96, 211, 148, 0.00) 100%)",
         }}
+        data-aos="fade-right"
+        data-aos-duration="1500"
       ></div>
 
       <div
         className="size-[33rem] rounded-[33rem] absolute blur-[12.5rem] pointer-events-none"
         style={{
           background:
-            "linear-gradient(180deg, rgba(0, 0, 140, 0.80) 12.38%, rgba(15, 15, 16, 0.00) 100%)",
+            "linear-gradient(180deg, rgba(0, 128, 0, 0.80) 12.38%, rgba(15, 15, 16, 0.00) 100%)",
         }}
+        data-aos="fade-up"
+        data-aos-duration="1500"
       ></div>
 
       <div className="w-full min-h-[calc(100vh-5rem)] flex">

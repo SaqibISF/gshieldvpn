@@ -1,16 +1,17 @@
 import React, { FC } from "react";
-import Section, { SectionHeading } from "./Section";
+import Section, { SectionProps } from "./Section";
 import Image from "next/image";
 import { Africa, Asia, Europe, NorthAmerica } from "@/icons";
 import { mapBase64Src } from "@/lib/map-base64";
 
-const FactsSection: FC = () => (
-  <Section title="Facts">
-    <SectionHeading className="lg:w-1/2">
-      2.6k+ Active Server In All Over The World.
-    </SectionHeading>
+const FactsSection: FC<SectionProps> = ({ ...props }) => (
+  <Section
+    title="Facts"
+    heading="2.6k+ Active Server In All Over The World."
+    {...props}
+  >
     <div className="flex flex-col-reverse lg:flex-row gap-y-12">
-      <div className="lg:w-1/2 w-full">
+      <div className="lg:w-1/2 w-full" data-aos="fade-right">
         <Image
           className="w-full h-auto"
           src="/map.png"

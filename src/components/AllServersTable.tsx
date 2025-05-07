@@ -98,7 +98,7 @@ const AllServersTable: FC = () => {
                     item.sub_server.name
                   ) : columnKey === "ad_block" ||
                     columnKey === "threat_block" ? (
-                    <CheckedIcon className="text-primary" />
+                    <CheckedIcon />
                   ) : (
                     getKeyValue(item, columnKey)
                   )}

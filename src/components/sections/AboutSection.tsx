@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import Section, { SectionTitle } from "./Section";
+import Section, { SectionProps, SectionTitle } from "./Section";
 import Image from "next/image";
 import { Button } from "@heroui/react";
 import Link from "next/link";
@@ -7,8 +7,8 @@ import { DOWNLOADS_PAGE_PATH } from "@/lib/pathnames";
 import { laptopBase64Src } from "@/lib/laptop-base64";
 import { CheckedIcon } from "@/icons";
 
-const AboutSection: FC = () => (
-  <Section className="flex-col-reverse lg:flex-row gap-y-12">
+const AboutSection: FC<SectionProps> = ({ ...props }) => (
+  <Section className="flex-col-reverse lg:flex-row gap-y-12" {...props}>
     <div
       className="lg:w-2/5 w-full flex items-center justify-center"
       data-aos="fade-right"
@@ -52,7 +52,7 @@ const AboutSection: FC = () => (
           data-aos="zoom-in-up"
           data-aos-duration="1500"
         >
-          <CheckedIcon className="text-primary" /> Enhanced Privacy & Security
+          <CheckedIcon /> Enhanced Privacy & Security
         </h6>
 
         <p
@@ -71,7 +71,7 @@ const AboutSection: FC = () => (
           data-aos="zoom-in-up"
           data-aos-duration="1500"
         >
-          <CheckedIcon className="text-primary" /> Fast & Reliable Connection
+          <CheckedIcon /> Fast & Reliable Connection
         </h6>
 
         <p

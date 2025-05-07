@@ -4,7 +4,7 @@ import {
   FeaturesSection,
   Section,
 } from "@/components/sections";
-import { Button } from "@heroui/react";
+import { Button, Divider } from "@heroui/react";
 import { ArrowRightIcon } from "@/icons";
 import Link from "next/link";
 import { DOWNLOADS_PAGE_PATH } from "@/lib/pathnames";
@@ -16,6 +16,7 @@ const FeaturesPage: FC = () => (
       heading="GShieldVPN features"
       subtitle="Every ExpressVPN subscription comes jam-packed with privacy and security features to give you a safer, more enjoyable online experience."
       isRightCornerGradient
+      isLeftCornerGradient
     >
       <Button
         as={Link}
@@ -32,7 +33,9 @@ const FeaturesPage: FC = () => (
       </Button>
     </Section>
 
-    <FeaturesSection />
+    <Divider className="h-2" />
+
+    <FeaturesSection isLeftCornerGradient />
   </>
 );
 

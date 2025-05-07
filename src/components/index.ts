@@ -7,6 +7,7 @@ import ChangeBillingAddressDialog from "./ChangeBillingAddressDialog";
 import DashboardSection from "./DashboardSection";
 import Invoice from "./Invoice";
 import AllServersTable from "./AllServersTable";
+import AvailableDevices from "./AvailableDevices";
 
 export {
   ChangeNameDialog,
@@ -18,4 +19,5 @@ export {
   DashboardSection,
   Invoice,
   AllServersTable,
+  AvailableDevices,
 };

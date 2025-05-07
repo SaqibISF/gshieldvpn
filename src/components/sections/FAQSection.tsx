@@ -1,15 +1,11 @@
 "use client";
 import React, { FC } from "react";
-import Section from "./Section";
+import Section, { SectionProps } from "./Section";
 import { Accordion, AccordionItem } from "@heroui/react";
 import Link from "next/link";
 import { CONTACT_US_PAGE_PATH } from "@/lib/pathnames";
 
-const FAQSection: FC<{
-  isLeftCornerGradient?: boolean;
-  isRightCornerGradient?: boolean;
-  isCenterGradient?: boolean;
-}> = ({ isLeftCornerGradient, isRightCornerGradient, isCenterGradient }) => {
+const FAQSection: FC<SectionProps> = ({ ...props }) => {
   const faqs = [
     {
       question: "Why do I need a VPN?",
@@ -43,15 +39,14 @@ const FAQSection: FC<{
       title="FAQ"
       heading="Frequently Asked Questions"
       description="We have compiled list of frequently asked questions to provide you with quick and comprehensive answers."
-      isLeftCornerGradient={isLeftCornerGradient}
-      isRightCornerGradient={isRightCornerGradient}
-      isCenterGradient={isCenterGradient}
+      {...props}
     >
       <Accordion
         variant="splitted"
         className="max-w-4xl w-full"
         data-aos="fade-up"
         data-aos-duration="1500"
+        data-aos-once="true"
       >
         {faqs.map((faq, index) => (
           <AccordionItem

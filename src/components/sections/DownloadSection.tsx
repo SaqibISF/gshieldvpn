@@ -1,28 +1,13 @@
 import React, { FC } from "react";
-import Section, { SectionTitle } from "./Section";
+import Section, { SectionProps, SectionTitle } from "./Section";
 import { Button } from "@heroui/react";
 import Image from "next/image";
 import { mockupBase64Src } from "@/lib/mockup-base64";
-import { AppleIcon, GooglePlayIcon } from "@/icons";
+import Link from "next/link";
+import { DOWNLOADS_PAGE_PATH } from "@/lib/pathnames";
 
-const DownloadSection: FC<{
-  isHeroSection?: boolean;
-  isRightCornerGradient?: boolean;
-  isCenterGradient?: boolean;
-  isLeftCornerGradient?: boolean;
-}> = ({
-  isHeroSection,
-  isRightCornerGradient,
-  isLeftCornerGradient,
-  isCenterGradient,
-}) => (
-  <Section
-    isHeroSection={isHeroSection}
-    isRightCornerGradient={isRightCornerGradient}
-    isLeftCornerGradient={isLeftCornerGradient}
-    isCenterGradient={isCenterGradient}
-    className="flex-col lg:flex-row gap-y-12"
-  >
+const DownloadSection: FC<SectionProps> = ({ ...props }) => (
+  <Section className="flex-col lg:flex-row gap-y-12" {...props}>
     <div className="lg:w-3/5 flex flex-col gap-y-6 px-4 items-center md:items-start text-center md:text-left">
       <SectionTitle className="mb-0">Download Mobile App</SectionTitle>
 
@@ -46,33 +31,9 @@ const DownloadSection: FC<{
         your personal data.
       </p>
 
-      <div className="flex sm:flex-row flex-col items-center justify-center lg:justify-stretch gap-4 mb-2">
-        <Button
-          variant="bordered"
-          size="lg"
-          startContent={<GooglePlayIcon />}
-          className="py-8"
-        >
-          <div className="flex flex-col items-start capitalize">
-            <span className="text-xl">Google Play</span>
-            <span className="text-sm">Get it on</span>
-          </div>
-        </Button>
-
-        <Button
-          variant="bordered"
-          size="lg"
-          startContent={<AppleIcon />}
-          className="py-8"
-        >
-          <div className="flex flex-col items-start capitalize">
-            <span className="text-xl">Apple Store</span>
-            <span className="text-sm">Download on the</span>
-          </div>
-        </Button>
-      </div>
-
       <Button
+        as={Link}
+        href={DOWNLOADS_PAGE_PATH}
         color="primary"
         variant="shadow"
         radius="full"

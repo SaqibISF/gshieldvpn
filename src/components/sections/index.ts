@@ -3,17 +3,18 @@ import HomeSection from "./HomeSection";
 import FeaturesSection from "./FeaturesSection";
 import PricingSection from "./PricingSection";
 import FAQSection from "./FAQSection";
-import AvailableDevicesSection from "./AvailableDevicesSection";
 import ArticleSection from "./ArticleSection";
 import DownloadSection from "./DownloadSection";
 import AboutSection from "./AboutSection";
 import FactsSection from "./FactsSection";
+import InstallingSection from "./InstallingSection";
 
 export {
   SectionTitle,
   SectionHeading,
   SectionSubTitle,
   SectionDescription,
+  type SectionProps,
 } from "./Section";
 
 export {
@@ -22,9 +23,9 @@ export {
   PricingSection,
   FAQSection,
   Section,
-  AvailableDevicesSection,
   ArticleSection,
   DownloadSection,
   AboutSection,
   FactsSection,
+  InstallingSection,
 };

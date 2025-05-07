@@ -1,8 +1,19 @@
 "use client";
-import React, { FC, HTMLAttributes, ReactNode } from "react";
+import React, { FC, HTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 import Navbar from "../Navbar";
-import { Property } from "csstype";
+
+export type SectionProps = HTMLAttributes<HTMLElement> & {
+  isHeroSection?: boolean;
+  title?: string;
+  heading?: string;
+  subtitle?: string;
+  description?: string;
+  isLeftCornerGradient?: boolean;
+  isRightCornerGradient?: boolean;
+  isCenterGradient?: boolean;
+  parentClassName?: string;
+};
 
 const SectionTitle: FC<HTMLAttributes<HTMLSpanElement>> = ({
   children,
@@ -29,7 +40,7 @@ const SectionHeading: FC<HTMLAttributes<HTMLHeadingElement>> = ({
 }) => (
   <h2
     className={cn(
-      "sm:text-5xl text-4xl font-bold !leading-[3.5rem] text-center mb-6",
+      "lg:w-1/2 sm:text-5xl text-4xl font-bold !leading-[3.5rem] text-center mb-6",
       className
     )}
     data-aos="zoom-in-up"
@@ -77,19 +88,7 @@ const SectionDescription: FC<HTMLAttributes<HTMLParagraphElement>> = ({
   </p>
 );
 
-const Section: FC<{
-  isHeroSection?: boolean;
-  title?: string;
-  heading?: string;
-  subtitle?: string;
-  description?: string;
-  isLeftCornerGradient?: boolean;
-  isRightCornerGradient?: boolean;
-  isCenterGradient?: boolean;
-  parentClassName?: string;
-  className?: string;
-  children?: ReactNode;
-}> = ({
+const Section: FC<SectionProps> = ({
   isHeroSection,
   title,
   heading,
@@ -101,6 +100,7 @@ const Section: FC<{
   parentClassName,
   className,
   children,
+  ...props
 }) => (
   <section
     id={isHeroSection ? "main-section" : undefined}
@@ -109,6 +109,7 @@ const Section: FC<{
       isHeroSection ? "pt-4" : "",
       parentClassName
     )}
+    {...props}
   >
     {isHeroSection && <Navbar />}
 
@@ -118,8 +119,10 @@ const Section: FC<{
         style={{
           rotate: "-135deg",
           background:
-            "linear-gradient(180deg, #8290FF 12.38%, rgba(15, 15, 16, 0.00) 33.74%)",
+            "linear-gradient(180deg, #60D394 12.38%, rgba(15, 15, 16, 0.00) 33.74%)",
         }}
+        data-aos="fade-left"
+        data-aos-duration="1500"
       ></div>
     )}
 
@@ -128,8 +131,10 @@ const Section: FC<{
         className="w-[21.875rem] h-[27.125rem] rounded-[27.125rem] absolute blur-[12.5rem] top-16 -right-10 pointer-events-none"
         style={{
           background:
-            "linear-gradient(180deg, rgba(130, 144, 255, 0.70) 12.38%, rgba(130, 144, 255, 0.00) 100%)",
+            "linear-gradient(180deg, rgba(96, 211, 148, 0.70) 12.38%, rgba(96, 211, 148, 0.00) 100%)",
         }}
+        data-aos="fade-right"
+        data-aos-duration="1500"
       ></div>
     )}
 
@@ -138,8 +143,10 @@ const Section: FC<{
         className="size-[33rem] rounded-[33rem] absolute blur-[12.5rem] pointer-events-none"
         style={{
           background:
-            "linear-gradient(180deg, rgba(0, 0, 140, 0.80) 12.38%, rgba(15, 15, 16, 0.00) 100%)",
+            "linear-gradient(180deg, rgba(0, 128, 0, 0.80) 12.38%, rgba(15, 15, 16, 0.00) 100%)",
         }}
+        data-aos="fade-up"
+        data-aos-duration="1500"
       ></div>
     )}
 

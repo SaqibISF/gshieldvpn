@@ -41,9 +41,9 @@ const DeleteAccountDialog: FC = () => {
         )
         .then((res) => res.data);
       if (res.status) {
-        removeUserCookie();
         addToast({ color: "success", description: res.message });
         router.refresh();
+        removeUserCookie();
       } else {
         setErrorMessage(res.message);
         addToast({ color: "danger", description: res.message });

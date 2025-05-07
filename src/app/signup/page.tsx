@@ -112,7 +112,7 @@ const SignUpPage: FC = () => {
           className="w-full h-full rounded-xl absolute blur-[5.375rem] pointer-events-none"
           style={{
             background:
-              "linear-gradient(180deg, rgba(130, 144, 255, 0.70) 12.38%, rgba(130, 144, 255, 0.00) 100%)",
+              "linear-gradient(180deg, rgba(96, 211, 148, 0.70) 12.38%, rgba(96, 211, 148, 0.00) 100%)",
           }}
           data-aos="fade-up"
           data-aos-duration="1500"

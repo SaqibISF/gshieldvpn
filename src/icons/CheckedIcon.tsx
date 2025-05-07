@@ -1,10 +1,12 @@
 import React, { FC } from "react";
 import { IconSvgProps } from "@/types";
+import { cn } from "@/lib/utils";
 
 const CheckedIcon: FC<IconSvgProps> = ({
   size = "24",
   width,
   height,
+  className,
   ...props
 }) => (
   <svg
@@ -13,6 +15,7 @@ const CheckedIcon: FC<IconSvgProps> = ({
     height={size || height}
     viewBox="0 0 24 24"
     fill="none"
+    className={cn("text-primary", className)}
     {...props}
   >
     <path

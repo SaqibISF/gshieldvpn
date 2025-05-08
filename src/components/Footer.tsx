@@ -13,7 +13,7 @@ import {
 const Footer: FC = () => (
   <footer className="w-full relative overflow-hidden">
     <div
-      className="w-[21.875rem] h-[27.125rem] rounded-[27.125rem] absolute blur-[12.5rem] top-16 -right-10 pointer-events-none"
+      className="w-[21.875rem] h-[27.125rem] rounded-[27.125rem] absolute blur-[12.5rem] top-16 -right-10 !pointer-events-none"
       style={{
         background:
           "linear-gradient(180deg, rgba(96, 211, 148, 0.70) 12.38%, rgba(96, 211, 148, 0.00) 100%)",
@@ -21,7 +21,7 @@ const Footer: FC = () => (
     ></div>
 
     <div
-      className="size-[34.875rem] rounded-[[34.875rem] absolute blur-[12.5rem] -bottom-8 left-4 pointer-events-none"
+      className="size-[34.875rem] rounded-[[34.875rem] absolute blur-[12.5rem] -bottom-8 left-4 !pointer-events-none"
       style={{
         background:
           "linear-gradient(180deg, rgba(96, 211, 148, 0.50) 12.38%, rgba(96, 211, 148, 0.00) 100%)",

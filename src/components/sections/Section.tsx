@@ -115,7 +115,7 @@ const Section: FC<SectionProps> = ({
 
     {isLeftCornerGradient && (
       <div
-        className="size-[42rem] rounded-[42rem] absolute blur-[12.5rem] -top-80 left-4 pointer-events-none"
+        className="size-[42rem] rounded-[42rem] absolute blur-[12.5rem] -top-80 left-4 !pointer-events-none"
         style={{
           rotate: "-135deg",
           background:
@@ -128,7 +128,7 @@ const Section: FC<SectionProps> = ({
 
     {isRightCornerGradient && (
       <div
-        className="w-[21.875rem] h-[27.125rem] rounded-[27.125rem] absolute blur-[12.5rem] top-16 -right-10 pointer-events-none"
+        className="w-[21.875rem] h-[27.125rem] rounded-[27.125rem] absolute blur-[12.5rem] top-16 -right-10 !pointer-events-none"
         style={{
           background:
             "linear-gradient(180deg, rgba(96, 211, 148, 0.70) 12.38%, rgba(96, 211, 148, 0.00) 100%)",
@@ -140,7 +140,7 @@ const Section: FC<SectionProps> = ({
 
     {isCenterGradient && (
       <div
-        className="size-[33rem] rounded-[33rem] absolute blur-[12.5rem] pointer-events-none"
+        className="size-[33rem] rounded-[33rem] absolute blur-[12.5rem] !pointer-events-none"
         style={{
           background:
             "linear-gradient(180deg, rgba(0, 128, 0, 0.80) 12.38%, rgba(15, 15, 16, 0.00) 100%)",

@@ -112,7 +112,7 @@ const LoginPage: FC = () => {
     <Section isHeroSection isRightCornerGradient>
       <form onSubmit={handleSubmit(login)} className="max-w-md w-full relative">
         <div
-          className="w-full h-full rounded-xl absolute blur-[5.375rem] pointer-events-none"
+          className="w-full h-full rounded-xl absolute blur-[5.375rem] !pointer-events-none"
           style={{
             background:
               "linear-gradient(180deg, rgba(96, 211, 148, 0.70) 12.38%, rgba(96, 211, 148, 0.00) 100%)",

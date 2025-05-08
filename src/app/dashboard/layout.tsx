@@ -88,7 +88,7 @@ const SideBar: FC<{ className?: string }> = ({ className }) => {
         </li>
       </ul>
       <div
-        className="w-[21.875rem] h-[27.125rem] rounded-xl absolute blur-[5.375rem] -left-[10.625rem] -bottom-[12.5rem] pointer-events-none"
+        className="w-[21.875rem] h-[27.125rem] rounded-xl absolute blur-[5.375rem] -left-[10.625rem] -bottom-[12.5rem] !pointer-events-none"
         style={{
           background:
             "linear-gradient(180deg, rgba(96, 211, 148, 0.70) 12.38%, rgba(96, 211, 148, 0.00) 100%)",
@@ -112,7 +112,7 @@ const DashboardLayout: FC<{
       <Navbar />
 
       <div
-        className="w-[21.875rem] h-[27.125rem] rounded-[27.125rem] absolute blur-[12.5rem] top-16 -right-10 pointer-events-none"
+        className="w-[21.875rem] h-[27.125rem] rounded-[27.125rem] absolute blur-[12.5rem] top-16 -right-10 !pointer-events-none"
         style={{
           background:
             "linear-gradient(180deg, rgba(96, 211, 148, 0.70) 12.38%, rgba(96, 211, 148, 0.00) 100%)",
@@ -122,7 +122,7 @@ const DashboardLayout: FC<{
       ></div>
 
       <div
-        className="size-[33rem] rounded-[33rem] absolute blur-[12.5rem] pointer-events-none"
+        className="size-[33rem] rounded-[33rem] absolute blur-[12.5rem] !pointer-events-none"
         style={{
           background:
             "linear-gradient(180deg, rgba(0, 128, 0, 0.80) 12.38%, rgba(15, 15, 16, 0.00) 100%)",

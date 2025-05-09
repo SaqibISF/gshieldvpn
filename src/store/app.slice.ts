@@ -8,6 +8,8 @@ const initialState: AppState = {
   privacyPolicy: "",
   isBillingAddressLoadedOnce: false,
   billingAddress: null,
+  currentSupportTicketId: 0,
+  isChatDialogOpen: false,
 };
 
 const appSlice = createSlice({
@@ -34,12 +36,33 @@ const appSlice = createSlice({
       state,
       action: PayloadAction<BillingAddress | null>
     ) => {
+      state.isBillingAddressLoadedOnce = true;
       state.billingAddress = action.payload;
+    },
+
+    setCurrentSupportTicketId: (state, action: PayloadAction<number>) => {
+      state.currentSupportTicketId = action.payload;
+      state.isChatDialogOpen = true;
+    },
+
+    setIsChatDialogOpen: (state, action: PayloadAction<boolean>) => {
+      state.isChatDialogOpen = action.payload;
+    },
+
+    closeChat: (state) => {
+      state.isChatDialogOpen = false;
+      state.currentSupportTicketId = 0;
     },
   },
 });
 
-export const { setAppMounted, setLegalNotes, setBillingAddress } =
-  appSlice.actions;
+export const {
+  setAppMounted,
+  setLegalNotes,
+  setBillingAddress,
+  setCurrentSupportTicketId,
+  setIsChatDialogOpen,
+  closeChat,
+} = appSlice.actions;
 
 export default appSlice.reducer;

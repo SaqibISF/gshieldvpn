@@ -1,4 +1,4 @@
-export type { AppState, BillingAddress } from "./app.state";
+export type { AppState, BillingAddress, SupportTicket } from "./app.state";
 
 export type { IconSvgProps } from "./svg-props";
 

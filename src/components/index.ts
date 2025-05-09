@@ -8,6 +8,9 @@ import DashboardSection from "./DashboardSection";
 import Invoice from "./Invoice";
 import AllServersTable from "./AllServersTable";
 import AvailableDevices from "./AvailableDevices";
+import SupportTicketsTable from "./SupportTicketsTable";
+import Chat from "./Chat";
+import RadioElement from "./RadioElement";
 
 export {
   ChangeNameDialog,
@@ -20,4 +23,7 @@ export {
   Invoice,
   AllServersTable,
   AvailableDevices,
+  SupportTicketsTable,
+  Chat,
+  RadioElement,
 };

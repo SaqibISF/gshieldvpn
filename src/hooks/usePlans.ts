@@ -122,7 +122,6 @@ export const usePurchasedPlan = (
         )
         .then((res) => res.data);
       if (response.status) {
-        console.log(response.purchase);
         setPurchasedPlan(response.purchase);
       }
     } catch (error) {

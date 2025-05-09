@@ -7,6 +7,7 @@ import {
   SettingsIcon,
   SignOutIcon,
   SubscriptionIcon,
+  TicketIcon,
 } from "@/icons";
 import {
   Button,
@@ -21,6 +22,7 @@ import {
   BILLING_DETAILS_PAGE_PATH,
   DASHBOARD_PAGE_PATH,
   SUBSCRIPTION_PAGE_PATH,
+  SUPPORT_TICKETS_PAGE_PATH,
 } from "@/lib/pathnames";
 import Link from "next/link";
 import { useLogout } from "@/hooks/useLogout";
@@ -57,6 +59,11 @@ const SideBar: FC<{ className?: string }> = ({ className }) => {
             href: BILLING_DETAILS_PAGE_PATH,
             name: "Account & Billing",
             Icon: SettingsIcon,
+          },
+          {
+            href: SUPPORT_TICKETS_PAGE_PATH,
+            name: "Support Tickets",
+            Icon: TicketIcon,
           },
         ].map(({ href, name, Icon }) => (
           <li key={href}>

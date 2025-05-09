@@ -43,6 +43,13 @@ import DownloadIcon2 from "./DownloadIcon2";
 import InstallSetupIcon from "./InstallSetupIcon";
 import RingPairIcon from "./RingPairIcon";
 import WiFiIcon from "./WiFiIcon";
+import ChatIcon from "./ChatIcon";
+import TicketIcon from "./TicketIcon";
+import CloseIcon from "./CloseIcon";
+import WarningIcon from "./WarningIcon";
+import PaperPlaneIcon from "./PaperPlaneIcon";
+import FileArrowUpIcon from "./FileArrowUpIcon";
+import MessagesIcon from "./MessagesIcon";
 
 export {
   MoonFilledIcon,
@@ -90,4 +97,11 @@ export {
   InstallSetupIcon,
   RingPairIcon,
   WiFiIcon,
+  ChatIcon,
+  TicketIcon,
+  CloseIcon,
+  WarningIcon,
+  PaperPlaneIcon,
+  FileArrowUpIcon,
+  MessagesIcon,
 };

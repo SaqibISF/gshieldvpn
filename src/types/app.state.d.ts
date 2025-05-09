@@ -6,6 +6,24 @@ export type BillingAddress = {
   postal_code: string;
 };
 
+export type ChatMessage = {
+  id: number;
+  user_id: number;
+  message: string;
+  is_admin: number | boolean;
+  attachments: File[];
+  created_at: string;
+};
+
+export type SupportTicket = {
+  id: number;
+  subject: string;
+  status: string;
+  priority: "high" | "medium" | "low";
+  created_at: string;
+  messages: ChatMessage[];
+};
+
 export type AppState = {
   isAppMounted: boolean;
   isLegalNoticeLoadedOnce: boolean;
@@ -13,4 +31,6 @@ export type AppState = {
   privacyPolicy: string;
   isBillingAddressLoadedOnce: boolean;
   billingAddress: BillingAddress | null;
+  currentSupportTicketId: number;
+  isChatDialogOpen: boolean;
 };

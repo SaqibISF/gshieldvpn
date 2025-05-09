@@ -40,3 +40,17 @@ export const DELETE_USER_ACCOUNT_ROUTE = REST_API_BASE_URL + "/user/delete";
 export const GET_BILLING_ADDRESS_ROUTE = REST_API_BASE_URL + "/billing-address";
 export const UPDATE_BILLING_ADDRESS_ROUTE =
   REST_API_BASE_URL + "/billing-address/store";
+
+export const GET_SUPPORT_TICKETS_ROUTE = REST_API_BASE_URL + "/tickets";
+
+export const CREATE_SUPPORT_TICKETS_ROUTE =
+  REST_API_BASE_URL + "/ticket/create";
+
+export const CLOSE_SUPPORT_TICKETS_ROUTE = (ticketId: number) =>
+  `${REST_API_BASE_URL}/ticket/${ticketId}/close`;
+
+export const VIEW_SUPPORT_TICKET_ROUTE = (ticketId: number) =>
+  `${REST_API_BASE_URL}/ticket/${ticketId}`;
+
+export const MESSAGE_REPLY_SUPPORT_TICKET_ROUTE = (ticketId: number) =>
+  `${REST_API_BASE_URL}/ticket/${ticketId}/reply`;

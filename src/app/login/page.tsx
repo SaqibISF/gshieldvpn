@@ -62,10 +62,7 @@ const LoginPage: FC = () => {
       const res = await axios
         .post<LoginResponse>(
           LOGIN_ROUTE,
-          {
-            name: data.email,
-            password: data.password,
-          },
+          data,
           {
             headers: {
               Accept: "application/json",

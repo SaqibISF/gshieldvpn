@@ -42,5 +42,5 @@ export const useViewTicket = (ticketId: number, token: string) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return { isTicketLoading, ticket } as const;
+  return { isTicketLoading, ticket, setTicket } as const;
 };

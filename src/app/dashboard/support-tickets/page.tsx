@@ -11,7 +11,7 @@ const SupportTicketsPage: FC = () => (
       </div>
     </DashboardSection>
 
-    <Chat className="fixed right-16 bottom-16" />
+    <Chat />
   </>
 );
 

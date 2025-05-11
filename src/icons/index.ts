@@ -48,8 +48,8 @@ import TicketIcon from "./TicketIcon";
 import CloseIcon from "./CloseIcon";
 import WarningIcon from "./WarningIcon";
 import PaperPlaneIcon from "./PaperPlaneIcon";
-import FileArrowUpIcon from "./FileArrowUpIcon";
 import MessagesIcon from "./MessagesIcon";
+import PaperClipIcon from "./PaperClipIcon";
 
 export {
   MoonFilledIcon,
@@ -102,6 +102,6 @@ export {
   CloseIcon,
   WarningIcon,
   PaperPlaneIcon,
-  FileArrowUpIcon,
   MessagesIcon,
+  PaperClipIcon
 };

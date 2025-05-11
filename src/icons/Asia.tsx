@@ -3,12 +3,13 @@ import { IconSvgProps } from "@/types";
 
 const Asia: FC<IconSvgProps> = ({ size = 60, width, height, ...props }) => (
   <svg
-    width="60"
-    height="60"
+    width={size || width}
+    height={size || height}
     viewBox="0 0 60 60"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
+    {...props}
   >
     <circle cx="30" cy="30" r="30" fill="url(#pattern0_362_510)" />
     <defs>

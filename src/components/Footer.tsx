@@ -8,6 +8,7 @@ import {
   BILLING_DETAILS_PAGE_PATH,
   DASHBOARD_PAGE_PATH,
   SUBSCRIPTION_PAGE_PATH,
+  SUPPORT_TICKETS_PAGE_PATH,
 } from "@/lib/pathnames";
 
 const Footer: FC = () => (
@@ -62,6 +63,7 @@ const Footer: FC = () => (
               { name: "Dashboard", href: DASHBOARD_PAGE_PATH },
               { name: "Billing Details", href: BILLING_DETAILS_PAGE_PATH },
               { name: "Subscription", href: SUBSCRIPTION_PAGE_PATH },
+              { name: "Support Tickets", href: SUPPORT_TICKETS_PAGE_PATH },
             ],
           },
           {

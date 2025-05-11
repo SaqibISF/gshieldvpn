@@ -1,11 +1,11 @@
 "use client";
 
-import React, { FC, useEffect, useState } from "react";
+import React, { ChangeEvent, FC, useEffect, useState } from "react";
 import {
   BoltIcon,
   ChatIcon,
   CloseIcon,
-  FileArrowUpIcon,
+  PaperClipIcon,
   PaperPlaneIcon,
   TickIcon,
   WarningIcon,
@@ -13,13 +13,19 @@ import {
 import {
   addToast,
   Alert,
+  Badge,
   Button,
   ButtonProps,
+  Chip,
   Divider,
+  Image,
+  Modal,
+  ModalContent,
   Popover,
   PopoverContent,
   PopoverTrigger,
   RadioGroup,
+  ScrollShadow,
   Spinner,
   Textarea,
 } from "@heroui/react";
@@ -39,8 +45,9 @@ import { useAppState } from "@/hooks/use-app-state";
 import { SupportTicket } from "@/types";
 import { useDispatch } from "react-redux";
 import {
+  addNewSupportTicket,
   closeChat,
-  setCurrentSupportTicketId,
+  closeSupportTicket,
   setIsChatDialogOpen,
 } from "@/store/app.slice";
 
@@ -88,7 +95,7 @@ const CreateTicket: FC = () => {
       );
 
       if (res.status === 200 || res.status === 201) {
-        dispatch(setCurrentSupportTicketId(res.data.ticket.id));
+        dispatch(addNewSupportTicket(res.data.ticket));
         addToast({ color: "success", description: res.data.message });
         reset();
       } else {
@@ -216,16 +223,26 @@ const ViewChat: FC<{ ticketId: number }> = ({ ticketId }) => {
 
   type SubmitData = {
     message: string;
-    attachments?: File[];
   };
 
-  const { isTicketLoading, ticket } = useViewTicket(
+  const { isTicketLoading, ticket, setTicket } = useViewTicket(
     ticketId,
     user.access_token
   );
 
   const [isChatClosing, setIsChatClosing] = useState<boolean>(false);
   const [isLoading, setLoading] = useState<boolean>(false);
+  const [attachments, setAttachments] = useState<{ src: string; file: File }[]>(
+    []
+  );
+
+  const [isImageExpanded, setIsImageExpanded] = useState<boolean>(false);
+  const [expandedImageUrl, setExpandedImageUrl] = useState<string | null>(null);
+
+  const handleImageClick = (url: string) => {
+    setExpandedImageUrl(url);
+    setIsImageExpanded(true); // Expand image on click
+  };
 
   const {
     register,
@@ -239,21 +256,17 @@ const ViewChat: FC<{ ticketId: number }> = ({ ticketId }) => {
   } = useForm<SubmitData>({
     defaultValues: {
       message: "",
-      attachments: [],
     },
   });
-
-  const watchMessage = watch("message");
-  const watchAttachments = watch("attachments");
 
   const handleMessageReply: SubmitHandler<SubmitData> = async (data) => {
     try {
       clearErrors();
       setLoading(true);
       const formData = new FormData();
-      formData.append("message", data.message);
-      data.attachments?.forEach((file) =>
-        formData.append("attachments[]", file)
+      formData.append("message", data.message.trim());
+      attachments.forEach((attachment) =>
+        formData.append("attachments[]", attachment.file)
       );
 
       const res = await axios.post<{ ticket: SupportTicket; message: string }>(
@@ -268,10 +281,10 @@ const ViewChat: FC<{ ticketId: number }> = ({ ticketId }) => {
       );
 
       if (res.status === 200 || res.status === 201) {
-        addToast({ color: "success", description: res.data.message });
+        setTicket(res.data.ticket);
+        setAttachments([]);
         reset();
       } else {
-        addToast({ color: "danger", description: res.data.message });
         setError("root", { type: "manual", message: res.data.message });
       }
     } catch (error) {
@@ -281,7 +294,6 @@ const ViewChat: FC<{ ticketId: number }> = ({ ticketId }) => {
             ? error.response.data.message
             : error.message
           : "Something Went Wrong";
-      addToast({ color: "danger", description: errorMessage });
       setError("root", { type: "manual", message: errorMessage });
     } finally {
       setLoading(false);
@@ -305,8 +317,7 @@ const ViewChat: FC<{ ticketId: number }> = ({ ticketId }) => {
 
       if (res.status === 200 || res.status === 201) {
         addToast({ color: "success", description: res.data.message });
-        dispatch(closeChat());
-        
+        dispatch(closeSupportTicket(ticketId));
         reset();
       } else {
         addToast({ color: "danger", description: res.data.message });
@@ -323,6 +334,37 @@ const ViewChat: FC<{ ticketId: number }> = ({ ticketId }) => {
       setError("root", { type: "manual", message: errorMessage });
     } finally {
       setIsChatClosing(false);
+    }
+  };
+
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    const imageTypes = ["image/png", "image/jpeg", "image/jpg", "image/webp"];
+    let invalidFile = false;
+
+    if (files && files.length > 0) {
+      for (let i = 0; i < files.length; i++) {
+        if (!imageTypes.includes(files[i].type)) {
+          invalidFile = true;
+          break;
+        }
+      }
+
+      if (invalidFile) {
+        setError("root", {
+          type: "manual",
+          message: "Please select only image files (PNG, JPEG, JPG, WEBP).",
+        });
+      } else {
+        clearErrors("root");
+        setAttachments((prev) => [
+          ...prev,
+          ...Array.from(files).map((file) => ({
+            file,
+            src: URL.createObjectURL(file),
+          })),
+        ]);
+      }
     }
   };
 
@@ -369,85 +411,130 @@ const ViewChat: FC<{ ticketId: number }> = ({ ticketId }) => {
         )}
       </div>
       <Divider />
-      <div className="w-full h-[calc(100%-4.5rem)] overflow-y-auto px-4 pt-6">
+      <ScrollShadow className="w-full h-[calc(100%-4.5rem)] px-4 pt-6">
         {isTicketLoading && <Spinner className="w-full h-full" />}
 
-        {ticket?.messages?.map((message, index) => (
-          <div
-            key={index}
-            className={cn(
-              "flex flex-col gap-2 mb-4",
-              !!message.is_admin ? "items-end" : "items-start"
-            )}
-          >
+        {ticket &&
+          ticket.messages.map((message, index) => (
             <div
+              key={index}
               className={cn(
-                "px-4 py-2 rounded-lg max-w-xs",
-                !!message.is_admin
-                  ? "bg-gray-200 text-black"
-                  : "bg-primary text-white"
+                "flex flex-col gap-2 mb-4",
+                !message.is_admin ? "items-end" : "items-start"
               )}
             >
-              {message.message}
-            </div>
-            <span className="text-xs text-gray-500">
-              {new Date(message.created_at).toLocaleString()}
-            </span>
-          </div>
-        ))}
-      </div>
-
-      {errors.root && <Alert color="danger" title={errors.root.message} />}
-      <Divider />
-
-      {ticket && ticket.status === "open" ? (
-        <form
-          onSubmit={handleSubmit(handleMessageReply)}
-          className="w-full flex items-center gap-2 px-4 py-2"
-        >
-          <input
-            id="attachments"
-            type="file"
-            className="hidden"
-            {...register("attachments")}
-            multiple
-          />
-
-          <Input
-            placeholder="Message Type Here..."
-            type="text"
-            size="md"
-            radius="full"
-            endContent={
-              <label
-                htmlFor="attachments"
-                className="text-primary hover:opacity-70 active:opacity-50 pointer-events-auto cursor-pointer"
+              <div
+                className={cn(
+                  "px-4 py-2 rounded-lg max-w-xs",
+                  !message.is_admin
+                    ? "bg-primary text-white"
+                    : "bg-gray-200 text-black"
+                )}
               >
-                <FileArrowUpIcon />
-              </label>
-            }
-            errorMessage={errors.message?.message}
-            {...register("message", {
-              required: {
-                value: true,
-                message: "Type here...",
-              },
-            })}
-          />
+                {message.message}
+              </div>
+              {message.attachments.map((attachment) => (
+                <Image
+                  key={attachment.url}
+                  alt={attachment.name}
+                  src={attachment.url}
+                  classNames={{
+                    wrapper: "w-2/3 h-auto border-2 p-1 bg-default-100",
+                  }}
+                  onClick={() => handleImageClick(attachment.url)}
+                />
+              ))}
 
-          <Button
-            isIconOnly
-            isLoading={isLoading}
-            type="submit"
-            color="primary"
-            variant="shadow"
-            radius="full"
-            isDisabled={!watchMessage.trim() && !watchAttachments?.length}
+              <Modal
+                isOpen={isImageExpanded}
+                onOpenChange={(isOpen) => {
+                  setIsImageExpanded(isOpen);
+                  if (!isOpen) setExpandedImageUrl(null);
+                }}
+                className="pt-8 shadow-none bg-transparent"
+                size="2xl"
+              >
+                <ModalContent>
+                  <Image
+                    src={expandedImageUrl!}
+                    alt="Expanded view"
+                    className="max-w-full max-h-full object-contain"
+                  />
+                </ModalContent>
+              </Modal>
+
+              <span className="text-xs text-gray-500">
+                {new Date(message.created_at).toLocaleString()}
+              </span>
+            </div>
+          ))}
+      </ScrollShadow>
+      <Divider />
+      {!isTicketLoading && ticket && ticket.status === "open" && (
+        <>
+          {!!attachments.length && (
+            <div className="px-4 py-1 flex flex-wrap gap-2">
+              {attachments.map((attachment) => (
+                <Chip
+                  key={attachment.src}
+                  variant="flat"
+                  onClose={() =>
+                    setAttachments(
+                      attachments.filter((file) => file.src !== attachment.src)
+                    )
+                  }
+                >
+                  {attachment.file.name}
+                </Chip>
+              ))}
+            </div>
+          )}
+          <form
+            onSubmit={handleSubmit(handleMessageReply)}
+            className="w-full flex gap-2 px-4 py-2"
           >
-            <PaperPlaneIcon size={16} />
-          </Button>
-        </form>
-      ) : (
+            <input
+              id="attachments"
+              type="file"
+              multiple
+              accept="image/png, image/jpeg, image/jpg, image/webp"
+              className="hidden"
+              onChange={handleFileChange}
+            />
+
+            <Input
+              placeholder="Message Type Here..."
+              type="text"
+              size="md"
+              radius="full"
+              endContent={
+                <label
+                  htmlFor="attachments"
+                  className="text-default-700 hover:opacity-70 active:opacity-50 pointer-events-auto cursor-pointer"
+                >
+                  <PaperClipIcon />
+                </label>
+              }
+              errorMessage={errors.root?.message}
+              {...register("message")}
+            />
+
+            <Button
+              isIconOnly
+              isLoading={isLoading}
+              type="submit"
+              color="primary"
+              variant="shadow"
+              radius="full"
+              isDisabled={!watch("message").trim()}
+            >
+              <PaperPlaneIcon size={16} />
+            </Button>
+          </form>
+        </>
+      )}
+
+      {!isTicketLoading && ticket && ticket.status !== "open" && (
         <span className="w-full text-danger-500 py-4 px-6 text-md font-semibold mx-auto bg-danger-100 rounded-b-2xl">
           Chat Closed
         </span>
@@ -460,48 +547,68 @@ const Chat: FC<ButtonProps> = ({ className, ...props }) => {
   const dispatch = useDispatch();
   const { currentSupportTicketId, isChatDialogOpen } = useAppState();
   return (
-    <div>
-      <Popover
-        placement="top-end"
-        showArrow
-        isOpen={isChatDialogOpen}
-        onOpenChange={(isOpen) => dispatch(setIsChatDialogOpen(isOpen))}
-      >
-        <PopoverTrigger>
-          <Button
-            isIconOnly
-            variant="shadow"
-            color="primary"
-            radius="full"
-            className={cn("size-20", className)}
-            {...props}
+    <Popover
+      placement="top-end"
+      showArrow
+      isOpen={isChatDialogOpen}
+      onOpenChange={(isOpen) => dispatch(setIsChatDialogOpen(isOpen))}
+    >
+      <PopoverTrigger>
+        <div className="fixed xl:right-12 xl:bottom-12 right-5 bottom-5">
+          <Badge
+            content={
+              <Chip
+                color="warning"
+                onClose={() => {
+                  dispatch(closeChat());
+                }}
+              >
+                Ticket #{currentSupportTicketId}
+              </Chip>
+            }
+            placement="top-left"
+            className={cn(
+              "bg-transparent border-none",
+              !currentSupportTicketId ? "hidden" : ""
+            )}
           >
-            <ChatIcon className="size-12" />
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent className="p-0 w-96">
-          <div className="w-full text-white bg-primary px-6 py-2 rounded-t-2xl flex items-center justify-between">
-            <h3 className="text-xl">
-              {!currentSupportTicketId
-                ? "Create Ticket"
-                : `Ticket # ${currentSupportTicketId}`}
-            </h3>
             <Button
               isIconOnly
-              variant="light"
-              className="min-w-fit w-auto h-auto rounded-none"
+              variant="shadow"
+              color="primary"
+              radius="full"
+              className={cn("size-14 md:size-16", className)}
+              onPress={() => dispatch(setIsChatDialogOpen(true))}
+              {...props}
             >
-              <CloseIcon className="text-white" />
+              <ChatIcon className="size-9 md:size-10" />
             </Button>
-          </div>
-          {!currentSupportTicketId ? (
-            <CreateTicket />
-          ) : (
-            <ViewChat ticketId={currentSupportTicketId} />
-          )}
-        </PopoverContent>
-      </Popover>
-    </div>
+          </Badge>
+        </div>
+      </PopoverTrigger>
+      <PopoverContent className="p-0 w-96">
+        <div className="w-full text-white bg-primary px-6 py-2 rounded-t-xl flex items-center justify-between">
+          <h3 className="text-xl">
+            {!currentSupportTicketId
+              ? "Create Ticket"
+              : `Ticket # ${currentSupportTicketId}`}
+          </h3>
+          <Button
+            isIconOnly
+            variant="light"
+            className="min-w-fit w-auto h-auto rounded-none"
+            onPress={() => dispatch(closeChat())}
+          >
+            <CloseIcon className="text-white" />
+          </Button>
+        </div>
+        {!currentSupportTicketId ? (
+          <CreateTicket />
+        ) : (
+          <ViewChat ticketId={currentSupportTicketId} />
+        )}
+      </PopoverContent>
+    </Popover>
   );
 };
 

@@ -1,4 +1,4 @@
-import { AppState, BillingAddress } from "@/types";
+import { AppState, BillingAddress, SupportTicket } from "@/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: AppState = {
@@ -8,6 +8,8 @@ const initialState: AppState = {
   privacyPolicy: "",
   isBillingAddressLoadedOnce: false,
   billingAddress: null,
+  isSupportTicketsLoadedOnce: false,
+  supportTickets: [],
   currentSupportTicketId: 0,
   isChatDialogOpen: false,
 };
@@ -40,6 +42,25 @@ const appSlice = createSlice({
       state.billingAddress = action.payload;
     },
 
+    setSupportTickets: (state, action: PayloadAction<SupportTicket[]>) => {
+      state.isSupportTicketsLoadedOnce = true;
+      state.supportTickets = action.payload;
+    },
+
+    addNewSupportTicket: (state, action: PayloadAction<SupportTicket>) => {
+      state.currentSupportTicketId = action.payload.id;
+      state.supportTickets.unshift(action.payload);
+    },
+
+    closeSupportTicket: (state, action: PayloadAction<number>) => {
+      const index = state.supportTickets.findIndex(
+        (ticket) => ticket.id === action.payload
+      );
+      state.supportTickets[index].status = "closed";
+      state.isChatDialogOpen = false;
+      state.currentSupportTicketId = 0;
+    },
+
     setCurrentSupportTicketId: (state, action: PayloadAction<number>) => {
       state.currentSupportTicketId = action.payload;
       state.isChatDialogOpen = true;
@@ -60,6 +81,9 @@ export const {
   setAppMounted,
   setLegalNotes,
   setBillingAddress,
+  setSupportTickets,
+  addNewSupportTicket,
+  closeSupportTicket,
   setCurrentSupportTicketId,
   setIsChatDialogOpen,
   closeChat,

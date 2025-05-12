@@ -36,6 +36,7 @@ import RadioElement from "./RadioElement";
 import { useUserCookie } from "@/hooks/use-cookies";
 import { useViewTicket } from "@/hooks/use-view-ticket";
 import { useAppState } from "@/hooks/use-app-state";
+import useEcho from "@/hooks/useEcho";
 import { SupportTicket } from "@/types";
 import { useDispatch } from "react-redux";
 import {
@@ -214,10 +215,18 @@ const ViewChat: FC<{ ticketId: number }> = ({ ticketId }) => {
   const dispatch = useDispatch();
   const { user } = useUserCookie();
 
+  const echo: { private: (channel: string) => { listen: (event: string, callback: (data: any) => void) => void } } | null = useEcho();
+
   type SubmitData = {
     message: string;
     attachments?: File[];
   };
+
+  if (echo) {
+    echo.private(`ticket.${ticketId}`).listen("TicketMessageSent", event => {
+      console.log(event);
+    });
+  }
 
   const { isTicketLoading, ticket } = useViewTicket(
     ticketId,
@@ -306,7 +315,7 @@ const ViewChat: FC<{ ticketId: number }> = ({ ticketId }) => {
       if (res.status === 200 || res.status === 201) {
         addToast({ color: "success", description: res.data.message });
         dispatch(closeChat());
-        
+
         reset();
       } else {
         addToast({ color: "danger", description: res.data.message });
@@ -346,10 +355,10 @@ const ViewChat: FC<{ ticketId: number }> = ({ ticketId }) => {
                 ticket?.priority === "low"
                   ? "text-success-500"
                   : ticket?.priority === "medium"
-                  ? "text-warning-500"
-                  : ticket?.priority === "high"
-                  ? "text-danger-500"
-                  : ""
+                    ? "text-warning-500"
+                    : ticket?.priority === "high"
+                      ? "text-danger-500"
+                      : ""
               )}
             >
               {ticket?.priority}

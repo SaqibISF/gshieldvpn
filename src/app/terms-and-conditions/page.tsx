@@ -1,20 +1,6 @@
-"use client";
+import TermsAndConditionsPage from "@/components/pages/TermsAndConditionsPage";
+import { Metadata } from "next";
 
-import React, { FC } from "react";
-import { ArticleSection } from "@/components/sections";
-import { useLegalNotes } from "@/hooks/useLegalNotes";
+export const metadata: Metadata = { title: "Terms of Conditions" };
 
-const TermsAndConditions: FC = () => {
-  const { isLegalNotesLoading, errorMessage, termsAndConditions } =
-    useLegalNotes();
-  return (
-    <ArticleSection
-      heading="Terms and Conditions"
-      htmlContent={termsAndConditions}
-      errorMessage={errorMessage}
-      isLoading={isLegalNotesLoading}
-    />
-  );
-};
-
-export default TermsAndConditions;
+export default TermsAndConditionsPage;

@@ -1,18 +1,8 @@
-"use client";
+import { Metadata } from "next";
+import SupportTicketsPage from "@/components/pages/SupportTicketsPage";
 
-import React, { FC } from "react";
-import { Chat, DashboardSection, SupportTicketsTable } from "@/components";
-
-const SupportTicketsPage: FC = () => (
-  <>
-    <DashboardSection title="Support Tickets">
-      <div className="w-full" data-aos="fade-down" data-aos-duration="1500">
-        <SupportTicketsTable />
-      </div>
-    </DashboardSection>
-
-    <Chat />
-  </>
-);
+export const metadata: Metadata = {
+  title: "Support Tickets",
+};
 
 export default SupportTicketsPage;

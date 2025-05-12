@@ -18,7 +18,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import axios, { AxiosError } from "axios";
 import { UPDATE_USER_INFO_ROUTE } from "@/lib/constants";
 import { useUserCookie } from "@/hooks/use-cookies";
-import Input from "./Input";
+import Input from "../Input";
 
 const ChangeNameDialog: FC = () => {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();

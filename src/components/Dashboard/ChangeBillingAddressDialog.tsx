@@ -3,7 +3,7 @@
 import React, { FC } from "react";
 import { Button, useDisclosure } from "@heroui/react";
 import { useBillingAddress } from "@/hooks/use-billing-address";
-import BillingAddressModal from "./BillingAddressModal";
+import BillingAddressModal from "../BillingAddressModal";
 
 const ChangeBillingAddressDialog: FC = () => {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();

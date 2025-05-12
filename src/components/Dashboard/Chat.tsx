@@ -37,8 +37,8 @@ import {
   CREATE_SUPPORT_TICKETS_ROUTE,
   MESSAGE_REPLY_SUPPORT_TICKET_ROUTE,
 } from "@/lib/constants";
-import Input from "./Input";
-import RadioElement from "./RadioElement";
+import Input from "../Input";
+import RadioElement from "../RadioElement";
 import { useUserCookie } from "@/hooks/use-cookies";
 import { useViewTicket } from "@/hooks/use-view-ticket";
 import { useAppState } from "@/hooks/use-app-state";

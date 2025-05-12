@@ -17,7 +17,7 @@ import useSWR from "swr";
 import { PurchasedPlan } from "@/types";
 import { getFormattedDate } from "@/lib/utils";
 import { useUserCookie } from "@/hooks/use-cookies";
-import DownloadInvoiceButton from "./DownloadInvoiceButton";
+import DownloadInvoiceButton from "../DownloadInvoiceButton";
 
 const PaymentHistoryTable: FC = () => {
   const { user } = useUserCookie();

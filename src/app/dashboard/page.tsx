@@ -1,6 +1,7 @@
 "use client";
 import React, { FC } from "react";
-import { AvailableDevices, DashboardSection } from "@/components";
+import { AvailableDevices } from "@/components";
+import DashboardSection from "@/components/Dashboard/DashboardSection";
 import { Button } from "@heroui/react";
 import { HeadphoneIcon } from "@/icons";
 import Link from "next/link";

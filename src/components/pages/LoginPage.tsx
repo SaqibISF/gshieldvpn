@@ -72,18 +72,18 @@ const LoginPage: FC = () => {
         .then((res) => res.data);
 
       if (res.status) {
-        addToast({
-          color: "success",
-          description: res.message,
-        });
-        reset();
         setUserCookie({
           id: res.user.id,
           name: res.user.name,
           email: res.user.email,
           access_token: res.access_token,
         });
-        router.push(DASHBOARD_PAGE_PATH);
+        reset();
+        router.replace(DASHBOARD_PAGE_PATH);
+        addToast({
+          color: "success",
+          description: res.message,
+        });
       } else {
         addToast({ color: "danger", description: res.message });
         setError("root", { type: "manual", message: res.message });

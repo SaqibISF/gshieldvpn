@@ -9,26 +9,26 @@ import {
   HomeSection,
   InstallingSection,
   PricingSection,
+  SectionDivider,
 } from "@/components/sections";
-import { Divider } from "@heroui/react";
 
 const HomePage: FC = () => {
   return (
     <>
       <HomeSection />
-      <Divider className="h-2" />
+      <SectionDivider />
       <FeaturesSection isLeftCornerGradient />
-      <Divider className="h-2" />
+      <SectionDivider />
       <AboutSection isRightCornerGradient isLeftCornerGradient />
-      <Divider className="h-2" />
+      <SectionDivider />
       <DownloadSection isRightCornerGradient />
-      <Divider className="h-2" />
+      <SectionDivider />
       <PricingSection isLeftCornerGradient />
-      <Divider className="h-2" />
+      <SectionDivider />
       <InstallingSection isRightCornerGradient />
-      <Divider className="h-2" />
+      <SectionDivider />
       <FactsSection isLeftCornerGradient />
-      <Divider className="h-2" />
+      <SectionDivider />
       <FAQSection isRightCornerGradient isCenterGradient />
     </>
   );

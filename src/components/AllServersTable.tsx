@@ -48,6 +48,7 @@ const AllServersTable: FC = () => {
       data-aos="flip-up"
       data-aos-easing="ease-out-cubic"
       data-aos-duration="2000"
+      data-aos-offset="25"
     >
       <Table
         aria-label="VPN Servers"

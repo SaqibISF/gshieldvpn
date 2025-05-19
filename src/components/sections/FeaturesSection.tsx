@@ -68,6 +68,7 @@ const FeaturesSection: FC<SectionProps> = ({ ...props }) => (
               : ""
           }
           data-aos-duration="1500"
+          data-aos-offset="25"
         >
           <CardBody className="flex sm:flex-row gap-4 items-center">
             <span className="size-[4.375rem] flex items-center justify-center bg-primary text-white rounded-full">

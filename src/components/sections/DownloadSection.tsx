@@ -14,8 +14,8 @@ const DownloadSection: FC<SectionProps> = ({ ...props }) => (
       <h2
         className="sm:text-5xl text-4xl font-bold !leading-[3.5rem] md:!leading-[4.5rem]"
         data-aos="fade-right"
-        data-aos-offset="300"
         data-aos-easing="ease-in-sine"
+        data-aos-offset="25"
       >
         Download The Fastest Vpn App Secure Your Internet
       </h2>
@@ -24,6 +24,7 @@ const DownloadSection: FC<SectionProps> = ({ ...props }) => (
         className="text-default-500 text-xl leading-8 capitalize"
         data-aos="zoom-in-up"
         data-aos-duration="1500"
+        data-aos-offset="25"
       >
         At GShield, we are committed to providing secure, private, and
         unrestricted internet access to our users worldwide. In an age where
@@ -41,6 +42,7 @@ const DownloadSection: FC<SectionProps> = ({ ...props }) => (
         className="self-center sm:self-start"
         data-aos="fade-up"
         data-aos-anchor-placement="top-bottom"
+        data-aos-offset="25"
       >
         Download App
       </Button>
@@ -48,6 +50,7 @@ const DownloadSection: FC<SectionProps> = ({ ...props }) => (
     <div
       className="lg:w-2/5 w-full flex items-center justify-center"
       data-aos="fade-left"
+      data-aos-offset="25"
     >
       <Image
         className="max-w-64 w-full h-auto"

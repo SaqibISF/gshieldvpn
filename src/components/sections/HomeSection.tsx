@@ -17,8 +17,8 @@ const HomeSection: FC<SectionProps> = ({ ...props }) => (
       <h1
         className="text-5xl md:text-7xl font-bold leading-[3.5rem] md:leading-[5rem]"
         data-aos="fade-right"
-        data-aos-offset="300"
         data-aos-easing="ease-in-sine"
+        data-aos-offset="25"
       >
         Stay{" "}
         <span
@@ -26,6 +26,7 @@ const HomeSection: FC<SectionProps> = ({ ...props }) => (
           data-aos="flip-left"
           data-aos-easing="ease-out-cubic"
           data-aos-duration="2000"
+          data-aos-offset="25"
         >
           Private
         </span>{" "}
@@ -35,6 +36,7 @@ const HomeSection: FC<SectionProps> = ({ ...props }) => (
         className="text-default-500 text-2xl font-medium leading-10"
         data-aos="zoom-in-up"
         data-aos-duration="1500"
+        data-aos-offset="25"
       >
         Surf the web without tracking with a VPN, protect your devices &
         identity with an all-in-one app.
@@ -47,6 +49,7 @@ const HomeSection: FC<SectionProps> = ({ ...props }) => (
         className="self-center sm:self-start"
         data-aos="fade-up"
         data-aos-anchor-placement="top-bottom"
+        data-aos-offset="25"
       >
         Get Started
       </Button>
@@ -54,6 +57,7 @@ const HomeSection: FC<SectionProps> = ({ ...props }) => (
     <div
       className="lg:w-2/5 w-full flex items-center justify-center"
       data-aos="fade-left"
+      data-aos-offset="25"
     >
       <Image
         className="max-w-64 w-full h-auto"

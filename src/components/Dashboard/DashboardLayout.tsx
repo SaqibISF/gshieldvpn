@@ -34,6 +34,7 @@ const DashboardLayout: FC<{
         }}
         data-aos="fade-right"
         data-aos-duration="1500"
+        data-aos-offset="25"
       ></div>
 
       <div
@@ -44,6 +45,7 @@ const DashboardLayout: FC<{
         }}
         data-aos="fade-up"
         data-aos-duration="1500"
+        data-aos-offset="25"
       ></div>
 
       <div className="w-full min-h-[calc(100vh-5rem)] flex">

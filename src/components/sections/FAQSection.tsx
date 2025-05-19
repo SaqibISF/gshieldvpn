@@ -47,6 +47,7 @@ const FAQSection: FC<SectionProps> = ({ ...props }) => {
         data-aos="fade-up"
         data-aos-duration="1500"
         data-aos-once="true"
+        data-aos-offset="25"
       >
         {faqs.map((faq, index) => (
           <AccordionItem
@@ -62,6 +63,7 @@ const FAQSection: FC<SectionProps> = ({ ...props }) => {
         className="text-default-500 text-base font-medium mt-14"
         data-aos="fade-up"
         data-aos-duration="1500"
+        data-aos-offset="25"
       >
         More questions?{" "}
         <Link href={CONTACT_US_PAGE_PATH} className="text-primary font-bold">

@@ -1,7 +1,7 @@
 "use client";
 import React, { FC } from "react";
-import { PricingSection, Section } from "../sections";
-import { Card, CardBody, CardHeader, Divider, Skeleton } from "@heroui/react";
+import { PricingSection, Section, SectionDivider } from "../sections";
+import { Card, CardBody, CardHeader, Skeleton } from "@heroui/react";
 import { CheckedIcon, XCircleIcon } from "@/icons";
 import { usePlans } from "@/hooks/usePlans";
 
@@ -26,13 +26,14 @@ const PricingPage: FC = () => {
         isRightCornerGradient
       />
 
-      <Divider className="h-2" />
+      <SectionDivider />
 
       <Section isLeftCornerGradient>
         <div
           className="w-full hidden lg:flex flex-row items-start justify-between"
           data-aos="fade-up"
           data-aos-duration="1500"
+          data-aos-offset="25"
         >
           {isPlansLoading &&
             Array.from({ length: 4 }).map((_, index) => (

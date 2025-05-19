@@ -12,6 +12,7 @@ const AboutSection: FC<SectionProps> = ({ ...props }) => (
     <div
       className="lg:w-2/5 w-full flex items-center justify-center"
       data-aos="fade-right"
+      data-aos-offset="25"
     >
       <Image
         className="max-w-md w-full h-auto"
@@ -31,8 +32,8 @@ const AboutSection: FC<SectionProps> = ({ ...props }) => (
       <h2
         className="sm:text-5xl text-4xl font-bold !leading-[3.5rem] md:!leading-[4.5rem]"
         data-aos="fade-left"
-        data-aos-offset="300"
         data-aos-easing="ease-in-sine"
+        data-aos-offset="25"
       >
         Safeguarding Your Online World with Trust
       </h2>
@@ -41,6 +42,7 @@ const AboutSection: FC<SectionProps> = ({ ...props }) => (
         className="text-default-500 text-xl leading-8 capitalize"
         data-aos="zoom-in-up"
         data-aos-duration="1500"
+        data-aos-offset="25"
       >
         At GShield, we are dedicated to delivering safe, private, and limitless
         internet access to users across the globe.
@@ -51,6 +53,7 @@ const AboutSection: FC<SectionProps> = ({ ...props }) => (
           className="text-xl w-full font-semibold flex gap-2"
           data-aos="zoom-in-up"
           data-aos-duration="1500"
+          data-aos-offset="25"
         >
           <CheckedIcon /> Enhanced Privacy & Security
         </h6>
@@ -59,6 +62,7 @@ const AboutSection: FC<SectionProps> = ({ ...props }) => (
           className="text-default-500 text-lg leading-8 mb-3 mx-4 text-start"
           data-aos="zoom-in-up"
           data-aos-duration="1500"
+          data-aos-offset="25"
         >
           GShield encrypts your internet traffic, keeping your online activities
           private and secure, protecting you from hackers and cyber threats.
@@ -70,6 +74,7 @@ const AboutSection: FC<SectionProps> = ({ ...props }) => (
           className="text-xl w-full font-semibold flex gap-2"
           data-aos="zoom-in-up"
           data-aos-duration="1500"
+          data-aos-offset="25"
         >
           <CheckedIcon /> Fast & Reliable Connection
         </h6>
@@ -78,6 +83,7 @@ const AboutSection: FC<SectionProps> = ({ ...props }) => (
           className="text-default-500 text-lg leading-8 mb-3 mx-4 text-start"
           data-aos="zoom-in-up"
           data-aos-duration="1500"
+          data-aos-offset="25"
         >
           GShield encrypts your internet traffic, keeping your online activities
           private and secure, protecting you from hackers and cyber threats.
@@ -94,6 +100,7 @@ const AboutSection: FC<SectionProps> = ({ ...props }) => (
         className="self-center sm:self-start"
         data-aos="fade-up"
         data-aos-anchor-placement="top-bottom"
+        data-aos-offset="25"
       >
         Get it now
       </Button>

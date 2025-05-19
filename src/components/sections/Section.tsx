@@ -2,6 +2,7 @@
 import React, { FC, HTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 import Navbar from "../Navbar";
+import { Divider } from "@heroui/react";
 
 export type SectionProps = HTMLAttributes<HTMLElement> & {
   isHeroSection?: boolean;
@@ -27,6 +28,7 @@ const SectionTitle: FC<HTMLAttributes<HTMLSpanElement>> = ({
     )}
     data-aos="fade-up"
     data-aos-duration="1500"
+    data-aos-offset="25"
     {...props}
   >
     {children}
@@ -46,6 +48,7 @@ const SectionHeading: FC<HTMLAttributes<HTMLHeadingElement>> = ({
     data-aos="zoom-in-up"
     data-aos-easing="ease-in-out"
     data-aos-duration="1500"
+    data-aos-offset="25"
     {...props}
   >
     {children}
@@ -64,6 +67,7 @@ const SectionSubTitle: FC<HTMLAttributes<HTMLSpanElement>> = ({
     )}
     data-aos="fade-up"
     data-aos-duration="1500"
+    data-aos-offset="25"
     {...props}
   >
     {children}
@@ -82,10 +86,21 @@ const SectionDescription: FC<HTMLAttributes<HTMLParagraphElement>> = ({
     )}
     data-aos="zoom-in-up"
     data-aos-duration="1500"
+    data-aos-offset="25"
     {...props}
   >
     {children}
   </p>
+);
+
+const SectionDivider: FC<HTMLAttributes<HTMLHRElement>> = ({ ...props }) => (
+  <Divider
+    className="h-2"
+    data-aos="fade-up"
+    data-aos-duration="1500"
+    data-aos-offset="25"
+    {...props}
+  />
 );
 
 const Section: FC<SectionProps> = ({
@@ -123,6 +138,7 @@ const Section: FC<SectionProps> = ({
         }}
         data-aos="fade-left"
         data-aos-duration="1500"
+        data-aos-offset="25"
       ></div>
     )}
 
@@ -135,6 +151,7 @@ const Section: FC<SectionProps> = ({
         }}
         data-aos="fade-right"
         data-aos-duration="1500"
+        data-aos-offset="25"
       ></div>
     )}
 
@@ -147,6 +164,7 @@ const Section: FC<SectionProps> = ({
         }}
         data-aos="fade-up"
         data-aos-duration="1500"
+        data-aos-offset="25"
       ></div>
     )}
 
@@ -172,6 +190,12 @@ const Section: FC<SectionProps> = ({
   </section>
 );
 
-export { SectionTitle, SectionHeading, SectionSubTitle, SectionDescription };
+export {
+  SectionTitle,
+  SectionHeading,
+  SectionSubTitle,
+  SectionDescription,
+  SectionDivider,
+};
 
 export default Section;

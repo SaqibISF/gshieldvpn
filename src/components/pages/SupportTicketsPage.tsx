@@ -8,7 +8,12 @@ import Chat from "../Dashboard/Chat";
 const SupportTicketsPage: FC = () => (
   <>
     <DashboardSection title="Support Tickets">
-      <div className="w-full" data-aos="fade-down" data-aos-duration="1500">
+      <div
+        className="w-full"
+        data-aos="fade-down"
+        data-aos-duration="1500"
+        data-aos-offset="25"
+      >
         <SupportTicketsTable />
       </div>
     </DashboardSection>

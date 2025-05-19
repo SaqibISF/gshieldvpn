@@ -11,7 +11,11 @@ const FactsSection: FC<SectionProps> = ({ ...props }) => (
     {...props}
   >
     <div className="flex flex-col-reverse lg:flex-row gap-y-12">
-      <div className="lg:w-1/2 w-full" data-aos="fade-right">
+      <div
+        className="lg:w-1/2 w-full"
+        data-aos="fade-right"
+        data-aos-offset="25"
+      >
         <Image
           className="w-full h-auto"
           src="/map.png"
@@ -26,11 +30,13 @@ const FactsSection: FC<SectionProps> = ({ ...props }) => (
       <div
         className="lg:w-1/2 flex flex-col gap-y-6 px-4 items-center md:items-start text-center md:text-left"
         data-aos="fade-left"
+        data-aos-offset="25"
       >
         <p
           className="text-default-500 text-xl font-medium leading-8"
           data-aos="zoom-in-up"
           data-aos-duration="1500"
+          data-aos-offset="25"
         >
           These speed excellent. It’s a fast connection safety Internet leading
           speeds across its network.

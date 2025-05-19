@@ -14,6 +14,7 @@ export {
   SectionHeading,
   SectionSubTitle,
   SectionDescription,
+  SectionDivider,
   type SectionProps,
 } from "./Section";
 

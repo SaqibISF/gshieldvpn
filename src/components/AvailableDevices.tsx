@@ -18,7 +18,12 @@ const AvailableDevices: FC<{ className?: string }> = ({ className }) => (
       { deviceName: "Android", Icon: AndroidIcon },
       { deviceName: "iPhone", Icon: IPhoneIcon },
     ].map(({ deviceName, Icon }) => (
-      <div key={deviceName} data-aos="fade-up" data-aos-duration="1500">
+      <div
+        key={deviceName}
+        data-aos="fade-up"
+        data-aos-duration="1500"
+        data-aos-offset="25"
+      >
         <Button className="w-24 h-24 rounded-full hover:bg-gradient-to-b hover:from-[#008234] hover:to-[#0c8103] hover:text-white">
           <Icon width={50} height={50} />
         </Button>

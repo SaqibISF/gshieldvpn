@@ -97,6 +97,7 @@ const SideBar: FC<{ className?: string }> = ({ className }) => {
         }}
         data-aos="fade-left"
         data-aos-duration="1500"
+        data-aos-offset="25"
       ></div>
     </aside>
   );

@@ -22,6 +22,7 @@ const InstallingSection: FC<SectionProps> = ({ ...props }) => (
         className="lg:w-3/5 w-full flex flex-col gap-y-6 md:gap-y-12 px-4 items-center md:items-start text-center md:text-left relative"
         data-aos="fade-up"
         data-aos-duration="1500"
+        data-aos-offset="25"
       >
         <Divider
           orientation="vertical"
@@ -82,6 +83,7 @@ const InstallingSection: FC<SectionProps> = ({ ...props }) => (
       <div
         className="lg:w-2/5 w-full flex items-center justify-center"
         data-aos="fade-left"
+        data-aos-offset="25"
       >
         <Image
           className="w-full h-auto"

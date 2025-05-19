@@ -34,7 +34,7 @@ const PricingSection: FC<SectionProps> = ({ ...props }) => {
       {...props}
     >
       {!isPlansLoading && plans.length === 0 && (
-        <Card data-aos="fade-up" data-aos-duration="1500">
+        <Card data-aos="fade-up" data-aos-duration="1500" data-aos-offset="25">
           <CardBody>
             <p className="text-lg font-medium text-default-500">
               No plans available at the moment. Please check back later.
@@ -47,6 +47,7 @@ const PricingSection: FC<SectionProps> = ({ ...props }) => {
         className="w-full grid lg:grid-cols-3 md:grid-cols-2 gap-6"
         data-aos="fade-up"
         data-aos-duration="1500"
+        data-aos-offset="25"
       >
         {isPlansLoading &&
           Array.from({ length: 3 }).map((_, index) => (
@@ -150,6 +151,7 @@ const PricingSection: FC<SectionProps> = ({ ...props }) => {
           data-aos="fade-up"
           data-aos-duration="1500"
           data-aos-once="true"
+          data-aos-offset="25"
         >
           See Plan Details
         </Button>

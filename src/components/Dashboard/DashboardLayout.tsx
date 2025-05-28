@@ -2,9 +2,7 @@
 
 import React, { FC, ReactNode } from "react";
 import Navbar from "@/components/Navbar";
-import {
-  DashboardIcon,
-} from "@/icons";
+import { DashboardIcon } from "@/icons";
 import {
   Button,
   Divider,
@@ -20,10 +18,7 @@ const DashboardLayout: FC<{
 }> = ({ children }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   return (
-    <div
-      id="main-section"
-      className="w-full flex flex-col items-center justify-center pt-4 relative"
-    >
+    <div className="w-full flex flex-col items-center justify-center pt-4 relative">
       <Navbar />
 
       <div

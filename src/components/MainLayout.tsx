@@ -7,11 +7,10 @@ import { setAppMounted } from "@/store/app.slice";
 import Footer from "./Footer";
 import { usePathname } from "next/navigation";
 import { INVOICE_PAGE_PATH } from "@/lib/pathnames";
+import TopBar from "./TopBar";
+import Navbar from "./Navbar";
 
-const MainLayout: FC<{ className?: string; children: ReactNode }> = ({
-  className,
-  children,
-}) => {
+const MainLayout: FC<{ children: ReactNode }> = ({ children }) => {
   const dispatch = useDispatch();
   const pathname = usePathname();
   useEffect(() => {
@@ -21,10 +20,12 @@ const MainLayout: FC<{ className?: string; children: ReactNode }> = ({
   }, []);
 
   return (
-    <>
-      <main className={className}>{children}</main>
+    <div className="flex-grow overflow-hidden">
+      <TopBar />
+      <Navbar />
+      <main>{children}</main>
       {pathname !== INVOICE_PAGE_PATH && <Footer />}
-    </>
+    </div>
   );
 };
 

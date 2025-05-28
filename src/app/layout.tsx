@@ -54,9 +54,7 @@ export default function RootLayout({
           themeProps={{ attribute: "class", defaultTheme: "light" }}
           className="min-h-screen flex flex-col"
         >
-          <MainLayout className="flex-grow overflow-hidden">
-            {children}
-          </MainLayout>
+          <MainLayout>{children}</MainLayout>
         </Providers>
       </body>
     </html>

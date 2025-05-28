@@ -1,8 +1,7 @@
 "use client";
 import React, { FC, HTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
-import Navbar from "../Navbar";
-import { Divider } from "@heroui/react";
+import { Divider, DividerProps } from "@heroui/react";
 
 export type SectionProps = HTMLAttributes<HTMLElement> & {
   isHeroSection?: boolean;
@@ -93,7 +92,7 @@ const SectionDescription: FC<HTMLAttributes<HTMLParagraphElement>> = ({
   </p>
 );
 
-const SectionDivider: FC<HTMLAttributes<HTMLHRElement>> = ({ ...props }) => (
+const SectionDivider: FC<DividerProps> = ({ ...props }) => (
   <Divider
     className="h-2"
     data-aos="fade-up"
@@ -118,16 +117,13 @@ const Section: FC<SectionProps> = ({
   ...props
 }) => (
   <section
-    id={isHeroSection ? "main-section" : undefined}
     className={cn(
       "w-full flex flex-col items-center justify-center relative",
-      isHeroSection ? "pt-4" : "",
+      isHeroSection ? "min-h-[calc(100vh-6.25rem)] pt-4" : "h-auto",
       parentClassName
     )}
     {...props}
   >
-    {isHeroSection && <Navbar />}
-
     {isLeftCornerGradient && (
       <div
         className="size-[42rem] rounded-[42rem] absolute blur-[12.5rem] -top-80 left-4 !pointer-events-none"
@@ -171,9 +167,7 @@ const Section: FC<SectionProps> = ({
     <div
       className={cn(
         "container w-full max-w-7xl flex flex-col flex-wrap items-center justify-center",
-        isHeroSection
-          ? "p-4 min-h-[calc(100vh-5rem)]"
-          : "px-4 py-12 lg:py-14 h-auto",
+        isHeroSection ? "p-4" : "px-4 py-12 lg:py-14",
         className
       )}
     >

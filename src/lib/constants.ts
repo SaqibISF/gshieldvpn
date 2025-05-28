@@ -1,5 +1,7 @@
 export const USER_COOKIE_KEY = "gshield_user";
 
+export const IP_INFO_TOKEN = process.env.NEXT_PUBLIC_IP_INFO_TOKEN!;
+
 export const REVERB_APP_ID = +process.env.REVERB_APP_ID!;
 export const REVERB_APP_KEY = process.env.REVERB_APP_KEY!;
 export const REVERB_APP_SECRET = process.env.REVERB_APP_SECRET!;

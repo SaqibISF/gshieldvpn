@@ -2,8 +2,6 @@
 import React, { FC } from "react";
 import Section, { SectionProps } from "./Section";
 import { Accordion, AccordionItem } from "@heroui/react";
-import Link from "next/link";
-import { CONTACT_US_PAGE_PATH } from "@/lib/pathnames";
 
 const FAQSection: FC<SectionProps> = ({ ...props }) => {
   const faqs = [
@@ -66,9 +64,12 @@ const FAQSection: FC<SectionProps> = ({ ...props }) => {
         data-aos-offset="25"
       >
         More questions?{" "}
-        <Link href={CONTACT_US_PAGE_PATH} className="text-primary font-bold">
+        <a
+          href="mailto:support@gshieldvpn.com"
+          className="text-primary font-bold"
+        >
           Contact Us.
-        </Link>
+        </a>
       </p>
     </Section>
   );

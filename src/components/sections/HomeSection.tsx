@@ -4,6 +4,8 @@ import Section, { SectionProps } from "./Section";
 import Image from "next/image";
 import { mockupBase64Src } from "@/lib/mockup-base64";
 import { Button } from "@heroui/react";
+import Link from "next/link";
+import { PRICING_PAGE_PATH } from "@/lib/pathnames";
 
 const HomeSection: FC<SectionProps> = ({ ...props }) => (
   <Section
@@ -42,6 +44,8 @@ const HomeSection: FC<SectionProps> = ({ ...props }) => (
         identity with an all-in-one app.
       </p>
       <Button
+        as={Link}
+        href={PRICING_PAGE_PATH}
         color="primary"
         variant="shadow"
         radius="full"

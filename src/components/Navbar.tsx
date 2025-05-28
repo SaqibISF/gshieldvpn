@@ -47,7 +47,7 @@ const Navbar: FC = () => {
   ];
 
   return (
-    <HeroUINavbar id="navbar" maxWidth="xl" className="bg-transparent">
+    <HeroUINavbar position="static" maxWidth="xl" className="bg-transparent">
       <NavbarContent>
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <Link href={HOME_PAGE_PATH}>

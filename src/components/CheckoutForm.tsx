@@ -9,7 +9,7 @@ import {
 } from "@stripe/react-stripe-js";
 import { PAYMENT_PROCESSING_PAGE_PATH } from "@/lib/pathnames";
 import { addToast, Button, Card } from "@heroui/react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useTheme } from "next-themes";
 import { loadStripe } from "@stripe/stripe-js";
 import { STRIPE_PUBLISHABLE_KEY } from "@/lib/constants";
@@ -23,10 +23,9 @@ import { useUserCookie } from "@/hooks/use-cookies";
 
 const PaymentForm: FC<{
   planId: number;
-  amount: number;
   billingAddress: BillingAddress | null;
   className?: string;
-}> = ({ planId, amount, billingAddress, className }) => {
+}> = ({ planId, billingAddress, className }) => {
   const { user } = useUserCookie();
   const stripe = useStripe();
   const elements = useElements();
@@ -79,18 +78,20 @@ const PaymentForm: FC<{
       setErrorMessage(undefined);
 
       const res = await axios
-        .post<{ clientSecret: string | null }>("/api/create-payment-intent", {
-          amount,
-        })
+        .get<{
+          status: boolean;
+          message: string;
+          customerId: string;
+          clientSecret: string;
+        }>(`/api/create-setup-intent?email=${user.email}`)
         .then((res) => res.data);
 
-      if (!res.clientSecret) {
-        setErrorMessage("Client secret is missing");
+      if (!res.status) {
+        setErrorMessage(res.message);
         return;
       }
 
-      const { error } = await stripe.confirmPayment({
-        //`Elements` instance that was used to create the Payment Element
+      const { error } = await stripe.confirmSetup({
         elements,
         clientSecret: res.clientSecret,
         confirmParams: {
@@ -123,7 +124,11 @@ const PaymentForm: FC<{
       }
     } catch (error) {
       setErrorMessage(
-        error instanceof Error ? error.message : "An error occurred"
+        error instanceof AxiosError
+          ? error.response?.data.message
+          : error instanceof Error
+          ? error.message
+          : "An error occurred"
       );
     } finally {
       setLoading(false);
@@ -242,7 +247,7 @@ const PaymentForm: FC<{
           disabled={!stripe || !elements || isLoading}
           className="w-full"
         >
-          {isLoading ? "Processing..." : "Pay"}
+          {isLoading ? "Submitting..." : "Submit"}
         </Button>
       </form>
     </Card>
@@ -251,17 +256,15 @@ const PaymentForm: FC<{
 
 const CheckoutForm: FC<{
   planId: number;
-  amount: number;
   billingAddress: BillingAddress | null;
   className?: string;
-}> = ({ planId, amount, billingAddress, className }) => {
+}> = ({ planId, billingAddress, className }) => {
   const { theme } = useTheme();
   const isDarkMode = theme === "dark";
 
   const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY);
   const options: StripeElementsOptionsMode = {
-    mode: "payment",
-    amount,
+    mode: "setup",
     currency: "usd",
     appearance: {
       theme: isDarkMode ? "night" : "stripe",
@@ -281,7 +284,6 @@ const CheckoutForm: FC<{
     <Elements stripe={stripePromise} options={options}>
       <PaymentForm
         planId={planId}
-        amount={amount}
         billingAddress={billingAddress}
         className={className}
       />

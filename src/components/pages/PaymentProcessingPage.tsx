@@ -2,8 +2,6 @@
 
 import React, { FC, useEffect, useState } from "react";
 import { notFound, useSearchParams } from "next/navigation";
-import { useUserCookie } from "@/hooks/use-cookies";
-import { ADD_PURCHASE_PLAN_ROUTE } from "@/lib/constants";
 import axios, { AxiosError } from "axios";
 import { addToast, Alert, Button, Spinner } from "@heroui/react";
 import { Section } from "@/components/sections";
@@ -13,51 +11,50 @@ import { PurchasedPlan } from "@/types";
 import { useDispatch } from "react-redux";
 import { setActivePlan } from "@/store/plans.slice";
 import Link from "next/link";
+import { usePlans } from "@/hooks/usePlans";
 
 const PaymentProcessingPage: FC = () => {
   const dispatch = useDispatch();
   const searchParams = useSearchParams();
-  const { user } = useUserCookie();
+  const planId = searchParams.get("planId");
+  const setupIntentId = searchParams.get("setup_intent");
+  const setupIntentClientSecret = searchParams.get(
+    "setup_intent_client_secret"
+  );
+  const redirectStatus = searchParams.get("redirect_status");
+
+  if (
+    !planId ||
+    !setupIntentId ||
+    !setupIntentClientSecret ||
+    !redirectStatus
+  ) {
+    notFound();
+  }
+
+  const { isPlansLoading, plans } = usePlans();
+  const plan = plans.find((plan) => plan.id === +planId);
+
   const [isPaymentSuccessful, setPaymentStatus] = useState<boolean>(false);
   const [isLoading, setLoading] = useState<boolean>(true);
   const [successMessage, setSuccessMessage] = useState<string>("");
 
   useEffect(() => {
-    const verifyPayment = async (planId: number, paymentIntent: string) => {
+    const subscribe = async () => {
       try {
         const res = await axios
           .post<{
-            paymentStatus: boolean;
-          }>("/api/verify-payment", { paymentIntent })
+            status: boolean;
+            message: string;
+            subscriptionId: string;
+            activePlan: PurchasedPlan;
+          }>("/api/create-subscription", { plan, setupIntentId })
           .then((res) => res.data);
 
-        if (res.paymentStatus) {
+        if (res.status) {
           setPaymentStatus(true);
-
-          const res = await axios
-            .post<{
-              status: boolean;
-              message: string;
-              purchase: PurchasedPlan;
-            }>(
-              ADD_PURCHASE_PLAN_ROUTE,
-              {
-                plan_id: planId,
-                payment_intent: paymentIntent,
-              },
-              {
-                headers: {
-                  Accept: "application/json",
-                  Authorization: `Bearer ${user.access_token}`,
-                },
-              }
-            )
-            .then((res) => res.data);
-
-          if (res.status) {
-            setSuccessMessage(res.message);
-            dispatch(setActivePlan(res.purchase));
-          }
+          setSuccessMessage(res.message);
+          dispatch(setActivePlan(res.activePlan));
         } else {
           setPaymentStatus(false);
         }
@@ -77,15 +74,12 @@ const PaymentProcessingPage: FC = () => {
       }
     };
 
-    const paymentIntent = searchParams.get("payment_intent");
-    const planId = searchParams.get("planId");
-    if (!paymentIntent) {
-      notFound();
+    if (redirectStatus === "succeeded") {
+      if (!isPlansLoading) subscribe();
     } else {
-      verifyPayment(+planId!, paymentIntent);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isPlansLoading]);
 
   return (
     <Section isHeroSection isCenterGradient className="space-y-4">

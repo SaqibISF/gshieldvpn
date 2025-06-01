@@ -20,12 +20,13 @@ const CheckOutPage: FC = () => {
   const searchParams = useSearchParams();
   const planId = searchParams.get("planId");
 
-  const { isPlansLoading, plans } = usePlans();
-  const { isBillingAddressLoading, billingAddress } = useBillingAddress();
-
   if (!planId) {
     notFound();
   }
+
+  const { isPlansLoading, plans } = usePlans();
+  const { isBillingAddressLoading, billingAddress } = useBillingAddress();
+
   const plan = plans.find((plan) => plan.id === +planId);
 
   return (
@@ -105,11 +106,7 @@ const CheckOutPage: FC = () => {
               data-aos-duration="1500"
               data-aos-offset="25"
             >
-              <CheckoutForm
-                planId={plan!.id}
-                amount={+plan!.price * 100}
-                billingAddress={billingAddress}
-              />
+              <CheckoutForm planId={plan.id} billingAddress={billingAddress} />
             </div>
           </>
         )}

@@ -3,9 +3,8 @@ import React, { FC } from "react";
 import Section, { SectionProps } from "./Section";
 import { Card, CardBody } from "@heroui/react";
 import {
-  GlobeIcon,
-  LockIcon,
-  PlayIcon,
+  DevicesIcon,
+  SpeedIcon,
   ShieldIcon,
   SplitIcon,
   WiFiOffIcon,
@@ -14,52 +13,41 @@ import {
 const FeaturesSection: FC<SectionProps> = ({ ...props }) => (
   <Section
     title="Features"
-    heading="Features for Our App"
-    description="Discover the powerful features of GShieldVPN designed to provide you with secure, private, and seamless internet access."
+    heading="Everything You Expect — Done Right"
+    // description="Discover the powerful features of GShieldVPN designed to provide you with secure, private, and seamless internet access."
     {...props}
   >
     <div className="w-full grid md:grid-cols-2 gap-6">
       {[
         {
           Icon: ShieldIcon,
-          title: "Secure encryption",
-          description:
-            "Keep your online traffic safe behind a wall of next-generation encryption",
+          title: "Advanced Encryption",
+          description: "256-bit AES standard used by military & banks",
         },
         {
           Icon: WiFiOffIcon,
-          title: "Safe when disconnected",
-          description:
-            "Keep your online traffic safe behind a wall of next-generation encryption",
+          title: "Smart Auto-Connect",
+          description: "Stay protected without lifting a finger",
         },
         {
           Icon: SplitIcon,
-          title: "Split tunneling",
-          description:
-            "Everyday digital security, your way. Choose which apps need VPN protection.",
+          title: "Strict No-Log Policy",
+          description: "We never store or track your data",
         },
         {
-          Icon: LockIcon,
-          title: "Double VPN",
-          description:
-            "Add another layer of encryption with our Double VPN servers for extra peace of mind.",
+          Icon: DevicesIcon,
+          title: "Unlimited Devices",
+          description: "Use GShield on all your devices at once",
         },
         {
-          Icon: PlayIcon,
-          title: "SmartPlay",
-          description:
-            "Watch shows and movies safely without extra steps — whether at home or abroad.",
-        },
-        {
-          Icon: GlobeIcon,
-          title: "Private DNS",
-          description:
-            "Enjoy more online privacy without worrying about third parties spying on your every move.",
+          Icon: SpeedIcon,
+          title: "Blazing Speeds",
+          description: "Engineered to deliver fast, stable performance",
         },
       ].map(({ title, description, Icon }, index) => (
         <Card
           key={title.trim() + index}
-          className="p-4 mx-auto bg-[#00823417]"
+          className="w-full p-4 mx-auto bg-[#00823417]"
           data-aos={
             (index + 1) % 2 === 1
               ? "zoom-out-right"

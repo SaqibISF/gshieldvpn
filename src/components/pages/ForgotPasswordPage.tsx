@@ -98,10 +98,10 @@ const ForgotPasswordPage: FC = () => {
           data-aos-offset="25"
         >
           <CardHeader className="flex-col gap-2">
-            <h2 className="text-3xl font-semibold">Forgot Password?</h2>
+            <h2 className="text-3xl font-semibold">Reset Your Password</h2>
             <p className="text-default-500 text-sm font-normal">
-              Please enter your email we will send you password reset link to
-              your email.
+              Enter the email associated with your account. We’ll send reset
+              instructions immediately.
             </p>
             {successMessage && (
               <div className="w-full text-success-600 bg-success-50 border-2 border-solid border-success-100 p-3 rounded-xl">

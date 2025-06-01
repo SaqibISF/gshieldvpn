@@ -7,7 +7,7 @@ import { mapBase64Src } from "@/lib/map-base64";
 const FactsSection: FC<SectionProps> = ({ ...props }) => (
   <Section
     title="Facts"
-    heading="2.6k+ Active Server In All Over The World."
+    heading="2,600+ Servers. Global Access. Instant Connection."
     {...props}
   >
     <div className="flex flex-col-reverse lg:flex-row gap-y-12">
@@ -38,8 +38,9 @@ const FactsSection: FC<SectionProps> = ({ ...props }) => (
           data-aos-duration="1500"
           data-aos-offset="25"
         >
-          These speed excellent. It’s a fast connection safety Internet leading
-          speeds across its network.
+          Whether you’re at home or traveling abroad, GShield connects you to
+          lightning-fast servers in over 40+ countries. No throttling. No
+          congestion. Just reliable speed and rock-solid encryption.
         </p>
         <div className="w-full grid sm:grid-cols-2 gap-4">
           {[

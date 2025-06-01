@@ -7,9 +7,8 @@ import AndroidIcon from "./AndroidIcon";
 import IPhoneIcon from "./IPhoneIcon";
 import ArrowRightIcon from "./ArrowRightIcon";
 import CheckedIcon from "./CheckedIcon";
-import GlobeIcon from "./GlobeIcon";
 import ChevronDownIcon from "./ChevronDownIcon";
-import LockIcon from "./LockIcon";
+import DevicesIcon from "./DevicesIcon";
 import EnvelopeIcon from "./EnvelopeIcon";
 import EyeSlashIcon from "./EyeSlashIcon";
 import EyeIcon from "./EyeIcon";
@@ -30,7 +29,7 @@ import StateIcon from "./StateIcon";
 import ShieldIcon from "./ShieldIcon";
 import WiFiOffIcon from "./WiFiOffIcon";
 import SplitIcon from "./SplitIcon";
-import PlayIcon from "./PlayIcon";
+import SpeedIcon from "./SpeedIcon";
 import BoltIcon from "./BoltIcon";
 import TickIcon from "./TickIcon";
 import StarIcon from "./StarIcon";
@@ -61,9 +60,8 @@ export {
   IPhoneIcon,
   ArrowRightIcon,
   CheckedIcon,
-  GlobeIcon,
   ChevronDownIcon,
-  LockIcon,
+  DevicesIcon,
   EnvelopeIcon,
   EyeSlashIcon,
   EyeIcon,
@@ -84,7 +82,7 @@ export {
   ShieldIcon,
   WiFiOffIcon,
   SplitIcon,
-  PlayIcon,
+  SpeedIcon,
   BoltIcon,
   TickIcon,
   StarIcon,

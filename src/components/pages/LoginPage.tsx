@@ -121,9 +121,11 @@ const LoginPage: FC = () => {
           data-aos-offset="25"
         >
           <CardHeader className="flex-col gap-2">
-            <h2 className="text-3xl font-semibold">Welcome Back!</h2>
+            <h2 className="text-3xl font-semibold text-center">
+              Welcome Back to Secure Internet
+            </h2>
             <p className="text-default-500 text-sm font-normal">
-              Sign in with your email
+              Enter your credentials to connect instantly.
             </p>
 
             {errors.root && (

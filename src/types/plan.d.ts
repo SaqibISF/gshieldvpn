@@ -6,6 +6,8 @@ export type Plan = {
   price: number | string;
   duration: number;
   duration_unit: string;
+  stripe_price_id: string;
+  trial_days: number;
   is_best_deal: boolean;
   created_at: string;
   updated_at: string;

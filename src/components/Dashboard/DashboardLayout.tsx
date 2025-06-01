@@ -1,7 +1,6 @@
 "use client";
 
 import React, { FC, ReactNode } from "react";
-import Navbar from "@/components/Navbar";
 import { DashboardIcon } from "@/icons";
 import {
   Button,
@@ -19,8 +18,6 @@ const DashboardLayout: FC<{
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   return (
     <div className="w-full flex flex-col items-center justify-center pt-4 relative">
-      <Navbar />
-
       <div
         className="w-[21.875rem] h-[27.125rem] rounded-[27.125rem] absolute blur-[12.5rem] top-16 -right-10 !pointer-events-none"
         style={{

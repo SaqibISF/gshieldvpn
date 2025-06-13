@@ -16,21 +16,19 @@ import {
   SIGNUP_PAGE_PATH,
 } from "@/lib/pathnames";
 import Link from "next/link";
-import { useUserCookie } from "@/hooks/use-cookies";
-import { useAppState } from "@/hooks/use-app-state";
 import { usePathname } from "next/navigation";
 import { useLogout } from "@/hooks/useLogout";
+import { useSession } from "next-auth/react";
 
 const AuthButton: FC<{
   classNames?: { dropdownButton?: string; authButton?: string };
 }> = ({ classNames }) => {
   const pathname = usePathname();
-  const { isAppMounted } = useAppState();
-  const { user } = useUserCookie();
+  const { data: session, status: sessionStatus } = useSession();
   const { handleLogout } = useLogout();
   return (
-    isAppMounted &&
-    (user ? (
+    sessionStatus !== "loading" &&
+    (sessionStatus === "authenticated" ? (
       <Dropdown>
         <DropdownTrigger>
           <Button
@@ -38,7 +36,7 @@ const AuthButton: FC<{
             endContent={<ChevronDownIcon />}
             className={classNames && classNames.dropdownButton}
           >
-            {user.name}
+            {session.user.name}
           </Button>
         </DropdownTrigger>
         <DropdownMenu aria-label="user menu" variant="faded">
@@ -58,8 +56,8 @@ const AuthButton: FC<{
                 name: "text-default-600",
                 description: "text-default-500",
               }}
-              description={user.email}
-              name={user.name}
+              description={session.user.email}
+              name={session.user.name}
             />
           </DropdownItem>
 

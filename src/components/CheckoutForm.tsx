@@ -19,14 +19,14 @@ import { BillingAddress } from "@/types";
 import Input from "./Input";
 import { CityIcon, LocationDotIcon, StateIcon, UserIcon } from "@/icons";
 import { cn, NAME_INVALID_ERROR_MESSAGE, NAME_REGEX } from "@/lib/utils";
-import { useUserCookie } from "@/hooks/use-cookies";
+import { useSession } from "next-auth/react";
 
 const PaymentForm: FC<{
   planId: number;
   billingAddress: BillingAddress | null;
   className?: string;
 }> = ({ planId, billingAddress, className }) => {
-  const { user } = useUserCookie();
+  const { data: session } = useSession();
   const stripe = useStripe();
   const elements = useElements();
 
@@ -83,7 +83,7 @@ const PaymentForm: FC<{
           message: string;
           customerId: string;
           clientSecret: string;
-        }>(`/api/create-setup-intent?email=${user.email}`)
+        }>("/api/create-setup-intent")
         .then((res) => res.data);
 
       if (!res.status) {
@@ -98,7 +98,7 @@ const PaymentForm: FC<{
           payment_method_data: {
             billing_details: {
               name: values.name,
-              email: user.email,
+              email: session?.user.email,
               address: {
                 line1: values.address,
                 city: values.city,

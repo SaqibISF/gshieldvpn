@@ -1,8 +1,8 @@
 "use client";
 
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Section } from "../sections";
-import { EnvelopeIcon } from "@/icons";
+import { AppleIcon, EnvelopeIcon, GoogleIcon } from "@/icons";
 import {
   DASHBOARD_PAGE_PATH,
   FORGOT_PASSWORD_PAGE_PATH,
@@ -25,14 +25,12 @@ import { EMAIL_INVALID_ERROR_MESSAGE, EMAIL_REGEX } from "@/lib/utils";
 import axios, { AxiosError } from "axios";
 import { LOGIN_ROUTE } from "@/lib/constants";
 import { User } from "@/types/user";
-import { useUserCookie } from "@/hooks/use-cookies";
-import { useRouter } from "next/navigation";
+import { useSession, signIn } from "next-auth/react";
+import { getToken } from "next-auth/jwt";
 
 const LoginPage: FC = () => {
-  const router = useRouter();
+  const { data: session } = useSession();
   type LoginData = { email: string; password: string };
-
-  const { setUserCookie } = useUserCookie();
 
   const [isLoading, setLoading] = useState<boolean>(false);
 
@@ -68,14 +66,15 @@ const LoginPage: FC = () => {
         .then((res) => res.data);
 
       if (res.status) {
-        setUserCookie({
+        await signIn("credentials", {
+          redirectTo: DASHBOARD_PAGE_PATH,
           id: res.user.id,
-          name: res.user.name,
           email: res.user.email,
+          name: res.user.name,
+          slug: res.user.slug,
           access_token: res.access_token,
         });
         reset();
-        router.replace(DASHBOARD_PAGE_PATH);
         addToast({
           color: "success",
           description: res.message,
@@ -91,7 +90,7 @@ const LoginPage: FC = () => {
           ? error.response
             ? error.response.data.message
             : error.message
-          : "Something Went Wrong";
+          : "Failed to login";
       setError("root", { type: "manual", message: errorMessage });
       // setValue("password", "");
       setFocus("password");
@@ -100,6 +99,29 @@ const LoginPage: FC = () => {
       setLoading(false);
     }
   };
+
+  const handleGoogleSignin = async () => {
+    const res = await signIn("google");
+    console.log(res);
+  };
+
+  const handleAppleSignin = async () => {
+    const res = await signIn("apple");
+    console.log(res);
+  };
+
+  useEffect(() => {
+    console.log("Session:", session);
+  }, [session]);
+
+  useEffect(() => {
+    const token = async () => {
+      const res = await getToken({ req: { headers: {} }, secureCookie: true });
+      console.log("Token", res);
+    };
+
+    token();
+  }, [session]);
 
   return (
     <Section isHeroSection isRightCornerGradient>
@@ -187,6 +209,27 @@ const LoginPage: FC = () => {
             >
               {isLoading ? "Logging in..." : "Login"}
             </Button>
+
+            <Button
+              fullWidth
+              size="lg"
+              variant="bordered"
+              startContent={<GoogleIcon />}
+              onPress={handleGoogleSignin}
+            >
+              Continue with Google
+            </Button>
+
+            <Button
+              fullWidth
+              size="lg"
+              variant="bordered"
+              startContent={<AppleIcon />}
+              onPress={handleAppleSignin}
+            >
+              Continue with Apple
+            </Button>
+
             <Link
               href={RESENT_EMAIL_VERIFICATION_PAGE_PATH}
               className="text-primary dark:text-primary-600 text-sm sm:text-medium font-medium"

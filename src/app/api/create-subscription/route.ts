@@ -3,18 +3,25 @@ import {
   ADD_PURCHASE_PLAN_ROUTE,
   CHECK_SETUP_INTENT_IS_USED_ROUTE,
   STRIPE_SECRET_KEY,
-  USER_COOKIE_KEY,
 } from "@/lib/constants";
 import Stripe from "stripe";
 import axios, { AxiosError } from "axios";
 import { Plan, PurchasedPlan } from "@/types";
-import { cookies } from "next/headers";
-import { User } from "@/types/user";
+import { auth } from "@/auth";
 
 const stripe = new Stripe(STRIPE_SECRET_KEY);
 
 export async function POST(request: Request) {
   try {
+    const session = await auth();
+
+    if (!session) {
+      return NextResponse.json(
+        { status: false, message: "Unauthorized: You are not logged in" },
+        { status: 401 }
+      );
+    }
+
     const { plan, setupIntentId }: { plan: Plan; setupIntentId: string } =
       await request.json();
 
@@ -27,18 +34,6 @@ export async function POST(request: Request) {
         { status: 400 }
       );
 
-    const cookieStore = await cookies();
-    const userCookies = cookieStore.get(USER_COOKIE_KEY)?.value;
-
-    if (!userCookies) {
-      return NextResponse.json(
-        { status: false, message: "Unauthorized: You are not logged in" },
-        { status: 401 }
-      );
-    }
-
-    const user: User = JSON.parse(userCookies);
-
     const res = await axios.post<{
       status: boolean;
       is_used: boolean;
@@ -50,7 +45,7 @@ export async function POST(request: Request) {
       {
         headers: {
           Accept: "application/json",
-          Authorization: `Bearer ${user.access_token}`,
+          Authorization: `Bearer ${session.user.access_token}`,
         },
       }
     );
@@ -68,7 +63,7 @@ export async function POST(request: Request) {
       );
 
     const customers = await stripe.customers.list({
-      email: user.email,
+      email: session.user.email,
       limit: 1,
     });
     const customerId = customers.data[0].id;
@@ -113,7 +108,7 @@ export async function POST(request: Request) {
         {
           headers: {
             Accept: "application/json",
-            Authorization: `Bearer ${user.access_token}`,
+            Authorization: `Bearer ${session.user.access_token}`,
           },
         }
       )

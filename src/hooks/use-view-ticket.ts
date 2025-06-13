@@ -3,20 +3,22 @@ import { SupportTicket } from "@/types";
 import axios, { AxiosError } from "axios";
 import { addToast } from "@heroui/react";
 import { VIEW_SUPPORT_TICKET_ROUTE } from "@/lib/constants";
+import { useSession } from "next-auth/react";
 
-export const useViewTicket = (ticketId: number, token: string) => {
+export const useViewTicket = (ticketId: number, status: string) => {
+  const { data: session } = useSession();
   const [ticket, setTicket] = useState<SupportTicket>();
   const [isTicketLoading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const fetchViewTicket = async () => {
+    const fetchViewTickets = async () => {
       try {
         const response = await axios.get<{ ticket: SupportTicket }>(
           VIEW_SUPPORT_TICKET_ROUTE(ticketId),
           {
             headers: {
               Accept: "application/json",
-              Authorization: `Bearer ${token}`,
+              Authorization: `Bearer ${session?.user.access_token}`,
             },
           }
         );
@@ -37,8 +39,17 @@ export const useViewTicket = (ticketId: number, token: string) => {
       }
     };
 
-    fetchViewTicket();
+    let timerId = null;
 
+    if (status === "open") {
+      timerId = setInterval(fetchViewTickets, 1000);
+    } else {
+      fetchViewTickets();
+    }
+
+    return () => {
+      if (timerId) clearInterval(timerId);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

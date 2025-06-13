@@ -17,12 +17,12 @@ import {
 import { SubmitHandler, useForm } from "react-hook-form";
 import axios, { AxiosError } from "axios";
 import { UPDATE_USER_INFO_ROUTE } from "@/lib/constants";
-import { useUserCookie } from "@/hooks/use-cookies";
 import Input from "../Input";
+import { useSession } from "next-auth/react";
 
 const ChangeEmailDialog: FC = () => {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
-  const { user, setUserCookie } = useUserCookie();
+  const { data: session, update: updateSession } = useSession();
 
   type Data = {
     email: string;
@@ -50,17 +50,17 @@ const ChangeEmailDialog: FC = () => {
       const res = await axios
         .post<{ status: boolean; message: string }>(
           UPDATE_USER_INFO_ROUTE,
-          { email: values.email, name: user.name },
+          { email: values.email, name: session?.user.name },
           {
             headers: {
               Accept: "application/json",
-              Authorization: `Bearer ${user.access_token}`,
+              Authorization: `Bearer ${session?.user.access_token}`,
             },
           }
         )
         .then((res) => res.data);
       if (res.status) {
-        setUserCookie({ ...user, email: values.email });
+        updateSession({ email: values.email });
         addToast({ color: "success", description: res.message });
         reset();
         onClose();

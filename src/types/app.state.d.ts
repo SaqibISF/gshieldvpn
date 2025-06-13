@@ -34,13 +34,13 @@ export type SupportTicket = {
 };
 
 export type AppState = {
-  isAppMounted: boolean;
   isLegalNoticeLoadedOnce: boolean;
   termsAndConditions: string;
   privacyPolicy: string;
   isBillingAddressLoadedOnce: boolean;
   billingAddress: BillingAddress | null;
   currentSupportTicketId: number;
+  currentSupportTicketStatus: string;
   isSupportTicketsLoadedOnce: boolean;
   supportTickets: SupportTicket[];
   isChatDialogOpen: boolean;

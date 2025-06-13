@@ -3,8 +3,6 @@
 import React, { FC } from "react";
 import DashboardSection from "../Dashboard/DashboardSection";
 import { Card, CardBody, CardHeader, Divider, Spinner } from "@heroui/react";
-import { useUserCookie } from "@/hooks/use-cookies";
-import { useAppState } from "@/hooks/use-app-state";
 import { useBillingAddress } from "@/hooks/use-billing-address";
 import ChangeNameDialog from "../Dashboard/ChangeNameDialog";
 import ChangeEmailDialog from "../Dashboard/ChangeEmailDialog";
@@ -12,10 +10,10 @@ import ChangePasswordDialog from "../Dashboard/ChangePasswordDialog";
 import DeleteAccountDialog from "../Dashboard/DeleteAccountDialog";
 import PaymentHistoryTable from "../Dashboard/PaymentHistoryTable";
 import ChangeBillingAddressDialog from "../Dashboard/ChangeBillingAddressDialog";
+import { useSession } from "next-auth/react";
 
 const BillingDetailsPage: FC = () => {
-  const { isAppMounted } = useAppState();
-  const { user } = useUserCookie();
+  const { data: session } = useSession();
   const { isBillingAddressLoading, billingAddress } = useBillingAddress();
   return (
     <>
@@ -29,11 +27,10 @@ const BillingDetailsPage: FC = () => {
           <CardBody className="sm:flex-row sm:items-center justify-between gap-6">
             <div className="space-y-4">
               <h3 className="text-2xl font-semibold">Name</h3>
-              {isAppMounted && user && (
-                <p className="text-default-500 text-lg font-normal">
-                  {user.name}
-                </p>
-              )}
+
+              <p className="text-default-500 text-lg font-normal">
+                {session?.user.name}
+              </p>
             </div>
             <ChangeNameDialog />
           </CardBody>
@@ -48,11 +45,9 @@ const BillingDetailsPage: FC = () => {
           <CardBody className="sm:flex-row sm:items-center justify-between gap-6">
             <div className="space-y-4">
               <h3 className="text-2xl font-semibold">Email Address</h3>
-              {isAppMounted && user && (
-                <p className="text-default-500 text-lg font-normal">
-                  {user.email}
-                </p>
-              )}
+              <p className="text-default-500 text-lg font-normal">
+                {session?.user.email}
+              </p>
             </div>
             <ChangeEmailDialog />
           </CardBody>
@@ -141,7 +136,7 @@ const BillingDetailsPage: FC = () => {
                 <div className="flex flex-col sm:flex-row sm:items-center">
                   <h4 className="text-xl font-semibold w-40">Email Address:</h4>
                   <span className="text-default-500 text-lg font-normal ml-2">
-                    {user.email}
+                    {session?.user.email}
                   </span>
                 </div>
 

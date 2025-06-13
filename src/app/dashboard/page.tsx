@@ -6,19 +6,17 @@ import { Button } from "@heroui/react";
 import { HeadphoneIcon } from "@/icons";
 import Link from "next/link";
 import { DOWNLOADS_PAGE_PATH } from "@/lib/pathnames";
-import { useAppState } from "@/hooks/use-app-state";
-import { useUserCookie } from "@/hooks/use-cookies";
 import { getFormattedDate } from "@/lib/utils";
 import { useActivePlan } from "@/hooks/usePlans";
+import { useSession } from "next-auth/react";
 
 const DashboardPage: FC = () => {
-  const { isAppMounted } = useAppState();
-  const { user } = useUserCookie();
+  const { data: session } = useSession();
   const { activePlan } = useActivePlan();
   return (
     <DashboardSection
       title="Dashboard"
-      heading={`Welcome back, ${isAppMounted && user ? user.name : ""}`}
+      heading={`Welcome back, ${session ? session.user.name : ""}`}
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div
@@ -65,31 +63,30 @@ const DashboardPage: FC = () => {
           data-aos-offset="25"
         >
           <h3 className="text-2xl font-medium">Subscription</h3>
-          {isAppMounted &&
-            (activePlan ? (
-              <>
-                <div className="flex items-center justify-between text-xl text-default-500 font-normal">
-                  <p>Plan: {activePlan.plan.name}</p>
-                  <p className="text-base">
-                    {activePlan.plan.duration} {activePlan.plan.duration_unit}
-                  </p>
-                </div>
-                <div className="flex items-center justify-between gap-4 text-xl text-default-500 font-normal">
-                  <p>Renewal Date: {getFormattedDate(activePlan.end_date)}</p>
-                  <p className="text-base">
-                    ${activePlan.amount_paid}/
-                    {activePlan.plan.duration > 1
-                      ? activePlan.plan.duration + " "
-                      : ""}
-                    {activePlan.plan.duration_unit}
-                  </p>
-                </div>
-              </>
-            ) : (
-              <p className="text-default-500 text-base font-normal">
-                No, Active Plan Found.
-              </p>
-            ))}
+          {activePlan ? (
+            <>
+              <div className="flex items-center justify-between text-xl text-default-500 font-normal">
+                <p>Plan: {activePlan.plan.name}</p>
+                <p className="text-base">
+                  {activePlan.plan.duration} {activePlan.plan.duration_unit}
+                </p>
+              </div>
+              <div className="flex items-center justify-between gap-4 text-xl text-default-500 font-normal">
+                <p>Renewal Date: {getFormattedDate(activePlan.end_date)}</p>
+                <p className="text-base">
+                  ${activePlan.amount_paid}/
+                  {activePlan.plan.duration > 1
+                    ? activePlan.plan.duration + " "
+                    : ""}
+                  {activePlan.plan.duration_unit}
+                </p>
+              </div>
+            </>
+          ) : (
+            <p className="text-default-500 text-base font-normal">
+              No, Active Plan Found.
+            </p>
+          )}
         </div>
 
         <div

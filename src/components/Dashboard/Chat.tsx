@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ChangeEvent, FC, useEffect, useState } from "react";
+import React, { ChangeEvent, FC, useEffect, useRef, useState } from "react";
 import {
   BoltIcon,
   ChatIcon,
@@ -39,7 +39,6 @@ import {
 } from "@/lib/constants";
 import Input from "../Input";
 import RadioElement from "../RadioElement";
-import { useUserCookie } from "@/hooks/use-cookies";
 import { useViewTicket } from "@/hooks/use-view-ticket";
 import { useAppState } from "@/hooks/use-app-state";
 import { SupportTicket } from "@/types";
@@ -50,10 +49,11 @@ import {
   closeSupportTicket,
   setIsChatDialogOpen,
 } from "@/store/app.slice";
+import { useSession } from "next-auth/react";
 
 const CreateTicket: FC = () => {
   const dispatch = useDispatch();
-  const { user } = useUserCookie();
+  const { data: session } = useSession();
 
   type SubmitData = {
     priority: "high" | "medium" | "low";
@@ -89,7 +89,7 @@ const CreateTicket: FC = () => {
         {
           headers: {
             Accept: "application/json",
-            Authorization: `Bearer ${user.access_token}`,
+            Authorization: `Bearer ${session?.user.access_token}`,
           },
         }
       );
@@ -217,9 +217,13 @@ const CreateTicket: FC = () => {
   );
 };
 
-const ViewChat: FC<{ ticketId: number }> = ({ ticketId }) => {
+const ViewChat: FC<{ ticketId: number; status: string }> = ({
+  ticketId,
+  status,
+}) => {
   const dispatch = useDispatch();
-  const { user } = useUserCookie();
+  const chatContainerRef = useRef<HTMLDivElement | null>(null);
+  const { data: session } = useSession();
 
   type SubmitData = {
     message: string;
@@ -227,7 +231,7 @@ const ViewChat: FC<{ ticketId: number }> = ({ ticketId }) => {
 
   const { isTicketLoading, ticket, setTicket } = useViewTicket(
     ticketId,
-    user.access_token
+    status
   );
 
   const [isChatClosing, setIsChatClosing] = useState<boolean>(false);
@@ -275,7 +279,7 @@ const ViewChat: FC<{ ticketId: number }> = ({ ticketId }) => {
         {
           headers: {
             Accept: "application/json",
-            Authorization: `Bearer ${user.access_token}`,
+            Authorization: `Bearer ${session?.user.access_token}`,
           },
         }
       );
@@ -310,7 +314,7 @@ const ViewChat: FC<{ ticketId: number }> = ({ ticketId }) => {
         {
           headers: {
             Accept: "application/json",
-            Authorization: `Bearer ${user.access_token}`,
+            Authorization: `Bearer ${session?.user.access_token}`,
           },
         }
       );
@@ -370,6 +374,13 @@ const ViewChat: FC<{ ticketId: number }> = ({ ticketId }) => {
 
   useEffect(() => setFocus("message"), [setFocus]);
 
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop =
+        chatContainerRef.current.scrollHeight;
+    }
+  }, [ticket?.messages]);
+
   return (
     <div className="w-full h-96 flex flex-col">
       <div className="p-2 text-sm flex items-center">
@@ -411,7 +422,10 @@ const ViewChat: FC<{ ticketId: number }> = ({ ticketId }) => {
         )}
       </div>
       <Divider />
-      <ScrollShadow className="w-full h-[calc(100%-4.5rem)] px-4 pt-6">
+      <ScrollShadow
+        ref={chatContainerRef}
+        className="w-full h-[calc(100%-4.5rem)] px-4 pt-6"
+      >
         {isTicketLoading && <Spinner className="w-full h-full" />}
 
         {ticket &&
@@ -545,7 +559,11 @@ const ViewChat: FC<{ ticketId: number }> = ({ ticketId }) => {
 
 const Chat: FC<ButtonProps> = ({ className, ...props }) => {
   const dispatch = useDispatch();
-  const { currentSupportTicketId, isChatDialogOpen } = useAppState();
+  const {
+    currentSupportTicketId,
+    currentSupportTicketStatus,
+    isChatDialogOpen,
+  } = useAppState();
   return (
     <Popover
       placement="top-end"
@@ -605,7 +623,10 @@ const Chat: FC<ButtonProps> = ({ className, ...props }) => {
         {!currentSupportTicketId ? (
           <CreateTicket />
         ) : (
-          <ViewChat ticketId={currentSupportTicketId} />
+          <ViewChat
+            ticketId={currentSupportTicketId}
+            status={currentSupportTicketStatus}
+          />
         )}
       </PopoverContent>
     </Popover>

@@ -16,16 +16,16 @@ import { GET_PURCHASE_HISTORY_ROUTE } from "@/lib/constants";
 import useSWR from "swr";
 import { PurchasedPlan } from "@/types";
 import { getFormattedDate } from "@/lib/utils";
-import { useUserCookie } from "@/hooks/use-cookies";
 import DownloadInvoiceButton from "../DownloadInvoiceButton";
+import { useSession } from "next-auth/react";
 
 const PaymentHistoryTable: FC = () => {
-  const { user } = useUserCookie();
+  const { data: session } = useSession();
 
   const fetcher = (url: string) =>
     fetch(url, {
       headers: {
-        Authorization: `Bearer ${user.access_token}`,
+        Authorization: `Bearer ${session?.user.access_token}`,
       },
     }).then((res) => res.json());
 
@@ -46,8 +46,7 @@ const PaymentHistoryTable: FC = () => {
       : 0;
   }, [history?.meta.total, rowsPerPage]);
 
-  const loadingState =
-    isLoading ? "loading" : "idle";
+  const loadingState = isLoading ? "loading" : "idle";
 
   return (
     <Table
@@ -101,10 +100,7 @@ const PaymentHistoryTable: FC = () => {
                 ) : columnKey === "start_date" || columnKey === "end_date" ? (
                   getFormattedDate(getKeyValue(item, columnKey))
                 ) : columnKey === "invoice" ? (
-                  <DownloadInvoiceButton
-                    purchaseId={item.id}
-                    token={user.access_token}
-                  />
+                  <DownloadInvoiceButton purchaseId={item.id} />
                 ) : (
                   getKeyValue(item, columnKey)
                 )}

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { USER_COOKIE_KEY } from "./lib/constants";
+import { auth } from "@/auth";
 import {
   DASHBOARD_PAGE_PATH,
   HOME_PAGE_PATH,
@@ -7,23 +7,23 @@ import {
   SIGNUP_PAGE_PATH,
 } from "./lib/pathnames";
 
-export function middleware(req: NextRequest) {
-  const hasUserCookie = req.cookies.get(USER_COOKIE_KEY);
+export async function middleware(req: NextRequest) {
+  const session = await auth();
 
   if (req.nextUrl.pathname.includes(DASHBOARD_PAGE_PATH)) {
-    if (!hasUserCookie) {
+    if (!session) {
       return NextResponse.redirect(new URL(LOGIN_PAGE_PATH, req.url));
     }
   } else if (
     req.nextUrl.pathname === LOGIN_PAGE_PATH ||
     req.nextUrl.pathname === SIGNUP_PAGE_PATH
   ) {
-    if (hasUserCookie) {
+    if (session) {
       return NextResponse.redirect(new URL(HOME_PAGE_PATH, req.url));
     }
   }
 
-  NextResponse.next();
+  return NextResponse.next();
 }
 
 export const config = {

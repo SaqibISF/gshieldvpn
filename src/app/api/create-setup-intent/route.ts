@@ -1,29 +1,32 @@
 import { NextResponse } from "next/server";
 import { STRIPE_SECRET_KEY } from "@/lib/constants";
 import Stripe from "stripe";
+import { auth } from "@/auth";
 
 const stripe = new Stripe(STRIPE_SECRET_KEY);
 
-export async function GET(request: Request) {
+export async function GET() {
   try {
-    const requestURL = new URL(request.url);
-    const email = requestURL.searchParams.get("email");
+    const session = await auth();
 
-    if (!email)
+    if (!session)
       return NextResponse.json(
-        { status: false, message: "Customer email is required" },
-        { status: 400 }
+        { status: false, message: "Unauthorized: You are not logged in" },
+        { status: 401 }
       );
 
     let customerId;
 
-    const customers = await stripe.customers.list({ email, limit: 1 });
+    const customers = await stripe.customers.list({
+      email: session.user.email,
+      limit: 1,
+    });
 
     if (customers.data.length > 0) {
       customerId = customers.data[0].id;
     } else {
       const customer = await stripe.customers.create({
-        email,
+        email: session.user.email,
       });
       customerId = customer.id;
     }

@@ -1,19 +1,10 @@
-export const USER_COOKIE_KEY = "gshield_user";
-
 export const IP_INFO_TOKEN = process.env.NEXT_PUBLIC_IP_INFO_TOKEN!;
 
-export const REVERB_APP_ID = +process.env.REVERB_APP_ID!;
-export const REVERB_APP_KEY = process.env.REVERB_APP_KEY!;
-export const REVERB_APP_SECRET = process.env.REVERB_APP_SECRET!;
-export const REVERB_HOST = process.env.REVERB_HOST!;
-// export const REVERB_HOST =
-//   process.env.NODE_ENV === "production"
-//     ? process.env.REVERB_HOST!
-//     : "localhost";
-export const REVERB_PORT = +process.env.REVERB_PORT!;
-export const REVERB_SCHEME = process.env.REVERB_SCHEME!;
-// export const REVERB_SCHEME =
-//   process.env.NODE_ENV === "production" ? "https" : "http";
+export const AUTH_GOOGLE_ID = process.env.AUTH_GOOGLE_ID!;
+export const AUTH_GOOGLE_SECRET = process.env.AUTH_GOOGLE_SECRET!;
+
+export const AUTH_APPLE_ID = process.env.AUTH_APPLE_ID!;
+export const AUTH_APPLE_SECRET = process.env.AUTH_APPLE_SECRET!;
 
 export const STRIPE_PUBLISHABLE_KEY =
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!;
@@ -29,6 +20,8 @@ export const SIGNUP_ROUTE = REST_API_BASE_URL + "/signup";
 export const LOGOUT_ROUTE = REST_API_BASE_URL + "/logout";
 export const FORGOT_PASSWORD_ROUTE = REST_API_BASE_URL + "/forgot-password";
 export const RESET_PASSWORD_ROUTE = REST_API_BASE_URL + "/reset-password";
+export const LOGIN_WITH_GOOGLE_ROUTE = REST_API_BASE_URL + "/login/google";
+export const LOGIN_WITH_APPLE_ROUTE = REST_API_BASE_URL + "/login/apple";
 
 export const EMAIL_VERIFICATION_ROUTE = (id: number | string, hash: string) =>
   REST_API_BASE_URL + "/email/verify/" + id + "/" + hash;
@@ -39,7 +32,8 @@ export const RESENT_EMAIL_VERIFICATION_ROUTE =
 export const GET_PLANS_ROUTE = REST_API_BASE_URL + "/plans";
 export const GET_LEGAL_NOTES_ROUTE = REST_API_BASE_URL + "/options";
 
-export const CHECK_SETUP_INTENT_IS_USED_ROUTE = REST_API_BASE_URL + "/purchase/stripe-session";
+export const CHECK_SETUP_INTENT_IS_USED_ROUTE =
+  REST_API_BASE_URL + "/purchase/stripe-session";
 export const ADD_PURCHASE_PLAN_ROUTE = REST_API_BASE_URL + "/purchase/add";
 export const GET_PURCHASE_ACTIVE_PLAN_ROUTE =
   REST_API_BASE_URL + "/purchase/active";

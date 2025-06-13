@@ -16,12 +16,12 @@ import {
 import { SubmitHandler, useForm } from "react-hook-form";
 import axios, { AxiosError } from "axios";
 import { UPDATE_BILLING_ADDRESS_ROUTE } from "@/lib/constants";
-import { useUserCookie } from "@/hooks/use-cookies";
 import Input from "./Input";
 import { BillingAddress } from "@/types";
 import { useBillingAddress } from "@/hooks/use-billing-address";
 import { useDispatch } from "react-redux";
 import { setBillingAddress } from "@/store/app.slice";
+import { useSession } from "next-auth/react";
 
 const BillingAddressModal: FC<{
   isOpen: boolean;
@@ -29,7 +29,7 @@ const BillingAddressModal: FC<{
   onClose: () => void;
 }> = ({ isOpen, onOpenChange, onClose }) => {
   const dispatch = useDispatch();
-  const { user } = useUserCookie();
+  const { data: session } = useSession();
 
   const [isLoading, setLoading] = useState<boolean>(false);
 
@@ -64,7 +64,7 @@ const BillingAddressModal: FC<{
         }>(UPDATE_BILLING_ADDRESS_ROUTE, values, {
           headers: {
             Accept: "application/json",
-            Authorization: `Bearer ${user.access_token}`,
+            Authorization: `Bearer ${session?.user.access_token}`,
           },
         })
         .then((res) => res.data);

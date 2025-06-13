@@ -2,8 +2,6 @@
 
 import React, { FC, ReactNode, useEffect } from "react";
 import AOS from "aos";
-import { useDispatch } from "react-redux";
-import { setAppMounted } from "@/store/app.slice";
 import Footer from "./Footer";
 import { usePathname } from "next/navigation";
 import { INVOICE_PAGE_PATH } from "@/lib/pathnames";
@@ -11,12 +9,9 @@ import TopBar from "./TopBar";
 import Navbar from "./Navbar";
 
 const MainLayout: FC<{ children: ReactNode }> = ({ children }) => {
-  const dispatch = useDispatch();
   const pathname = usePathname();
   useEffect(() => {
     AOS.init();
-    dispatch(setAppMounted());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

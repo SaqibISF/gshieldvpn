@@ -5,14 +5,11 @@ import { addToast, Button, useDisclosure } from "@heroui/react";
 import { DownloadIcon } from "@/icons";
 import { useBillingAddress } from "@/hooks/use-billing-address";
 import BillingAddressModal from "./BillingAddressModal";
-import { useUserCookie } from "@/hooks/use-cookies";
+import { useSession } from "next-auth/react";
 
-const DownloadInvoiceButton: FC<{ purchaseId: number; token: string }> = ({
-  purchaseId,
-  token,
-}) => {
+const DownloadInvoiceButton: FC<{ purchaseId: number }> = ({ purchaseId }) => {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
-  const { user } = useUserCookie();
+  const { data: session } = useSession();
   const { isBillingAddressLoading, billingAddress } = useBillingAddress();
 
   const [isInvoiceDownloading, setInvoiceDownloading] =
@@ -28,7 +25,7 @@ const DownloadInvoiceButton: FC<{ purchaseId: number; token: string }> = ({
       setInvoiceDownloading(true);
 
       const response = await fetch(
-        `/api/download-invoice?purchaseId=${purchaseId}&token=${token}&userId=${user.id}`
+        `/api/download-invoice?purchaseId=${purchaseId}&token=${session?.user.access_token}&userId=${session?.user.id}`
       );
 
       if (response.ok) {

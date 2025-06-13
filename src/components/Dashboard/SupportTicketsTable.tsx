@@ -17,7 +17,10 @@ import { useDispatch } from "react-redux";
 import { setCurrentSupportTicketId } from "@/store/app.slice";
 import { useSupportTickets } from "@/hooks/use-support-tickets";
 
-const ViewChat: FC<{ supportTicketId: number }> = ({ supportTicketId }) => {
+const ViewChat: FC<{
+  supportTicketId: number;
+  supportTicketStatus: string;
+}> = ({ supportTicketId, supportTicketStatus }) => {
   const dispatch = useDispatch();
   return (
     <Button
@@ -25,7 +28,14 @@ const ViewChat: FC<{ supportTicketId: number }> = ({ supportTicketId }) => {
       color="primary"
       variant="shadow"
       startContent={<MessagesIcon />}
-      onPress={() => dispatch(setCurrentSupportTicketId(supportTicketId))}
+      onPress={() =>
+        dispatch(
+          setCurrentSupportTicketId({
+            ticketId: supportTicketId,
+            status: supportTicketStatus,
+          })
+        )
+      }
     >
       <span className="hidden md:inline">View Chat</span>
     </Button>
@@ -88,7 +98,10 @@ const SupportTicketsTable: FC = () => {
                     {item.status}
                   </span>
                 ) : columnKey === "view" ? (
-                  <ViewChat supportTicketId={item.id} />
+                  <ViewChat
+                    supportTicketId={item.id}
+                    supportTicketStatus={item.status}
+                  />
                 ) : (
                   getKeyValue(item, columnKey)
                 )}

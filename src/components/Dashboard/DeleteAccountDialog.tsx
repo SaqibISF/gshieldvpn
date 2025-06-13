@@ -14,13 +14,13 @@ import {
 } from "@heroui/react";
 import axios, { AxiosError } from "axios";
 import { DELETE_USER_ACCOUNT_ROUTE } from "@/lib/constants";
-import { useUserCookie } from "@/hooks/use-cookies";
 import { useRouter } from "next/navigation";
+import { signOut, useSession } from "next-auth/react";
 
 const DeleteAccountDialog: FC = () => {
   const router = useRouter();
+  const { data: session } = useSession();
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
-  const { user, removeUserCookie } = useUserCookie();
 
   const [isLoading, setLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -35,15 +35,15 @@ const DeleteAccountDialog: FC = () => {
           {
             headers: {
               Accept: "application/json",
-              Authorization: `Bearer ${user.access_token}`,
+              Authorization: `Bearer ${session?.user.access_token}`,
             },
           }
         )
         .then((res) => res.data);
       if (res.status) {
         addToast({ color: "success", description: res.message });
+        await signOut({ redirect: false });
         router.refresh();
-        removeUserCookie();
       } else {
         setErrorMessage(res.message);
         addToast({ color: "danger", description: res.message });

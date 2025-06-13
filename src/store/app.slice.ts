@@ -2,7 +2,6 @@ import { AppState, BillingAddress, SupportTicket } from "@/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: AppState = {
-  isAppMounted: false,
   isLegalNoticeLoadedOnce: false,
   termsAndConditions: "",
   privacyPolicy: "",
@@ -11,6 +10,7 @@ const initialState: AppState = {
   isSupportTicketsLoadedOnce: false,
   supportTickets: [],
   currentSupportTicketId: 0,
+  currentSupportTicketStatus: "",
   isChatDialogOpen: false,
 };
 
@@ -18,10 +18,6 @@ const appSlice = createSlice({
   name: "app",
   initialState,
   reducers: {
-    setAppMounted: (state) => {
-      state.isAppMounted = true;
-    },
-
     setLegalNotes: (
       state,
       action: PayloadAction<{
@@ -49,6 +45,7 @@ const appSlice = createSlice({
 
     addNewSupportTicket: (state, action: PayloadAction<SupportTicket>) => {
       state.currentSupportTicketId = action.payload.id;
+      state.currentSupportTicketStatus = action.payload.status;
       state.supportTickets.unshift(action.payload);
     },
 
@@ -59,10 +56,15 @@ const appSlice = createSlice({
       state.supportTickets[index].status = "closed";
       state.isChatDialogOpen = false;
       state.currentSupportTicketId = 0;
+      state.currentSupportTicketStatus = "";
     },
 
-    setCurrentSupportTicketId: (state, action: PayloadAction<number>) => {
-      state.currentSupportTicketId = action.payload;
+    setCurrentSupportTicketId: (
+      state,
+      action: PayloadAction<{ ticketId: number; status: string }>
+    ) => {
+      state.currentSupportTicketId = action.payload.ticketId;
+      state.currentSupportTicketStatus = action.payload.status;
       state.isChatDialogOpen = true;
     },
 
@@ -73,12 +75,12 @@ const appSlice = createSlice({
     closeChat: (state) => {
       state.isChatDialogOpen = false;
       state.currentSupportTicketId = 0;
+      state.currentSupportTicketStatus = "";
     },
   },
 });
 
 export const {
-  setAppMounted,
   setLegalNotes,
   setBillingAddress,
   setSupportTickets,

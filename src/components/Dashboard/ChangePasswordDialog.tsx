@@ -17,12 +17,12 @@ import {
 import { SubmitHandler, useForm } from "react-hook-form";
 import axios, { AxiosError } from "axios";
 import { UPDATE_USER_PASSWORD_ROUTE } from "@/lib/constants";
-import { useUserCookie } from "@/hooks/use-cookies";
 import Input from "../Input";
+import { useSession } from "next-auth/react";
 
 const ChangePasswordDialog: FC = () => {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
-  const { user } = useUserCookie();
+  const { data: session } = useSession();
 
   type Data = {
     old_password: string;
@@ -59,7 +59,7 @@ const ChangePasswordDialog: FC = () => {
           {
             headers: {
               Accept: "application/json",
-              Authorization: `Bearer ${user.access_token}`,
+              Authorization: `Bearer ${session?.user.access_token}`,
             },
           }
         )

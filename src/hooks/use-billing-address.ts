@@ -6,11 +6,11 @@ import { addToast } from "@heroui/react";
 import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useUserCookie } from "./use-cookies";
+import { useSession } from "next-auth/react";
 
 export const useBillingAddress = (token?: string) => {
   const dispatch = useDispatch();
-  const { user } = useUserCookie();
+  const { data: session } = useSession();
   const { billingAddress, isBillingAddressLoadedOnce } = useSelector(
     (state: RootState) => state.app
   );
@@ -27,7 +27,9 @@ export const useBillingAddress = (token?: string) => {
             {
               headers: {
                 Accept: "application/json",
-                Authorization: `Bearer ${token ? token : user.access_token}`,
+                Authorization: `Bearer ${
+                  token ? token : session?.user.access_token
+                }`,
               },
             }
           )
@@ -48,9 +50,9 @@ export const useBillingAddress = (token?: string) => {
       }
     };
 
-    fetchBillingAddress();
+    if (session) fetchBillingAddress();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [session]);
 
   return { isBillingAddressLoading, billingAddress } as const;
 };

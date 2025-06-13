@@ -49,6 +49,8 @@ import WarningIcon from "./WarningIcon";
 import PaperPlaneIcon from "./PaperPlaneIcon";
 import MessagesIcon from "./MessagesIcon";
 import PaperClipIcon from "./PaperClipIcon";
+import GoogleIcon from "./GoogleIcon";
+import AppleIcon from "./AppleIcon";
 
 export {
   MoonFilledIcon,
@@ -101,5 +103,7 @@ export {
   WarningIcon,
   PaperPlaneIcon,
   MessagesIcon,
-  PaperClipIcon
+  PaperClipIcon,
+  GoogleIcon,
+  AppleIcon,
 };

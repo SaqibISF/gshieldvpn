@@ -18,14 +18,14 @@ import {
   LOGIN_PAGE_PATH,
   PRICING_PAGE_PATH,
 } from "@/lib/pathnames";
-import { useUserCookie } from "@/hooks/use-cookies";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 const PricingSection: FC<SectionProps> = ({ ...props }) => {
   const pathname = usePathname();
   const { isPlansLoading, plans } = usePlans();
-  const { user } = useUserCookie();
+  const { status: sessionStatus } = useSession();
   return (
     <Section
       title="Pricing"
@@ -84,12 +84,18 @@ const PricingSection: FC<SectionProps> = ({ ...props }) => {
               plan.is_best_deal ? "bg-primary" : ""
             )}
           >
-            {plan.is_best_deal && (
+            {plan.is_best_deal ? (
               <span className="text-white flex items-center justify-center gap-2 py-2">
                 <StarIcon /> Best Deals
               </span>
-            )}
-            <Card className="p-6">
+            ) : null}
+
+            <Card
+              className={cn(
+                "p-6",
+                plan.is_best_deal ? "h-[calc(100%-2.5rem)]" : ""
+              )}
+            >
               <CardHeader className="p-0 flex-col items-start gap-4">
                 <div className="w-full flex gap-4 items-center">
                   <Button
@@ -101,11 +107,11 @@ const PricingSection: FC<SectionProps> = ({ ...props }) => {
                     <BoltIcon className="text-primary" />
                   </Button>
                   <p className="flex-1 text-2xl font-semibold">{plan.name}</p>
-                  {plan.is_best_deal && (
+                  {plan.is_best_deal ? (
                     <Chip className="text-primary bg-[#E2FFE0] rounded-lg">
                       20% Off
                     </Chip>
-                  )}
+                  ) : null}
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-lg font-bold">$</span>
@@ -116,7 +122,11 @@ const PricingSection: FC<SectionProps> = ({ ...props }) => {
                 </div>
                 <Button
                   as={Link}
-                  href={user ? CHECKOUT_PAGE_PATH(plan.id) : LOGIN_PAGE_PATH}
+                  href={
+                    sessionStatus === "authenticated"
+                      ? CHECKOUT_PAGE_PATH(plan.id)
+                      : LOGIN_PAGE_PATH
+                  }
                   variant={plan.is_best_deal ? "shadow" : "solid"}
                   color={plan.is_best_deal ? "primary" : "default"}
                   radius="full"

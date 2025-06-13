@@ -6,11 +6,11 @@ import { addToast } from "@heroui/react";
 import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useUserCookie } from "./use-cookies";
+import { useSession } from "next-auth/react";
 
 export const useSupportTickets = () => {
   const dispatch = useDispatch();
-  const { user } = useUserCookie();
+  const { data: session } = useSession();
   const { supportTickets, isSupportTicketsLoadedOnce } = useSelector(
     (state: RootState) => state.app
   );
@@ -21,16 +21,15 @@ export const useSupportTickets = () => {
     const loadSupportTickets = async () => {
       try {
         if (isSupportTicketsLoadedOnce) return;
-        const response = await axios
-          .get<{ status: boolean; tickets: SupportTicket[] }>(
-            GET_SUPPORT_TICKETS_ROUTE,
-            {
-              headers: {
-                Accept: "application/json",
-                Authorization: `Bearer ${user.access_token}`,
-              },
-            }
-          );
+        const response = await axios.get<{
+          status: boolean;
+          tickets: SupportTicket[];
+        }>(GET_SUPPORT_TICKETS_ROUTE, {
+          headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${session?.user.access_token}`,
+          },
+        });
 
         if (response.status === 201 || response.status === 200) {
           dispatch(setSupportTickets(response.data.tickets));
@@ -48,9 +47,9 @@ export const useSupportTickets = () => {
       }
     };
 
-    loadSupportTickets();
+    if (session) loadSupportTickets();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [session]);
 
   return {
     isSupportTicketsLoading,

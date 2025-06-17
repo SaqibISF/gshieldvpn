@@ -51,6 +51,7 @@ import MessagesIcon from "./MessagesIcon";
 import PaperClipIcon from "./PaperClipIcon";
 import GoogleIcon from "./GoogleIcon";
 import AppleIcon from "./AppleIcon";
+import WorldIcon from "./WorldIcon";
 
 export {
   MoonFilledIcon,
@@ -106,4 +107,5 @@ export {
   PaperClipIcon,
   GoogleIcon,
   AppleIcon,
+  WorldIcon,
 };

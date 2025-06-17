@@ -8,6 +8,7 @@ import {
   ShieldIcon,
   SplitIcon,
   WiFiOffIcon,
+  WorldIcon,
 } from "@/icons";
 
 const FeaturesSection: FC<SectionProps> = ({ ...props }) => (
@@ -43,6 +44,11 @@ const FeaturesSection: FC<SectionProps> = ({ ...props }) => (
           Icon: SpeedIcon,
           title: "Blazing Speeds",
           description: "Engineered to deliver fast, stable performance",
+        },
+        {
+          Icon: WorldIcon,
+          title: "Global Server Access",
+          description: "Connect from anywhere with 100+ locations worldwide",
         },
       ].map(({ title, description, Icon }, index) => (
         <Card

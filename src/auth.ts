@@ -9,7 +9,6 @@ import {
   AUTH_GOOGLE_SECRET,
   LOGIN_WITH_GOOGLE_ROUTE,
 } from "./lib/constants";
-import axios, { AxiosError } from "axios";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -46,14 +45,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       if (account) {
         if (account.provider === "google") {
           try {
-            const res = await axios
-              .post<{
-                status: boolean;
-                message: string;
-                user: User;
-                access_token: string;
-              }>(LOGIN_WITH_GOOGLE_ROUTE, { token: account.access_token })
-              .then((res) => res.data);
+            const res = await fetch(LOGIN_WITH_GOOGLE_ROUTE, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ token: account.access_token }),
+            }).then((res) => res.json());
 
             if (res.status) {
               user.id = res.user.id;
@@ -64,13 +62,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
               return true;
             } else return `/auth/error?error=${res.message}`;
           } catch (error) {
-            const errorMessage =
-              error instanceof AxiosError
-                ? error.response
-                  ? error.response.data.message
-                  : error.message
-                : "Failed to login";
-            return `/auth/error?error=${errorMessage}`;
+            return `/auth/error?error=${
+              error instanceof Error ? error.message : "Failed to login"
+            }`;
           }
         } else if (account.provider === "apple") {
         }

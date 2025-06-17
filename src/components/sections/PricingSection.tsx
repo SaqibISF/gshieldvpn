@@ -125,7 +125,9 @@ const PricingSection: FC<SectionProps> = ({ ...props }) => {
                   href={
                     sessionStatus === "authenticated"
                       ? CHECKOUT_PAGE_PATH(plan.id)
-                      : LOGIN_PAGE_PATH
+                      : `${LOGIN_PAGE_PATH}?redirect=${CHECKOUT_PAGE_PATH(
+                          plan.id
+                        )}`
                   }
                   variant={plan.is_best_deal ? "shadow" : "solid"}
                   color={plan.is_best_deal ? "primary" : "default"}

@@ -17,7 +17,7 @@ const InstallingSection: FC<SectionProps> = ({ ...props }) => (
     heading="GShield Download And Installing Process"
     {...props}
   >
-    <div className="w-full flex flex-col lg:flex-row gap-y-12 mt-8">
+    <div className="w-full flex flex-col-reverse lg:flex-row gap-y-12 mt-8">
       <div
         className="lg:w-3/5 w-full flex flex-col gap-y-6 md:gap-y-12 px-4 items-center md:items-start text-center md:text-left relative"
         data-aos="fade-up"
@@ -86,7 +86,7 @@ const InstallingSection: FC<SectionProps> = ({ ...props }) => (
         data-aos-offset="25"
       >
         <Image
-          className="w-full h-auto"
+          className="w-full max-w-xl h-auto"
           src="/user.png"
           alt="image not founded"
           width={0}

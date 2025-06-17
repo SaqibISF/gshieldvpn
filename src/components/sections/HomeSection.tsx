@@ -2,10 +2,11 @@
 import React, { FC } from "react";
 import Section, { SectionProps } from "./Section";
 import Image from "next/image";
-import { mockupBase64Src } from "@/lib/mockup-base64";
+import { homeMockupBase64Src } from "@/lib/home-mockup-base64";
 import { Button } from "@heroui/react";
 import Link from "next/link";
 import { PRICING_PAGE_PATH } from "@/lib/pathnames";
+import { VerifiedIcon } from "@/icons";
 
 const HomeSection: FC<SectionProps> = ({ ...props }) => (
   <Section
@@ -16,33 +17,46 @@ const HomeSection: FC<SectionProps> = ({ ...props }) => (
     {...props}
   >
     <div className="lg:w-3/5 flex flex-col gap-y-6 px-4 items-center md:items-start text-center md:text-left">
+      <div
+        className="pl-6 pr-9 py-3 rounded-full text-white bg-gradient-to-r from-[#008234] to-[#0c8103] flex items-center gap-3"
+        data-aos="fade-up"
+        data-aos-easing="ease-in-sine"
+        data-aos-offset="25"
+      >
+        <VerifiedIcon className="size-12 bg-white text-primary rounded-full p-2" />
+        <div className="flex flex-col gap-y-1 leading-tight">
+          <h3 className="text-sm font-bold">No.1 VPN in 2025</h3>
+          <p className="text-sm font-medium">by tech reviewers</p>
+        </div>
+      </div>
       <h1
-        className="text-5xl md:text-7xl font-bold leading-[3.5rem] md:leading-[5rem]"
+        className="text-5xl md:text-6xl font-extrabold leading-tight"
         data-aos="fade-right"
         data-aos-easing="ease-in-sine"
         data-aos-offset="25"
       >
-        Stay{" "}
-        <span
-          className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-[#008234] to-[#0c8103]"
-          data-aos="flip-left"
-          data-aos-easing="ease-out-cubic"
-          data-aos-duration="2000"
-          data-aos-offset="25"
-        >
-          Private
-        </span>{" "}
-        and Access Worldwide Content
+        The best VPN service for online security
       </h1>
-      <p
-        className="text-default-500 text-2xl font-medium leading-10"
+
+      <span
+        className="text-2xl font-semibold"
         data-aos="zoom-in-up"
         data-aos-duration="1500"
         data-aos-offset="25"
       >
-        Surf the web without tracking with a VPN, protect your devices &
-        identity with an all-in-one app.
-      </p>
+        Get started risk free
+      </span>
+
+      <ul
+        className="text-default-500 text-xl font-medium flex flex-col gap-y-2 list-disc ml-5"
+        data-aos="zoom-in-up"
+        data-aos-duration="1500"
+        data-aos-offset="25"
+      >
+        <li>One of the fastest VPNs in the world.</li>
+        <li>Secures up to 10 devices with a single account.</li>
+        <li>Helps you avoid phishing, scams, and malware.</li>
+      </ul>
       <Button
         as={Link}
         href={PRICING_PAGE_PATH}
@@ -55,7 +69,7 @@ const HomeSection: FC<SectionProps> = ({ ...props }) => (
         data-aos-anchor-placement="top-bottom"
         data-aos-offset="25"
       >
-        Get Started
+        Get Started for Free
       </Button>
     </div>
     <div
@@ -64,14 +78,14 @@ const HomeSection: FC<SectionProps> = ({ ...props }) => (
       data-aos-offset="25"
     >
       <Image
-        className="max-w-64 w-full h-auto"
-        src="/mockup.png"
+        className="max-w-80 w-full h-auto"
+        src="/home-mockup.png"
         alt="image not founded"
         width={0}
         height={0}
         sizes="100vw"
         placeholder="blur"
-        blurDataURL={mockupBase64Src}
+        blurDataURL={homeMockupBase64Src}
       />
     </div>
   </Section>

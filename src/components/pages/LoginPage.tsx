@@ -27,8 +27,12 @@ import { LOGIN_ROUTE } from "@/lib/constants";
 import { User } from "@/types/user";
 import { useSession, signIn } from "next-auth/react";
 import { getToken } from "next-auth/jwt";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const LoginPage: FC = () => {
+  const searchParams = useSearchParams();
+  const redirect = searchParams.get("redirect");
+  const router = useRouter();
   const { data: session } = useSession();
   type LoginData = { email: string; password: string };
 
@@ -67,13 +71,14 @@ const LoginPage: FC = () => {
 
       if (res.status) {
         await signIn("credentials", {
-          redirectTo: DASHBOARD_PAGE_PATH,
+          redirect: false,
           id: res.user.id,
           email: res.user.email,
           name: res.user.name,
           slug: res.user.slug,
           access_token: res.access_token,
         });
+        router.replace(redirect ? redirect : DASHBOARD_PAGE_PATH);
         reset();
         addToast({
           color: "success",
@@ -100,15 +105,15 @@ const LoginPage: FC = () => {
     }
   };
 
-  const handleGoogleSignin = async () => {
-    const res = await signIn("google");
-    console.log(res);
-  };
+  const handleGoogleSignin = async () =>
+    await signIn("google", {
+      callbackUrl: redirect ? redirect : DASHBOARD_PAGE_PATH,
+    });
 
-  const handleAppleSignin = async () => {
-    const res = await signIn("apple");
-    console.log(res);
-  };
+  const handleAppleSignin = async () =>
+    await signIn("apple", {
+      callbackUrl: redirect ? redirect : DASHBOARD_PAGE_PATH,
+    });
 
   useEffect(() => {
     console.log("Session:", session);

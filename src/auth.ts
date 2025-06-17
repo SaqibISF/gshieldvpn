@@ -7,6 +7,7 @@ import {
   AUTH_APPLE_SECRET,
   AUTH_GOOGLE_ID,
   AUTH_GOOGLE_SECRET,
+  LOGIN_WITH_APPLE_ROUTE,
   LOGIN_WITH_GOOGLE_ROUTE,
 } from "./lib/constants";
 
@@ -43,15 +44,23 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       }
 
       if (account) {
-        if (account.provider === "google") {
+        if (account.provider === "google" || account.provider === "apple") {
           try {
-            const res = await fetch(LOGIN_WITH_GOOGLE_ROUTE, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ token: account.access_token }),
-            }).then((res) => res.json());
+            const res = await fetch(
+              account.provider === "google"
+                ? LOGIN_WITH_GOOGLE_ROUTE
+                : LOGIN_WITH_APPLE_ROUTE,
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body:
+                  account.provider === "google"
+                    ? JSON.stringify({ token: account.access_token })
+                    : JSON.stringify({ id_token: account.id_token }),
+              }
+            ).then((res) => res.json());
 
             if (res.status) {
               user.id = res.user.id;
@@ -66,7 +75,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
               error instanceof Error ? error.message : "Failed to login"
             }`;
           }
-        } else if (account.provider === "apple") {
         }
       }
       return false;

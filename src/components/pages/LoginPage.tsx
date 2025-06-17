@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, Suspense, useEffect, useState } from "react";
 import { Section } from "../sections";
 import { AppleIcon, EnvelopeIcon, GoogleIcon } from "@/icons";
 import {
@@ -257,4 +257,10 @@ const LoginPage: FC = () => {
   );
 };
 
-export default LoginPage;
+const Page: FC = () => (
+  <Suspense>
+    <LoginPage />
+  </Suspense>
+);
+
+export default Page;

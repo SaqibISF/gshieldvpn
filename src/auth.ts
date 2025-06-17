@@ -32,12 +32,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   ],
 
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
-      console.log("CallBack User:", user);
-      console.log("CallBack Account:", account);
-      console.log("CallBack Profile:", profile);
-      console.log("CallBack Email:", email);
-      console.log("CallBack Credentials:", credentials);
+    async signIn({ user, account, credentials }) {
 
       if (credentials) {
         return true;
@@ -80,7 +75,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return false;
     },
 
-    async jwt({ token, user, account, profile, trigger, isNewUser, session }) {
+    async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
         token.email = user.email;
@@ -88,14 +83,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         token.slug = user.slug;
         token.access_token = user.access_token;
       }
-
-      console.log("JWT Token:", token);
-      console.log("JWT User:", user);
-      console.log("JWT Account:", account);
-      console.log("JWT Profile:", profile);
-      console.log("JWT Trigger:", trigger);
-      console.log("JWT IsNewUser:", isNewUser);
-      console.log("JWT Session:", session);
       return token;
     },
 
@@ -108,9 +95,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         session.user.access_token = jwt.access_token;
         session.user.slug = jwt.slug;
       }
-
-      console.log("Session:", session);
-      console.log("Session Token:", token);
 
       return session;
     },

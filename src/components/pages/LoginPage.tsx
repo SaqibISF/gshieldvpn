@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FC, Suspense, useEffect, useState } from "react";
+import React, { FC, Suspense, useState } from "react";
 import { Section } from "../sections";
 import { AppleIcon, EnvelopeIcon, GoogleIcon } from "@/icons";
 import {
@@ -25,15 +25,13 @@ import { EMAIL_INVALID_ERROR_MESSAGE, EMAIL_REGEX } from "@/lib/utils";
 import axios, { AxiosError } from "axios";
 import { LOGIN_ROUTE } from "@/lib/constants";
 import { User } from "@/types/user";
-import { useSession, signIn } from "next-auth/react";
-import { getToken } from "next-auth/jwt";
+import { signIn } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 const LoginPage: FC = () => {
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect");
   const router = useRouter();
-  const { data: session } = useSession();
   type LoginData = { email: string; password: string };
 
   const [isLoading, setLoading] = useState<boolean>(false);
@@ -114,19 +112,6 @@ const LoginPage: FC = () => {
     await signIn("apple", {
       callbackUrl: redirect ? redirect : DASHBOARD_PAGE_PATH,
     });
-
-  useEffect(() => {
-    console.log("Session:", session);
-  }, [session]);
-
-  useEffect(() => {
-    const token = async () => {
-      const res = await getToken({ req: { headers: {} }, secureCookie: true });
-      console.log("Token", res);
-    };
-
-    token();
-  }, [session]);
 
   return (
     <Section isHeroSection isRightCornerGradient>

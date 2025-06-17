@@ -75,9 +75,6 @@ export function GET() {
       },
       { status: 200 }
     );
-
-    console.log("\n:\n");
-    console.log(token);
   } catch (err) {
     return NextResponse.json(
       {

@@ -4,6 +4,8 @@ export const AUTH_GOOGLE_ID = process.env.AUTH_GOOGLE_ID!;
 export const AUTH_GOOGLE_SECRET = process.env.AUTH_GOOGLE_SECRET!;
 
 export const AUTH_APPLE_ID = process.env.AUTH_APPLE_ID!;
+export const AUTH_APPLE_TEAM_ID = process.env.AUTH_APPLE_TEAM_ID!;
+export const AUTH_APPLE_KEY_ID = process.env.AUTH_APPLE_KEY_ID!;
 export const AUTH_APPLE_SECRET = process.env.AUTH_APPLE_SECRET!;
 
 export const STRIPE_PUBLISHABLE_KEY =

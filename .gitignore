@@ -23,6 +23,9 @@
 # package-lock.json
 package-lock.json
 
+# Secret Keys
+/keys
+
 # misc
 .DS_Store
 *.pem

@@ -6,6 +6,7 @@ import { homeMockupBase64Src } from "@/lib/home-mockup-base64";
 import { Button } from "@heroui/react";
 import Link from "next/link";
 import { PRICING_PAGE_PATH } from "@/lib/pathnames";
+import { BoltIcon, LocationCheckIcon } from "@/icons";
 
 const HomeSection: FC<SectionProps> = ({ ...props }) => (
   <Section
@@ -102,6 +103,24 @@ const HomeSection: FC<SectionProps> = ({ ...props }) => (
         blurDataURL={homeMockupBase64Src}
       />
     </div>
+    <div className="self-start lg:w-full grid sm:grid-cols-2 lg:grid-cols-3 gap-4 text-default-500 text-lg font-medium my-6">
+        {[
+          { sentence: "Trusted by 147000 users", Icon: LocationCheckIcon },
+          { sentence: "4,9/5 on Apps Store", Icon: BoltIcon },
+          { sentence: "Built for speed", Icon: BoltIcon },
+        ].map(({ sentence, Icon }, index) => (
+          <div
+            key={index}
+            className="flex items-center gap-2"
+            data-aos="zoom-in-up"
+            data-aos-duration="1500"
+            data-aos-offset="25"
+          >
+            <Icon />
+            {sentence}
+          </div>
+        ))}
+      </div>
   </Section>
 );
 

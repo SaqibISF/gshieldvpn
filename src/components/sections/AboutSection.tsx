@@ -48,47 +48,38 @@ const AboutSection: FC<SectionProps> = ({ ...props }) => (
         internet access to users across the globe.
       </p>
 
-      <div className="flex flex-col gap-2">
-        <h6
-          className="text-xl w-full font-semibold flex gap-2"
-          data-aos="zoom-in-up"
-          data-aos-duration="1500"
-          data-aos-offset="25"
-        >
-          <CheckedIcon /> Enhanced Privacy & Security
-        </h6>
+      {[
+        {
+          title: "Enhanced Privacy & Security",
+          description:
+            "GShield encrypts your internet traffic, keeping your online activities private and secure, protecting you from hackers and cyber threats.",
+        },
+        {
+          title: "Fast & Reliable Connection",
+          description:
+            "GShield encrypts your internet traffic, keeping your online activities private and secure, protecting you from hackers and cyber threats.",
+        },
+      ].map(({ title, description }, index) => (
+        <div key={index} className="flex flex-col gap-2">
+          <h6
+            className="text-xl w-full text-start font-semibold flex gap-2"
+            data-aos="zoom-in-up"
+            data-aos-duration="1500"
+            data-aos-offset="25"
+          >
+            <CheckedIcon /> {title}
+          </h6>
 
-        <p
-          className="text-default-500 text-lg leading-8 mb-3 mx-4 text-start"
-          data-aos="zoom-in-up"
-          data-aos-duration="1500"
-          data-aos-offset="25"
-        >
-          GShield encrypts your internet traffic, keeping your online activities
-          private and secure, protecting you from hackers and cyber threats.
-        </p>
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <h6
-          className="text-xl w-full font-semibold flex gap-2"
-          data-aos="zoom-in-up"
-          data-aos-duration="1500"
-          data-aos-offset="25"
-        >
-          <CheckedIcon /> Fast & Reliable Connection
-        </h6>
-
-        <p
-          className="text-default-500 text-lg leading-8 mb-3 mx-4 text-start"
-          data-aos="zoom-in-up"
-          data-aos-duration="1500"
-          data-aos-offset="25"
-        >
-          GShield encrypts your internet traffic, keeping your online activities
-          private and secure, protecting you from hackers and cyber threats.
-        </p>
-      </div>
+          <p
+            className="text-default-500 text-justify text-lg leading-8 mb-3 mx-4"
+            data-aos="zoom-in-up"
+            data-aos-duration="1500"
+            data-aos-offset="25"
+          >
+            {description}
+          </p>
+        </div>
+      ))}
 
       <Button
         as={Link}

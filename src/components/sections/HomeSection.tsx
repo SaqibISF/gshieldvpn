@@ -6,7 +6,6 @@ import { homeMockupBase64Src } from "@/lib/home-mockup-base64";
 import { Button } from "@heroui/react";
 import Link from "next/link";
 import { PRICING_PAGE_PATH } from "@/lib/pathnames";
-import { VerifiedIcon } from "@/icons";
 
 const HomeSection: FC<SectionProps> = ({ ...props }) => (
   <Section
@@ -18,15 +17,18 @@ const HomeSection: FC<SectionProps> = ({ ...props }) => (
   >
     <div className="lg:w-3/5 flex flex-col gap-y-6 px-4 items-center md:items-start text-center md:text-left">
       <div
-        className="pl-6 pr-9 py-3 rounded-full text-white bg-gradient-to-r from-[#008234] to-[#0c8103] flex items-center gap-3"
+        className="border-4 border-[#f4b457] bg-[#fef09a] rounded-full p-1 z-10"
         data-aos="fade-up"
         data-aos-easing="ease-in-sine"
         data-aos-offset="25"
       >
-        <VerifiedIcon className="size-12 bg-white text-primary rounded-full p-2" />
-        <div className="flex flex-col gap-y-1 leading-tight">
-          <h3 className="text-sm font-bold">No.1 VPN in 2025</h3>
-          <p className="text-sm font-medium">by tech reviewers</p>
+        <div className="w-56 py-1 rounded-full text-black bg-[#f4b757] border-2 border-[#f4b457] flex items-center justify-center gap-1">
+          <span className="text-white text-3xl">#</span>
+          <span className="text-[#fef09a] text-7xl font-extrabold">1</span>
+          <div className="flex flex-col gap-y-0.5 leading-tight">
+            <h3 className="text-4xl font-bold">VPN in</h3>
+            <p className="text-lg font-semibold">tech reviewers</p>
+          </div>
         </div>
       </div>
       <h1
@@ -35,7 +37,17 @@ const HomeSection: FC<SectionProps> = ({ ...props }) => (
         data-aos-easing="ease-in-sine"
         data-aos-offset="25"
       >
-        The best VPN service for online security
+        The best{" "}
+        <span
+          className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-[#008234] to-[#0c8103]"
+          data-aos="flip-left"
+          data-aos-easing="ease-out-cubic"
+          data-aos-duration="2000"
+          data-aos-offset="25"
+        >
+          VPN
+        </span>{" "}
+        service for online security
       </h1>
 
       <span
@@ -48,7 +60,7 @@ const HomeSection: FC<SectionProps> = ({ ...props }) => (
       </span>
 
       <ul
-        className="text-default-500 text-xl font-medium flex flex-col gap-y-2 list-disc ml-5"
+        className="text-default-500 text-xl text-start font-medium flex flex-col gap-y-2 list-disc ml-5"
         data-aos="zoom-in-up"
         data-aos-duration="1500"
         data-aos-offset="25"
@@ -64,7 +76,7 @@ const HomeSection: FC<SectionProps> = ({ ...props }) => (
         variant="shadow"
         radius="full"
         size="lg"
-        className="self-center sm:self-start"
+        className="self-center sm:self-start z-10"
         data-aos="fade-up"
         data-aos-anchor-placement="top-bottom"
         data-aos-offset="25"
@@ -73,12 +85,14 @@ const HomeSection: FC<SectionProps> = ({ ...props }) => (
       </Button>
     </div>
     <div
-      className="lg:w-2/5 w-full flex items-center justify-center"
+      className="lg:w-2/5 w-full flex items-center justify-center relative"
       data-aos="fade-left"
       data-aos-offset="25"
     >
+      {/* <div className="size-[28rem] bg-[#e5fde3] rounded-full absolute -top-12 -left-8 xl:left-0"></div> */}
+      <div className="size-[26rem] sm:size-[28rem] bg-[#e5fde3] rounded-full absolute -top-12"></div>
       <Image
-        className="max-w-80 w-full h-auto"
+        className="max-w-80 w-full h-auto z-10"
         src="/home-mockup.png"
         alt="image not founded"
         width={0}

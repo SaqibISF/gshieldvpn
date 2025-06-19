@@ -13,7 +13,7 @@ const HomeSection: FC<SectionProps> = ({ ...props }) => (
     isHeroSection
     isLeftCornerGradient
     isRightCornerGradient
-    className="flex-col lg:flex-row gap-y-12"
+    className="flex-col lg:flex-row gap-y-4"
     {...props}
   >
     <div className="lg:w-3/5 flex flex-col gap-y-6 px-4 items-center md:items-start text-center md:text-left">
@@ -90,8 +90,7 @@ const HomeSection: FC<SectionProps> = ({ ...props }) => (
       data-aos="fade-left"
       data-aos-offset="25"
     >
-      {/* <div className="size-[28rem] bg-[#e5fde3] rounded-full absolute -top-12 -left-8 xl:left-0"></div> */}
-      <div className="size-[26rem] sm:size-[28rem] bg-[#e5fde3] rounded-full absolute -top-12"></div>
+      <div className="size-[26rem] sm:size-[28rem] bg-[#e5fde3] rounded-full absolute -top-8"></div>
       <Image
         className="max-w-80 w-full h-auto z-10"
         src="/home-mockup.png"
@@ -103,24 +102,24 @@ const HomeSection: FC<SectionProps> = ({ ...props }) => (
         blurDataURL={homeMockupBase64Src}
       />
     </div>
-    <div className="self-start lg:w-full grid sm:grid-cols-2 lg:grid-cols-3 gap-4 text-default-500 text-lg font-medium my-6">
-        {[
-          { sentence: "Trusted by 147000 users", Icon: LocationCheckIcon },
-          { sentence: "4,9/5 on Apps Store", Icon: BoltIcon },
-          { sentence: "Built for speed", Icon: BoltIcon },
-        ].map(({ sentence, Icon }, index) => (
-          <div
-            key={index}
-            className="flex items-center gap-2"
-            data-aos="zoom-in-up"
-            data-aos-duration="1500"
-            data-aos-offset="25"
-          >
-            <Icon />
-            {sentence}
-          </div>
-        ))}
-      </div>
+    <div className="self-start lg:w-full grid sm:grid-cols-2 lg:grid-cols-3 gap-4 text-default-500 text-lg font-medium mb-6">
+      {[
+        { sentence: "Trusted by 147000 users", Icon: LocationCheckIcon },
+        { sentence: "4,9/5 on Apps Store", Icon: BoltIcon },
+        { sentence: "Built for speed", Icon: BoltIcon },
+      ].map(({ sentence, Icon }, index) => (
+        <div
+          key={index}
+          className="flex items-center gap-2"
+          data-aos="zoom-in-up"
+          data-aos-duration="1500"
+          data-aos-offset="25"
+        >
+          <Icon />
+          {sentence}
+        </div>
+      ))}
+    </div>
   </Section>
 );
 

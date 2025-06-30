@@ -7,9 +7,19 @@ import AppLogo from "./AppLogo";
 import {
   BILLING_DETAILS_PAGE_PATH,
   DASHBOARD_PAGE_PATH,
+  PRIVACY_POLICY_PAGE_PATH,
   SUBSCRIPTION_PAGE_PATH,
   SUPPORT_TICKETS_PAGE_PATH,
+  TERMS_AND_CONDITIONS_PAGE_PATH,
 } from "@/lib/pathnames";
+import {
+  FACEBOOK_GShield_URL,
+  INSTAGRAM_GShield_URL,
+  LINKEDIN_GShield_URL,
+  TIKTOK_GShield_URL,
+  TWITTER_GShield_URL,
+  YOUTUBE_GShield_URL,
+} from "@/lib/social-links";
 
 const Footer: FC = () => (
   <footer className="w-full relative overflow-hidden">
@@ -34,20 +44,8 @@ const Footer: FC = () => (
 
       <Divider />
 
-      <div className="w-full py-4 lg:py-6 grid lg:grid-cols-5 md:grid-cols-3 grid-cols-2 gap-x-4 lg:gap-x-8 gap-y-8">
+      <div className="w-full py-4 lg:py-6 grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-x-4 lg:gap-x-8 gap-y-8">
         {[
-          {
-            heading: "Company",
-            links: [
-              { name: "About", href: "#" },
-              { name: "Pricing", href: "#" },
-              { name: "Pivien Status", href: "#" },
-              { name: "Support", href: "#" },
-              { name: "Careers", href: "#" },
-              { name: "Open Source", href: "#" },
-              { name: "Press/Media Kit", href: "#" },
-            ],
-          },
           {
             heading: "Products",
             links: [
@@ -67,24 +65,24 @@ const Footer: FC = () => (
             ],
           },
           {
-            heading: "Legal",
+            heading: "Social",
             links: [
-              { name: "Imprint", href: "#" },
-              { name: "Privacy Policy", href: "#" },
-              { name: "Terms & Condition", href: "#" },
-              { name: "Transparency Report", href: "#" },
-              { name: "Threat Model", href: "#" },
-              { name: "Report Abuse", href: "#" },
+              { name: "TikTok", href: TIKTOK_GShield_URL },
+              { name: "Twitter", href: TWITTER_GShield_URL },
+              { name: "LinkedIn", href: LINKEDIN_GShield_URL },
+              { name: "Instagram", href: INSTAGRAM_GShield_URL },
+              { name: "Facebook", href: FACEBOOK_GShield_URL },
+              { name: "Youtube", href: YOUTUBE_GShield_URL },
             ],
           },
           {
-            heading: "Social",
+            heading: "Legal",
             links: [
-              { name: "Twitter", href: "#" },
-              { name: "LinkedIn", href: "#" },
-              { name: "Instagram", href: "#" },
-              { name: "Facebook", href: "#" },
-              { name: "Youtube", href: "#" },
+              { name: "Privacy Policy", href: PRIVACY_POLICY_PAGE_PATH },
+              {
+                name: "Terms & Condition",
+                href: TERMS_AND_CONDITIONS_PAGE_PATH,
+              },
             ],
           },
         ].map(({ heading, links }) => (

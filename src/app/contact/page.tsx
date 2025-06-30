@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useState } from "react";
 import { Section } from "@/components/sections";
 import { addToast, Alert, Button, Divider } from "@heroui/react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -30,7 +30,6 @@ const ContactUsPage: FC = () => {
     setError,
     clearErrors,
     reset,
-    setFocus,
   } = useForm<Data>({
     defaultValues: {
       email: "",
@@ -77,10 +76,6 @@ const ContactUsPage: FC = () => {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    setFocus("email");
-  }, [setFocus]);
 
   return (
     <Section isHeroSection heading="Contact Us" className="gap-6">

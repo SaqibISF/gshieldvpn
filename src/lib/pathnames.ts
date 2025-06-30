@@ -39,3 +39,5 @@ export const CHECKOUT_PAGE_PATH = (planId: number) =>
   `/checkout?planId=${planId}`;
 
 export const INVOICE_PAGE_PATH = "/invoice";
+
+export const CONTACT_US_PAGE_PATH = "/contact"

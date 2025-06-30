@@ -53,6 +53,8 @@ export const GET_BILLING_ADDRESS_ROUTE = REST_API_BASE_URL + "/billing-address";
 export const UPDATE_BILLING_ADDRESS_ROUTE =
   REST_API_BASE_URL + "/billing-address/store";
 
+export const SEND_FEEDBACK_ROUTE = REST_API_BASE_URL + "/feedback/store";
+
 export const GET_SUPPORT_TICKETS_ROUTE = REST_API_BASE_URL + "/tickets";
 
 export const CREATE_SUPPORT_TICKETS_ROUTE =

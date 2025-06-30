@@ -15,12 +15,12 @@ const MainLayout: FC<{ children: ReactNode }> = ({ children }) => {
   }, []);
 
   return (
-    <div className="flex-grow overflow-hidden">
+    <>
       <TopBar />
       <Navbar />
-      <main>{children}</main>
+      <main className="flex-grow">{children}</main>
       {pathname !== INVOICE_PAGE_PATH && <Footer />}
-    </div>
+    </>
   );
 };
 

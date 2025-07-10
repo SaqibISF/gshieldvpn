@@ -18,18 +18,24 @@ const HomeSection: FC<SectionProps> = ({ ...props }) => (
   >
     <div className="lg:w-3/5 flex flex-col gap-y-6 px-4 items-center md:items-start text-center md:text-left">
       <div
-        className="border-4 border-[#f4b457] bg-[#fef09a] rounded-full p-1 z-10"
+        className="px-4 py-2.5 rounded-md text-black bg-white border-2 border-[#bdf8dc] flex items-center justify-center gap-3"
         data-aos="fade-up"
         data-aos-easing="ease-in-sine"
         data-aos-offset="25"
       >
-        <div className="w-56 py-1 rounded-full text-black bg-[#f4b757] border-2 border-[#f4b457] flex items-center justify-center gap-1">
-          <span className="text-white text-3xl">#</span>
-          <span className="text-[#fef09a] text-7xl font-extrabold">1</span>
-          <div className="flex flex-col gap-y-0.5 leading-tight">
-            <h3 className="text-4xl font-bold">VPN in</h3>
-            <p className="text-lg font-semibold">tech reviewers</p>
-          </div>
+        <Image
+          className="w-14 h-auto"
+          src="/head-logo.png"
+          alt="image not founded"
+          width={0}
+          height={0}
+          sizes="100vw"
+          placeholder="blur"
+          blurDataURL="/head-logo.png"
+        />
+        <div className="flex flex-col gap-y-0.5 leading-tight">
+          <h3 className="text-3xl font-bold">#1 VPN</h3>
+          <p className="text-lg font-semibold">by Tech Reviewers</p>
         </div>
       </div>
       <h1
@@ -90,7 +96,6 @@ const HomeSection: FC<SectionProps> = ({ ...props }) => (
       data-aos="fade-left"
       data-aos-offset="25"
     >
-      <div className="size-[26rem] sm:size-[28rem] bg-[#e5fde3] rounded-full absolute -top-8"></div>
       <Image
         className="max-w-80 w-full h-auto z-10"
         src="/home-mockup.png"

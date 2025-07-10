@@ -25,13 +25,13 @@ const HomeSection: FC<SectionProps> = ({ ...props }) => (
       >
         <Image
           className="w-14 h-auto"
-          src="/head-logo.png"
+          src="/head-logo.svg"
           alt="image not founded"
           width={0}
           height={0}
           sizes="100vw"
           placeholder="blur"
-          blurDataURL="/head-logo.png"
+          blurDataURL="/head-logo.svg"
         />
         <div className="flex flex-col gap-y-0.5 leading-tight">
           <h3 className="text-3xl font-bold">#1 VPN</h3>

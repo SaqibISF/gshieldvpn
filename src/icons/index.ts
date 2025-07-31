@@ -8,7 +8,6 @@ import IPhoneIcon from "./IPhoneIcon";
 import ArrowRightIcon from "./ArrowRightIcon";
 import CheckedIcon from "./CheckedIcon";
 import ChevronDownIcon from "./ChevronDownIcon";
-import DevicesIcon from "./DevicesIcon";
 import EnvelopeIcon from "./EnvelopeIcon";
 import EyeSlashIcon from "./EyeSlashIcon";
 import EyeIcon from "./EyeIcon";
@@ -26,9 +25,6 @@ import ErrorIcon from "./ErrorIcon";
 import LocationDotIcon from "./LocationDotIcon";
 import CityIcon from "./CityIcon";
 import StateIcon from "./StateIcon";
-import ShieldIcon from "./ShieldIcon";
-import WiFiOffIcon from "./WiFiOffIcon";
-import SplitIcon from "./SplitIcon";
 import SpeedIcon from "./SpeedIcon";
 import BoltIcon from "./BoltIcon";
 import TickIcon from "./TickIcon";
@@ -53,6 +49,10 @@ import GoogleIcon from "./GoogleIcon";
 import AppleIcon from "./AppleIcon";
 import WorldIcon from "./WorldIcon";
 import LocationCheckIcon from "./LocationCheckIcon";
+import ShieldCheckIcon from "./ShieldCheckIcon";
+import BoltSlash from "./BoltSlash";
+import LockIcon from "./LockIcon";
+import DevicesIcon from "./DevicesIcon";
 
 export {
   MoonFilledIcon,
@@ -65,7 +65,6 @@ export {
   ArrowRightIcon,
   CheckedIcon,
   ChevronDownIcon,
-  DevicesIcon,
   EnvelopeIcon,
   EyeSlashIcon,
   EyeIcon,
@@ -83,9 +82,6 @@ export {
   LocationDotIcon,
   CityIcon,
   StateIcon,
-  ShieldIcon,
-  WiFiOffIcon,
-  SplitIcon,
   SpeedIcon,
   BoltIcon,
   TickIcon,
@@ -110,4 +106,8 @@ export {
   AppleIcon,
   WorldIcon,
   LocationCheckIcon,
+  ShieldCheckIcon,
+  BoltSlash,
+  LockIcon,
+  DevicesIcon,
 };

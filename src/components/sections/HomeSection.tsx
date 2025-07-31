@@ -7,6 +7,7 @@ import { Button } from "@heroui/react";
 import Link from "next/link";
 import { PRICING_PAGE_PATH } from "@/lib/pathnames";
 import { BoltIcon, LocationCheckIcon } from "@/icons";
+import { homeSectionLogoBase64 } from "@/lib/home-section-logo-base64";
 
 const HomeSection: FC<SectionProps> = ({ ...props }) => (
   <Section
@@ -17,27 +18,19 @@ const HomeSection: FC<SectionProps> = ({ ...props }) => (
     {...props}
   >
     <div className="lg:w-3/5 flex flex-col gap-y-6 px-4 items-center md:items-start text-center md:text-left">
-      <div
-        className="px-4 py-2.5 rounded-md text-black bg-white border-2 border-[#bdf8dc] flex items-center justify-center gap-3"
+      <Image
+        className="w-48 h-auto"
+        src="/home-section-logo.png"
+        alt="image not founded"
+        width={0}
+        height={0}
+        sizes="100vw"
+        placeholder="blur"
+        blurDataURL={homeSectionLogoBase64}
         data-aos="fade-up"
         data-aos-easing="ease-in-sine"
         data-aos-offset="25"
-      >
-        <Image
-          className="w-14 h-auto"
-          src="/head-logo.svg"
-          alt="image not founded"
-          width={0}
-          height={0}
-          sizes="100vw"
-          placeholder="blur"
-          blurDataURL="/head-logo.svg"
-        />
-        <div className="flex flex-col gap-y-0.5 leading-tight">
-          <h3 className="text-3xl font-bold">#1 VPN</h3>
-          <p className="text-lg font-semibold">by Tech Reviewers</p>
-        </div>
-      </div>
+      />
       <h1
         className="text-5xl md:text-6xl font-extrabold leading-tight"
         data-aos="fade-right"

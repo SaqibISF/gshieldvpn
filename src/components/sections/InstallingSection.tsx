@@ -13,7 +13,7 @@ import { Divider } from "@heroui/react";
 
 const InstallingSection: FC<SectionProps> = ({ ...props }) => (
   <Section
-    title="How it is work"
+    title="How it's works"
     heading="GShield Download And Installing Process"
     {...props}
   >

@@ -7,6 +7,10 @@ import AppLogo from "./AppLogo";
 import {
   BILLING_DETAILS_PAGE_PATH,
   DASHBOARD_PAGE_PATH,
+  DOWNLOAD_FOR_ANDROID_PAGE_PATH,
+  DOWNLOAD_FOR_IOS_PAGE_PATH,
+  DOWNLOAD_FOR_MAC_PAGE_PATH,
+  DOWNLOAD_FOR_WINDOWS_PAGE_PATH,
   PRIVACY_POLICY_PAGE_PATH,
   SUBSCRIPTION_PAGE_PATH,
   SUPPORT_TICKETS_PAGE_PATH,
@@ -49,10 +53,10 @@ const Footer: FC = () => (
           {
             heading: "Products",
             links: [
-              { name: "VPN for Windows", href: "#" },
-              { name: "VPN for Mac", href: "#" },
-              { name: "VPN for Android", href: "#" },
-              { name: "VPN for iPhone", href: "#" },
+              { name: "VPN for Windows", href: DOWNLOAD_FOR_WINDOWS_PAGE_PATH },
+              { name: "VPN for Mac", href: DOWNLOAD_FOR_MAC_PAGE_PATH },
+              { name: "VPN for Android", href: DOWNLOAD_FOR_ANDROID_PAGE_PATH },
+              { name: "VPN for IOS", href: DOWNLOAD_FOR_IOS_PAGE_PATH },
             ],
           },
           {

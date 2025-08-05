@@ -19,6 +19,10 @@ export const SERVERS_PAGE_PATH = "/servers";
 export const PRICING_PAGE_PATH = "/pricing";
 
 export const DOWNLOADS_PAGE_PATH = "/downloads";
+export const DOWNLOAD_FOR_WINDOWS_PAGE_PATH = "/downloads/Windows";
+export const DOWNLOAD_FOR_MAC_PAGE_PATH = "/downloads/MAC";
+export const DOWNLOAD_FOR_ANDROID_PAGE_PATH = "/downloads/Android";
+export const DOWNLOAD_FOR_IOS_PAGE_PATH = "/downloads/IOS";
 
 export const PRIVACY_POLICY_PAGE_PATH = "/privacy-policy";
 
@@ -31,7 +35,8 @@ export const BILLING_DETAILS_PAGE_PATH =
 
 export const SUBSCRIPTION_PAGE_PATH = DASHBOARD_PAGE_PATH + "/subscription";
 
-export const SUPPORT_TICKETS_PAGE_PATH = DASHBOARD_PAGE_PATH + "/support-tickets";
+export const SUPPORT_TICKETS_PAGE_PATH =
+  DASHBOARD_PAGE_PATH + "/support-tickets";
 
 export const PAYMENT_PROCESSING_PAGE_PATH = "/payment-processing";
 
@@ -40,4 +45,4 @@ export const CHECKOUT_PAGE_PATH = (planId: number) =>
 
 export const INVOICE_PAGE_PATH = "/invoice";
 
-export const CONTACT_US_PAGE_PATH = "/contact"
+export const CONTACT_US_PAGE_PATH = "/contact";

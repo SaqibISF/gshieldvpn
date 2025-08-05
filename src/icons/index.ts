@@ -53,6 +53,24 @@ import ShieldCheckIcon from "./ShieldCheckIcon";
 import BoltSlash from "./BoltSlash";
 import LockIcon from "./LockIcon";
 import DevicesIcon from "./DevicesIcon";
+import AppStoreIcon from "./AppStoreIcon";
+import GooglePlayIcon from "./GooglePlayIcon";
+import I_Icon from "./I_Icon";
+import IOSIcon from "./IOSIcon";
+import MacOSIcon from "./MacOSIcon";
+import ShieldIcon from "./ShieldIcon";
+import TimerIcon from "./TimerIcon";
+import WindowIcon from "./WindowIcon";
+import FlashIcon from "./FlashIcon";
+import StopIcon from "./StopIcon";
+import BatteryFullIcon from "./BatteryFullIcon";
+import AddUserIcon from "./AddUserIcon";
+import ExclamationMarkIcon from "./ExclamationMarkIcon";
+import FileEditIcon from "./FileEditIcon";
+import BookIcon from "./BookIcon";
+import NotesIcon from "./NotesIcon";
+import WireGardeIcon from "./WireGardeIcon";
+import KeyIcon from "./KeyIcon";
 
 export {
   MoonFilledIcon,
@@ -110,4 +128,22 @@ export {
   BoltSlash,
   LockIcon,
   DevicesIcon,
+  AppStoreIcon,
+  GooglePlayIcon,
+  I_Icon,
+  IOSIcon,
+  MacOSIcon,
+  ShieldIcon,
+  TimerIcon,
+  WindowIcon,
+  FlashIcon,
+  StopIcon,
+  BatteryFullIcon,
+  AddUserIcon,
+  ExclamationMarkIcon,
+  FileEditIcon,
+  BookIcon,
+  NotesIcon,
+  WireGardeIcon,
+  KeyIcon,
 };

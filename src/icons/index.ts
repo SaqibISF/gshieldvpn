@@ -29,10 +29,6 @@ import SpeedIcon from "./SpeedIcon";
 import BoltIcon from "./BoltIcon";
 import TickIcon from "./TickIcon";
 import StarIcon from "./StarIcon";
-import NorthAmerica from "./NorthAmerica";
-import Europe from "./Europe";
-import Africa from "./Africa";
-import Asia from "./Asia";
 import XCircleIcon from "./XCircleIcon";
 import DownloadIcon2 from "./DownloadIcon2";
 import InstallSetupIcon from "./InstallSetupIcon";
@@ -104,10 +100,6 @@ export {
   BoltIcon,
   TickIcon,
   StarIcon,
-  NorthAmerica,
-  Europe,
-  Africa,
-  Asia,
   XCircleIcon,
   DownloadIcon2,
   InstallSetupIcon,

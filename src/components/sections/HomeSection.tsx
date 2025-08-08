@@ -90,7 +90,7 @@ const HomeSection: FC<SectionProps> = ({ ...props }) => (
       data-aos-offset="25"
     >
       <Image
-        className="max-w-80 w-full h-auto z-10"
+        className="max-w-lg w-full h-auto"
         src="/home-mockup.png"
         alt="image not founded"
         width={0}

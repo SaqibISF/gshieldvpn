@@ -8,7 +8,13 @@ import {
   NavbarItem,
   NavbarMenuItem,
 } from "@heroui/navbar";
-import { Button } from "@heroui/button";
+import { Button, ButtonGroup } from "@heroui/button";
+import {
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+} from "@heroui/dropdown";
 import { link as linkStyles } from "@heroui/theme";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
@@ -16,6 +22,10 @@ import { cn } from "@/lib/utils";
 // import { ThemeSwitch } from "@/components/theme-switch";
 
 import {
+  DOWNLOAD_FOR_ANDROID_PAGE_PATH,
+  DOWNLOAD_FOR_IOS_PAGE_PATH,
+  DOWNLOAD_FOR_MAC_PAGE_PATH,
+  DOWNLOAD_FOR_WINDOWS_PAGE_PATH,
   DOWNLOADS_PAGE_PATH,
   FEATURES_PAGE_PATH,
   HOME_PAGE_PATH,
@@ -26,6 +36,13 @@ import {
 import { usePathname } from "next/navigation";
 import AuthButton from "./AuthButton";
 import AppLogo from "./AppLogo";
+import {
+  AndroidIcon,
+  ChevronDownIcon,
+  IOSIcon,
+  MACIcon,
+  WindowsIcon,
+} from "@/icons";
 
 const Navbar: FC = () => {
   const pathname = usePathname();
@@ -88,16 +105,58 @@ const Navbar: FC = () => {
             }}
           />
 
-          <Button
-            as={Link}
-            href={DOWNLOADS_PAGE_PATH}
+          <ButtonGroup
             color="primary"
             variant="shadow"
             radius="full"
             className="hidden sm:inline-flex"
           >
-            Download
-          </Button>
+            <Button as={Link} href={DOWNLOADS_PAGE_PATH}>
+              Download
+            </Button>
+
+            <Dropdown>
+              <DropdownTrigger>
+                <Button isIconOnly>
+                  <ChevronDownIcon />
+                </Button>
+              </DropdownTrigger>
+              <DropdownMenu color="primary" variant="flat">
+                {[
+                  {
+                    href: DOWNLOAD_FOR_WINDOWS_PAGE_PATH,
+                    title: "Download for Windows",
+                    Icon: WindowsIcon,
+                  },
+                  {
+                    href: DOWNLOAD_FOR_MAC_PAGE_PATH,
+                    title: "Download for MAC",
+                    Icon: MACIcon,
+                  },
+                  {
+                    href: DOWNLOAD_FOR_ANDROID_PAGE_PATH,
+                    title: "Download for Android",
+                    Icon: AndroidIcon,
+                  },
+                  {
+                    href: DOWNLOAD_FOR_IOS_PAGE_PATH,
+                    title: "Download for IOS",
+                    Icon: IOSIcon,
+                  },
+                ].map(({ href, title, Icon }) => (
+                  <DropdownItem
+                    key={href}
+                    as={Link}
+                    href={href}
+                    showDivider
+                    startContent={<Icon />}
+                  >
+                    {title}
+                  </DropdownItem>
+                ))}
+              </DropdownMenu>
+            </Dropdown>
+          </ButtonGroup>
         </NavbarItem>
         <NavbarMenuToggle className="lg:hidden" />
       </NavbarContent>
@@ -131,6 +190,7 @@ const Navbar: FC = () => {
                   variant="shadow"
                   radius="full"
                   className="w-full sm:hidden"
+                  endContent={<ChevronDownIcon />}
                 >
                   Download
                 </Button>

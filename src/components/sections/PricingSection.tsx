@@ -44,7 +44,7 @@ const PricingSection: FC<SectionProps> = ({ ...props }) => {
       )}
 
       <div
-        className="w-full grid lg:grid-cols-3 md:grid-cols-2 gap-6"
+        className="w-full grid lg:grid-cols-3 md:grid-cols-2 items-end gap-6"
         data-aos="fade-up"
         data-aos-duration="1500"
         data-aos-offset="25"
@@ -135,7 +135,9 @@ const PricingSection: FC<SectionProps> = ({ ...props }) => {
                   size="lg"
                   fullWidth
                 >
-                  Upgrade Plan
+                  {plan.trial_days > 0
+                    ? `Start trial ${plan.trial_days} days`
+                    : "Upgrade Plan"}
                 </Button>
               </CardHeader>
               <CardBody className="flex flex-col items-start gap-6">

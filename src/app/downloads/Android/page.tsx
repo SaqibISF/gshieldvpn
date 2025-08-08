@@ -6,7 +6,7 @@ import Section, {
   SectionDescription,
   SectionHeading,
 } from "@/components/sections/Section";
-import { Button, Card, CardBody } from "@heroui/react";
+import { Button, Card, CardBody, CardFooter } from "@heroui/react";
 import { FAQSection } from "@/components/sections";
 import {
   DownloadIcon,
@@ -160,10 +160,12 @@ const DownloadForAndroidPage: FC = () => (
               </span>
               <h3 className="text-xl font-semibold">{heading}</h3>
               <p className="text-default-500 text-base">{description}</p>
+            </CardBody>
+            <CardFooter>
               <div className="text-primary bg-gray-100 h-16 rounded-lg flex items-center p-4">
                 <Icon className="w-7 h-7" />
               </div>
-            </CardBody>
+            </CardFooter>
           </Card>
         ))}
       </div>

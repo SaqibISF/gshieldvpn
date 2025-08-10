@@ -162,7 +162,11 @@ const DownloadForAndroidPage: FC = () => (
               <p className="text-default-500 text-base">{description}</p>
             </CardBody>
             <CardFooter>
+<<<<<<< HEAD
               <div className="w-full text-primary bg-gray-100 h-16 rounded-lg flex items-center p-4">
+=======
+              <div className="text-primary bg-gray-100 h-16 rounded-lg flex items-center p-4">
+>>>>>>> 6483a4780091564dddc05bf48138c227a6f7d4f5
                 <Icon className="w-7 h-7" />
               </div>
             </CardFooter>

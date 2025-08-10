@@ -5,7 +5,13 @@ import Section, {
   SectionDescription,
   SectionHeading,
 } from "@/components/sections/Section";
-import { Button, Card, CardBody, Link as HeroLink } from "@heroui/react";
+import {
+  Button,
+  Card,
+  CardBody,
+  CardFooter,
+  Link as HeroLink,
+} from "@heroui/react";
 import Image from "next/image";
 import {
   DownloadIcon,
@@ -215,10 +221,12 @@ const DownloadForMACPage: FC = () => (
               </span>
               <h3 className="text-xl font-semibold">{heading}</h3>
               <p className="text-default-500 text-base">{description}</p>
-              <div className="text-primary bg-gray-100 h-16 rounded-lg flex items-center p-4">
+            </CardBody>
+            <CardFooter>
+              <div className="w-full text-primary bg-gray-100 h-16 rounded-lg flex items-center p-4">
                 <Icon className="w-7 h-7" />
               </div>
-            </CardBody>
+            </CardFooter>
           </Card>
         ))}
       </div>

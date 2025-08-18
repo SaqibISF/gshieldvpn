@@ -1,10 +1,27 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin './hero.ts';
+@plugin "@tailwindcss/typography";
+@source "../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}";
+@custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #ffffff;
-  --foreground: #0f0f0f;
+  --heroui-primary: 148 100% 25%;
+
+  /* Lighter Shades */
+  --heroui-primary-50: 148 100% 90%;
+  --heroui-primary-100: 148 100% 80%;
+  --heroui-primary-200: 148 100% 70%;
+  --heroui-primary-300: 148 100% 60%;
+  --heroui-primary-400: 148 100% 45%;
+
+  /* Base */
+  --heroui-primary-500: 148 100% 25%;
+
+  /* Darker Shades */
+  --heroui-primary-600: 148 100% 20%;
+  --heroui-primary-700: 148 100% 15%;
+  --heroui-primary-800: 148 100% 10%;
+  --heroui-primary-900: 148 100% 7%;
 }
 
 @font-face {
@@ -12,13 +29,6 @@
   src: url("/fonts/FiraCode-VariableFont_wght.ttf") format("truetype");
   font-weight: 100 900;
   font-style: normal;
-}
-
-@font-face {
-  font-family: "FiraCode";
-  src: url("/fonts/FiraCode-VariableFont_wght.ttf") format("truetype");
-  font-weight: 100 900;
-  font-style: italic;
 }
 
 @font-face {
@@ -27,31 +37,4 @@
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
-}
-
-@font-face {
-  font-family: "Inter";
-  src: url("/fonts/Inter-Italic-VariableFont_opsz,wght.ttf") format("truetype");
-  font-weight: 100 900;
-  font-style: italic;
-  font-display: swap;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0f0f0f;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
 }

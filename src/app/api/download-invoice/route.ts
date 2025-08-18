@@ -30,7 +30,7 @@ export async function GET(request: Request) {
 
     await browser.close();
 
-    return new Response(pdfBuffer, {
+    return new Response(pdfBuffer as BodyInit, {
       headers: {
         "Content-Type": "application/pdf",
         "Content-Disposition": 'attachment; filename="react-app-output.pdf"',

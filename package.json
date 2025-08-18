@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@heroui/react": "^2.7.5",
+    "@heroui/react": "^2.8.2",
     "@heroui/theme": "^2.4.12",
     "@reduxjs/toolkit": "^2.6.1",
     "@stripe/react-stripe-js": "^3.7.0",
@@ -17,10 +17,10 @@
     "@tailwindcss/typography": "^0.5.16",
     "aos": "^3.0.0-beta.6",
     "axios": "^1.8.4",
-    "framer-motion": "^12.6.2",
+    "framer-motion": "^12.23.11",
     "jsonwebtoken": "^9.0.2",
     "next": "15.2.4",
-    "next-auth": "^5.0.0-beta.28",
+    "next-auth": "^5.0.0-beta.29",
     "next-themes": "^0.4.6",
     "playwright": "^1.52.0",
     "react": "^19.0.0",
@@ -40,8 +40,8 @@
     "autoprefixer": "^10.4.21",
     "eslint": "^9",
     "eslint-config-next": "15.2.4",
-    "postcss": "^8.5.3",
-    "tailwindcss": "^3.4.17",
+    "@tailwindcss/postcss": "^4",
+    "tailwindcss": "^4",
     "typescript": "^5.8.3"
   }
 }
